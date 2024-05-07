@@ -27,6 +27,35 @@ git checkout v2.2.1
 
 mkdir build && cd build
 
-cmake -S ../ -B . -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF
+cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF
+cmake --build . -j$(nproc)
+cmake --install . --prefix /opt/assistant/deps --strip
+
+# Leptonica
+cd $WORKDIR
+git clone https://github.com/DanBloomberg/leptonica.git
+
+cd leptonica
+git checkout 1.84.1
+sed -i '/include(GNUInstallDirs)/a add_definitions(-DNO_CONSOLE_IO)' CMakeLists.txt
+
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_WEBP=OFF -DENABLE_OPENJPEG=OFF \
+  -DENABLE_GIF=OFF -DENABLE_TIFF=OFF -DENABLE_ZLIB=OFF -DENABLE_PNG=OFF -DENABLE_JPEG=OFF
+cmake --build . --config Release -j$(nproc)
+cmake --install . --prefix /opt/assistant/deps --strip
+cmake --install . --strip
+
+# Tesseract OCR
+cd $WORKDIR
+git clone https://github.com/tesseract-ocr/tesseract.git
+
+cd tesseract
+git checkout 5.3.4
+
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_TRAINING_TOOLS=OFF
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip

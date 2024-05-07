@@ -14,6 +14,7 @@ protected:
 
 private:
     QTextBlockFormat format;
+    int currentHeight = 0;
 
     void adjustHeight();
 

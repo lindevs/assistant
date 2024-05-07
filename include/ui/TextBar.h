@@ -1,5 +1,5 @@
-#ifndef ASSISTANT_UI_SD_PROMPT_BAR_H
-#define ASSISTANT_UI_SD_PROMPT_BAR_H
+#ifndef ASSISTANT_UI_TEXT_BAR_H
+#define ASSISTANT_UI_TEXT_BAR_H
 
 #include "ui/MessageEdit.h"
 
@@ -63,4 +63,4 @@ private:
     )";
 };
 
-#endif //ASSISTANT_UI_SD_PROMPT_BAR_H
+#endif //ASSISTANT_UI_TEXT_BAR_H

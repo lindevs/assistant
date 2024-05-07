@@ -17,6 +17,7 @@ signals:
 private:
     std::vector<QString> icons = {
         ":/img/qr.png",
+        ":/img/ocr.png",
     };
     std::vector<MenuItem *> items;
 

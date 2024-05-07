@@ -35,8 +35,9 @@ Qr::Area::Area(QWidget *parent) : QWidget(parent) {
 void Qr::Area::generate() {
     QString text = textBar->getText();
     Params params = settings->getParams();
-    chat->addText("User", text);
-    chat->addText("Assistant");
+    chat->addUsername("User");
+    chat->addText(text);
+    chat->addUsername("Assistant");
     textBar->clearText();
     chat->addImage(ZxingCpp::generate(text.toStdString(), params));
 }

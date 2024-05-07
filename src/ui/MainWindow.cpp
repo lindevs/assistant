@@ -23,8 +23,21 @@ void MainWindow::menuItemClicked(int itemIdx) {
         case 0:
             qrArea = new Qr::Area(this);
             ui->horizontalLayout->addWidget(qrArea);
+            removeMenuItem(ocrArea);
+            break;
+        case 1:
+            ocrArea = new Ocr::Area(this);
+            ui->horizontalLayout->addWidget(ocrArea);
+            removeMenuItem(qrArea);
             break;
         default:
             break;
+    }
+}
+
+void MainWindow::removeMenuItem(QWidget *item) {
+    if (item != nullptr) {
+        ui->horizontalLayout->removeWidget(item);
+        delete item;
     }
 }

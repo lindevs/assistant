@@ -3,7 +3,7 @@
 
 #include "ui/TextBar.h"
 #include "ui/qr/Settings.h"
-#include "ui/qr/Chat.h"
+#include "ui/Chat.h"
 #include "qr/ZxingCpp.h"
 
 namespace Qr {

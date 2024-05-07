@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui/Menu.h"
 #include "ui/qr/Area.h"
+#include "ui/ocr/Area.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,9 +21,12 @@ public:
 private:
     Menu *menu;
     Qr::Area *qrArea = nullptr;
+    Ocr::Area *ocrArea = nullptr;
     Ui::MainWindow *ui;
 
     void menuItemClicked(int item);
+
+    void removeMenuItem(QWidget *item);
 };
 
 #endif //ASSISTANT_MAINWINDOW_H
