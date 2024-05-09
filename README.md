@@ -7,7 +7,7 @@ recognizing text, chatting with LLM models (coming soon), and more. Lindevs Assi
 computer. While online tools offer convenience and accessibility, the Lindevs Assistant ensures data privacy,
 security, and no risk of data leakage.
 
-![lindevs-assistant](https://i.ibb.co/4gtc9K8/lindevs-assistant.png)
+![lindevs-assistant](https://i.ibb.co/Z6WPBRB/lindevs-assistant.png)
 
 ## Release Notes
 
@@ -16,4 +16,35 @@ security, and no risk of data leakage.
 
 ## Compilation
 
-Coming soon.
+### Linux
+
+* Clone repository:
+
+```shell
+git clone https://github.com/lindevs/assistant.git
+cd assistant
+```
+
+* Build Docker image:
+
+```shell
+./setup build-image
+```
+
+* Build dependencies:
+
+```shell
+./setup build-deps
+```
+
+* Build Lindevs Assistant:
+
+```shell
+./setup build-assistant
+```
+
+* Run application:
+
+```shell
+./deps/assistant
+```
