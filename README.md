@@ -28,19 +28,19 @@ cd assistant
 * Build Docker image:
 
 ```shell
-./setup build-image
+./setup.sh build-image
 ```
 
 * Build dependencies:
 
 ```shell
-./setup build-deps
+./setup.sh build-deps
 ```
 
 * Build Lindevs Assistant:
 
 ```shell
-./setup build-assistant
+./setup.sh build-assistant
 ```
 
 * Run application:
