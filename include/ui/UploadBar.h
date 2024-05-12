@@ -2,6 +2,7 @@
 #define ASSISTANT_UI_UPLOAD_BAR_H
 
 #include <QWidget>
+#include <opencv2/core/mat.hpp>
 
 class UploadBar : public QWidget {
 Q_OBJECT
@@ -11,7 +12,7 @@ public:
 
 signals:
 
-    void imageSelected(const QImage &img);
+    void imageSelected(const cv::Mat &img);
 
 private:
     QString style = R"(

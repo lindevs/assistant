@@ -4,6 +4,7 @@
 #include <QScrollArea>
 #include <QProgressBar>
 #include <QLayout>
+#include <opencv2/core/mat.hpp>
 
 class Chat : public QScrollArea {
 Q_OBJECT
@@ -15,7 +16,7 @@ public:
 
     void addUsername(const QString &username);
 
-    void addImage(const QImage &img);
+    void addImage(const cv::Mat &img);
 
     void addProgressBar();
 

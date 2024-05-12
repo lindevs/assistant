@@ -33,7 +33,7 @@ void Chat::addUsername(const QString &username) {
     scrollToBottom();
 }
 
-void Chat::addImage(const QImage &img) {
+void Chat::addImage(const cv::Mat &img) {
     auto *label = new ImageLabel(img, 400, this);
     layout.insertWidget(layout.count() - 1, label);
 

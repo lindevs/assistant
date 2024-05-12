@@ -23,7 +23,7 @@ Qr::Settings::Settings(QWidget *parent) : QGroupBox(parent) {
 Qr::Params Qr::Settings::getParams() {
     Params params;
     params.width = width.getValue();
-    params.height = width.getValue();
+    params.height = height.getValue();
 
     return params;
 }

@@ -8,8 +8,6 @@ void QTesseract::stop() {
     tesseract.stop();
 }
 
-void QTesseract::recognize(const QImage &img) {
-    auto rgb = img.convertToFormat(QImage::Format_RGB888);
-
-    emit recognized(tesseract.recognize(rgb.bits(), rgb.width(), rgb.height(), 3, (int) rgb.bytesPerLine()));
+void QTesseract::recognize(const cv::Mat &img) {
+    emit recognized(tesseract.recognize(img.data, img.cols, img.rows, img.channels(), (int) img.step));
 }

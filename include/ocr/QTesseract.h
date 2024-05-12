@@ -2,7 +2,7 @@
 #define ASSISTANT_OCR_QTESSERACT_H
 
 #include <QObject>
-#include <QImage>
+#include <opencv2/core/mat.hpp>
 #include "ocr/Tesseract.h"
 
 class QTesseract : public QObject {
@@ -13,7 +13,7 @@ public:
 
     void stop();
 
-    void recognize(const QImage &img);
+    void recognize(const cv::Mat &img);
 
 signals:
 

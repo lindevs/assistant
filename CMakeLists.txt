@@ -13,6 +13,7 @@ set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(ZXing REQUIRED)
 find_package(Tesseract REQUIRED)
+find_package(OpenCV COMPONENTS imgcodecs REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -65,6 +66,6 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtesseract)
+target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtesseract opencv_imgcodecs)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_SOURCE_DIR}/${CMAKE_PREFIX_PATH}")

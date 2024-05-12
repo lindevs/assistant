@@ -1,6 +1,7 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QFileDialog>
+#include <opencv2/imgcodecs.hpp>
 #include "ui/UploadBar.h"
 
 UploadBar::UploadBar(QWidget *parent) : QWidget(parent) {
@@ -19,7 +20,7 @@ UploadBar::UploadBar(QWidget *parent) : QWidget(parent) {
     connect(generateButton, &QPushButton::clicked, [=] {
         QString path = QFileDialog::getOpenFileName(this, "Select Image", QDir::homePath(), "*jpg *.png");
         if (!path.isEmpty()) {
-            emit imageSelected(QImage(path));
+            emit imageSelected(cv::imread(path.toStdString()));
         }
     });
 }

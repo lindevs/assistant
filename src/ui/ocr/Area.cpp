@@ -38,7 +38,7 @@ Ocr::Area::Area(QWidget *parent) : QWidget(parent) {
         chat->addText(text.trimmed());
     });
 
-    connect(uploadBar, &UploadBar::imageSelected, this, [=](const QImage &img) {
+    connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
         Params params = settings->getParams();
         QString path = QString(params.path) + params.language + ".traineddata";
 
@@ -72,7 +72,7 @@ Ocr::Area::~Area() {
     }
 }
 
-void Ocr::Area::recognize(const QImage &img) {
+void Ocr::Area::recognize(const cv::Mat &img) {
     chat->addUsername("User");
     chat->addImage(img);
     chat->addUsername("Assistant");

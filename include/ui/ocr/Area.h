@@ -25,7 +25,7 @@ namespace Ocr {
         Params currentParams;
         bool started = false;
 
-        void recognize(const QImage &img);
+        void recognize(const cv::Mat &img);
 
         const QString tesseractUrl = "https://github.com/tesseract-ocr/tessdata";
     };
