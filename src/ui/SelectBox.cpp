@@ -8,6 +8,7 @@ SelectBox::SelectBox(QWidget *parent) : QWidget(parent) {
     layout->setContentsMargins(0, 0, 0, 0);
 
     input.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    connect(&input, &QComboBox::currentIndexChanged, this, &SelectBox::currentIndexChanged);
 
     layout->addWidget(&label);
     layout->addWidget(&input);
@@ -17,7 +18,11 @@ void SelectBox::setText(const QString &text) {
     label.setText(text);
 }
 
-int SelectBox::getValueIndex() {
+void SelectBox::setCurrenctIndex(int index) {
+    input.setCurrentIndex(index);
+}
+
+int SelectBox::getCurrentIndex() {
     return input.currentIndex();
 }
 

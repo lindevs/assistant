@@ -2,8 +2,9 @@
 #define ASSISTANT_UI_QR_SETTINGS_H
 
 #include <QGroupBox>
+#include <QSettings>
+#include <QCheckBox>
 #include "ui/Slider.h"
-#include "ui/CheckBox.h"
 #include "core/structures.h"
 
 namespace Qr {
@@ -16,9 +17,10 @@ namespace Qr {
         Params getParams();
 
     private:
+        QSettings settings;
         Slider width;
         Slider height;
-        CheckBox autosave;
+        QCheckBox autosave;
     };
 }
 

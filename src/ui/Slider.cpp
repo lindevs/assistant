@@ -32,6 +32,7 @@ Slider::Slider(QWidget *parent) : QWidget(parent) {
     mainLayout->addLayout(inputsLayout);
 
     connect(&slider, &QSlider::valueChanged, &input, &QSpinBox::setValue);
+    connect(&slider, &QSlider::valueChanged, this, &Slider::valueChanged);
     connect(&input, &QSpinBox::valueChanged, &slider, &QSlider::setValue);
 }
 

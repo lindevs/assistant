@@ -12,9 +12,15 @@ public:
 
     void setText(const QString &text);
 
-    int getValueIndex();
+    void setCurrenctIndex(int index);
+
+    int getCurrentIndex();
 
     void addItems(const QList<QString> &items);
+
+signals:
+
+    int currentIndexChanged(int index);
 
 private:
     QLabel label;

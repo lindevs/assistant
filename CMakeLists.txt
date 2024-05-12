@@ -60,12 +60,11 @@ set(PROJECT_SOURCES
         src/ui/SelectBox.cpp
         include/ui/MessageDialog.h
         src/ui/MessageDialog.cpp
-        include/ui/CheckBox.h
-        src/ui/CheckBox.cpp
         include/core/ImageIo.h
         src/core/ImageIo.cpp
         include/core/DateTime.h
         src/core/DateTime.cpp
+        include/core/app.h
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

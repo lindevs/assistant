@@ -19,6 +19,10 @@ public:
 
     void setMinMaxValue(int min, int max);
 
+signals:
+
+    void valueChanged(int value);
+
 private:
     QLabel label;
     QSlider slider;

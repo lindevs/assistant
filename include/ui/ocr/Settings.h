@@ -2,6 +2,7 @@
 #define ASSISTANT_UI_OCR_SETTINGS_H
 
 #include <QGroupBox>
+#include <QSettings>
 #include "ui/SelectBox.h"
 #include "core/structures.h"
 
@@ -15,6 +16,7 @@ namespace Ocr {
         Params getParams();
 
     private:
+        QSettings settings;
         SelectBox language;
 
         const QList<QString> languages = {
