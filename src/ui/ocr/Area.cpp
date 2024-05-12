@@ -40,7 +40,7 @@ Ocr::Area::Area(QWidget *parent) : QWidget(parent) {
 
     connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
         Params params = settings->getParams();
-        QString path = QString(params.path) + params.language + ".traineddata";
+        QString path = QString(params.path) + "/" + params.language + ".traineddata";
 
         if (!QFile::exists(path)) {
             dialog->setText(

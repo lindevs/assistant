@@ -1,4 +1,5 @@
 #include <QLayout>
+#include <QCheckBox>
 #include "ui/qr/Settings.h"
 
 Qr::Settings::Settings(QWidget *parent) : QGroupBox(parent) {
@@ -17,6 +18,9 @@ Qr::Settings::Settings(QWidget *parent) : QGroupBox(parent) {
     height.setValue(512);
     layout->addWidget(&height);
 
+    autosave.setText("Save output automatically");
+    layout->addWidget(&autosave);
+
     layout->setAlignment(Qt::AlignTop);
 }
 
@@ -24,6 +28,7 @@ Qr::Params Qr::Settings::getParams() {
     Params params;
     params.width = width.getValue();
     params.height = height.getValue();
+    params.autosave = autosave.isChecked();
 
     return params;
 }

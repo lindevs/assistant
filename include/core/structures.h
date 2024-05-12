@@ -5,12 +5,14 @@ namespace Qr {
     struct Params {
         int width = 512;
         int height = 512;
+        bool autosave = false;
+        const char *path = "./out";
     };
 }
 
 namespace Ocr {
     struct Params {
-        const char *path = "./data/";
+        const char *path = "./data";
         const char *language = "eng";
 
         bool operator!=(const Params &other) const {

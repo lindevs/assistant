@@ -3,6 +3,7 @@
 
 #include <QGroupBox>
 #include "ui/Slider.h"
+#include "ui/CheckBox.h"
 #include "core/structures.h"
 
 namespace Qr {
@@ -17,6 +18,7 @@ namespace Qr {
     private:
         Slider width;
         Slider height;
+        CheckBox autosave;
     };
 }
 

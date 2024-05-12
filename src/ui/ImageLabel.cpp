@@ -1,6 +1,7 @@
 #include <QFileDialog>
-#include <opencv2/imgcodecs.hpp>
 #include "ui/ImageLabel.h"
+#include "core/DateTime.h"
+#include "core/ImageIo.h"
 
 ImageLabel::ImageLabel(const cv::Mat &img, const int width, QWidget *parent) : QLabel(parent), img(img) {
     auto format = img.channels() == 1 ? QImage::Format_Grayscale8 : QImage::Format_BGR888;
@@ -15,6 +16,6 @@ void ImageLabel::mousePressEvent(QMouseEvent *event) {
 
     QString path = QFileDialog::getExistingDirectory(this, "Select directory", QDir::homePath());
     if (!path.isEmpty()) {
-        cv::imwrite((path + "/" + QDateTime::currentDateTime().toString("yyyyMMddhhmmss") + ".jpg").toStdString(), img);
+        ImageIo::write(path.toStdString() + "/" + DateTime::current() + ".jpg", img);
     }
 }

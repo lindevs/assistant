@@ -1,4 +1,6 @@
 #include "ui/qr/Area.h"
+#include "core/ImageIo.h"
+#include "core/DateTime.h"
 
 Qr::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);
@@ -39,5 +41,11 @@ void Qr::Area::generate() {
     chat->addText(text);
     chat->addUsername("Assistant");
     textBar->clearText();
-    chat->addImage(ZxingCpp::generate(text.toStdString(), params));
+
+    cv::Mat img = ZxingCpp::generate(text.toStdString(), params);
+    chat->addImage(img);
+
+    if (params.autosave) {
+        ImageIo::write(params.path, DateTime::current() + ".jpg", img);
+    }
 }
