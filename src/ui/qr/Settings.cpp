@@ -3,7 +3,7 @@
 #include "ui/qr/Settings.h"
 #include "core/app.h"
 
-Qr::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(ORG, APP) {
+Qr::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::ORG, Core::APP) {
     setStyleSheet("QGroupBox {border: 1px solid #ccc;border-radius: 4px;}");
 
     settings.beginGroup("qr");

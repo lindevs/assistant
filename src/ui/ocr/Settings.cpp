@@ -2,7 +2,7 @@
 #include "ui/ocr/Settings.h"
 #include "core/app.h"
 
-Ocr::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(ORG, APP) {
+Ocr::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::ORG, Core::APP) {
     setStyleSheet("QGroupBox {border: 1px solid #ccc;border-radius: 4px;}");
 
     settings.beginGroup("ocr");
