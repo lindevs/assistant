@@ -2,13 +2,62 @@
 
 WORKDIR=$(pwd)
 
+# xorg
+git clone https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
+cd xcbproto
+./autogen.sh
+make install
+
+LIBRARIES=(
+  'libxcb'
+  'libxcb-render-util'
+  'libxcb-wm'
+  'libxcb-keysyms'
+  'libxcb-util'
+  'libxcb-image'
+  'libxcb-cursor'
+  'libice'
+  'libsm'
+  'libx11'
+)
+
+for library in "${LIBRARIES[@]}"; do
+  cd $WORKDIR
+  git clone --recursive https://gitlab.freedesktop.org/xorg/lib/${library}.git
+  cd $library
+
+  ./autogen.sh
+  ./configure
+  make -j$(nproc) CFLAGS='-static -fPIC'
+  make install
+done
+
+rm -rf /usr/local/lib/libxcb.a
+
+# GLib
+cd $WORKDIR
+git clone https://gitlab.gnome.org/GNOME/glib.git
+
+cd glib
+mkdir build && cd build
+
+meson setup .. --default-library static
+ninja -j$(nproc)
+ninja install
+
 # Qt
+cd $WORKDIR
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
 git checkout 6.7.1
 
 perl init-repository --module-subset=qtbase
+
+# https://bugreports.qt.io/browse/QTBUG-86287
+sed -i 's/set(XCB_IMAGE_component_deps XCB SHM)/set(XCB_IMAGE_component_deps XCB SHM UTIL)/' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
+sed -i '/^    IMAGE/d' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
+sed -i '/^    UTIL/a\    IMAGE' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
 
 mkdir build && cd build
 

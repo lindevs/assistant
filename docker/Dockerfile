@@ -7,7 +7,9 @@ COPY compile.sh compile.sh
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         curl ca-certificates git build-essential ninja-build ccache \
-        libicu-dev libsdl2-dev xorg-dev libx11-xcb-dev libxkbcommon-x11-dev '^libxcb.*-dev' \
+        autoconf automake xutils-dev libtool gperf python3-pip \
+        libicu-dev libsdl2-dev xorg-dev libx11-xcb-dev libxkbcommon-x11-dev \
+    && pip3 install meson packaging \
     && curl -sSo /etc/apt/trusted.gpg.d/kitware-key.asc https://apt.kitware.com/keys/kitware-archive-latest.asc \
     && echo "deb https://apt.kitware.com/ubuntu/ jammy main" > /etc/apt/sources.list.d/kitware.list \
     && apt update \
