@@ -12,9 +12,10 @@ perl init-repository --module-subset=qtbase
 
 mkdir build && cd build
 
-../configure -prefix /opt/assistant/deps -qt-zlib -qt-libjpeg -qt-libpng -qt-pcre -qt-harfbuzz \
+../configure -prefix /opt/assistant/deps -ccache -qt-zlib -qt-libjpeg -qt-libpng -qt-pcre -qt-harfbuzz \
     -bundled-xcb-xinput -fontconfig -system-freetype \
-    -no-dbus -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent -no-feature-network
+    -no-dbus -no-opengl -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent \
+    -no-feature-network -no-feature-androiddeployqt -no-feature-qmake
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
