@@ -13,6 +13,7 @@ set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(ZXing REQUIRED)
 find_package(Tesseract REQUIRED)
+find_package(facedetection REQUIRED)
 find_package(OpenCV COMPONENTS imgcodecs REQUIRED)
 
 set(PROJECT_SOURCES
@@ -60,17 +61,27 @@ set(PROJECT_SOURCES
         src/ui/SelectBox.cpp
         include/ui/MessageDialog.h
         src/ui/MessageDialog.cpp
-        include/core/ImageIo.h
-        src/core/ImageIo.cpp
-        include/core/DateTime.h
-        src/core/DateTime.cpp
+        include/utils/ImageIo.h
+        src/utils/ImageIo.cpp
+        include/utils/DateTime.h
+        src/utils/DateTime.cpp
         include/core/app.h
+        include/face/Libfacedetection.h
+        src/face/Libfacedetection.cpp
+        include/face/QLibfacedetection.h
+        src/face/QLibfacedetection.cpp
+        include/ui/face/Settings.h
+        src/ui/face/Settings.cpp
+        include/ui/face/Area.h
+        src/ui/face/Area.cpp
+        include/utils/Visualize.h
+        src/utils/Vizualize.cpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtesseract opencv_imgcodecs)
+target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtesseract facedetection opencv_imgcodecs)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_SOURCE_DIR}/${CMAKE_PREFIX_PATH}")

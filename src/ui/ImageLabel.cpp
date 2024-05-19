@@ -1,7 +1,7 @@
 #include <QFileDialog>
 #include "ui/ImageLabel.h"
-#include "core/DateTime.h"
-#include "core/ImageIo.h"
+#include "utils/DateTime.h"
+#include "utils/ImageIo.h"
 
 ImageLabel::ImageLabel(const cv::Mat &img, const int width, QWidget *parent) : QLabel(parent), img(img) {
     auto format = img.channels() == 1 ? QImage::Format_Grayscale8 : QImage::Format_BGR888;

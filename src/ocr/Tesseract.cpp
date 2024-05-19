@@ -8,8 +8,8 @@ void Tesseract::stop() {
     tess.End();
 }
 
-const char *Tesseract::recognize(const unsigned char *data, int width, int height, int channels, int steps) {
-    tess.SetImage(data, width, height, channels, steps);
+const char *Tesseract::recognize(const cv::Mat &img) {
+    tess.SetImage(img.data, img.cols, img.rows, img.channels(), (int) img.step);
 
     return tess.GetUTF8Text();
 }

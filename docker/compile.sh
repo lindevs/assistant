@@ -110,7 +110,21 @@ cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_TRAINING_TOOLS=OFF
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
+# libfacedetection
+cd $WORKDIR
+git clone https://github.com/ShiqiYu/libfacedetection.git
+
+cd libfacedetection
+sed -i '/ADD_LIBRARY(${fdt_lib_name} ${fdt_source_files} ${INSTALLHEADER_FILES})/a target_link_libraries(${fdt_lib_name} ${OpenMP_gomp_LIBRARY})' CMakeLists.txt
+
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON
+cmake --build . -j$(nproc)
+cmake --install . --prefix /opt/assistant/deps --strip
+
 # OpenCV
+cd $WORKDIR
 git clone https://github.com/opencv/opencv.git
 
 cd opencv

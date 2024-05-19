@@ -18,6 +18,7 @@ private:
     std::vector<QString> icons = {
         ":/img/qr.png",
         ":/img/ocr.png",
+        ":/img/face.png",
     };
     std::vector<MenuItem *> items;
 

@@ -1,6 +1,6 @@
 #include "ui/qr/Area.h"
-#include "core/ImageIo.h"
-#include "core/DateTime.h"
+#include "utils/ImageIo.h"
+#include "utils/DateTime.h"
 
 Qr::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);

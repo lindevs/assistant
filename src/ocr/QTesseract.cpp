@@ -9,5 +9,5 @@ void QTesseract::stop() {
 }
 
 void QTesseract::recognize(const cv::Mat &img) {
-    emit recognized(tesseract.recognize(img.data, img.cols, img.rows, img.channels(), (int) img.step));
+    emit recognized(tesseract.recognize(img));
 }

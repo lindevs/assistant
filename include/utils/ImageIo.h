@@ -1,5 +1,5 @@
-#ifndef ASSISTANT_CORE_IMAGE_IO_H
-#define ASSISTANT_CORE_IMAGE_IO_H
+#ifndef ASSISTANT_UTILS_IMAGE_IO_H
+#define ASSISTANT_UTILS_IMAGE_IO_H
 
 class ImageIo {
 public:
@@ -10,4 +10,4 @@ public:
     static void write(const std::string &path, const std::string &filename, cv::InputArray img);
 };
 
-#endif //ASSISTANT_CORE_IMAGE_IO_H
+#endif //ASSISTANT_UTILS_IMAGE_IO_H

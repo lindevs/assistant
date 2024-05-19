@@ -19,16 +19,25 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::menuItemClicked(int itemIdx) {
+    removeMenuItem(qrArea);
+    removeMenuItem(ocrArea);
+    removeMenuItem(faceArea);
+    qrArea = nullptr;
+    ocrArea = nullptr;
+    faceArea = nullptr;
+
     switch (itemIdx) {
         case 0:
             qrArea = new Qr::Area(this);
             ui->horizontalLayout->addWidget(qrArea);
-            removeMenuItem(ocrArea);
             break;
         case 1:
             ocrArea = new Ocr::Area(this);
             ui->horizontalLayout->addWidget(ocrArea);
-            removeMenuItem(qrArea);
+            break;
+        case 2:
+            faceArea = new Face::Area(this);
+            ui->horizontalLayout->addWidget(faceArea);
             break;
         default:
             break;

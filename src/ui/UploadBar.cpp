@@ -2,7 +2,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include "ui/UploadBar.h"
-#include "core/ImageIo.h"
+#include "utils/ImageIo.h"
 
 UploadBar::UploadBar(QWidget *parent) : QWidget(parent) {
     setStyleSheet(style);
@@ -18,7 +18,7 @@ UploadBar::UploadBar(QWidget *parent) : QWidget(parent) {
     layout->setContentsMargins(0, 9, 0, 0);
 
     connect(generateButton, &QPushButton::clicked, [=] {
-        QString path = QFileDialog::getOpenFileName(this, "Select Image", QDir::homePath(), "*jpg *.png");
+        QString path = QFileDialog::getOpenFileName(this, "Select Image", QDir::homePath(), "*jpg *jpeg *.png");
         if (!path.isEmpty()) {
             emit imageSelected(ImageIo::read(path.toStdString()));
         }

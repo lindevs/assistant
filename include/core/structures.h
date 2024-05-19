@@ -1,6 +1,8 @@
 #ifndef ASSISTANT_CORE_STRUCTURES_H
 #define ASSISTANT_CORE_STRUCTURES_H
 
+#include <opencv2/core/types.hpp>
+
 namespace Qr {
     struct Params {
         int width = 512;
@@ -17,6 +19,21 @@ namespace Ocr {
 
         bool operator!=(const Params &other) const {
             return language != other.language;
+        }
+    };
+}
+
+namespace Face {
+    struct Params {
+        bool autosave = false;
+        const char *path = "./out";
+    };
+
+    struct Detection {
+        float confidence = 0.0f;
+        cv::Rect box{};
+
+        Detection(float confidence, cv::Rect box) : confidence(confidence), box(box) {
         }
     };
 }

@@ -2,5 +2,6 @@
     <qresource>
         <file>img/qr.png</file>
         <file>img/ocr.png</file>
+        <file>img/face.png</file>
     </qresource>
 </RCC>

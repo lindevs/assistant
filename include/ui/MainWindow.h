@@ -5,6 +5,7 @@
 #include "ui/Menu.h"
 #include "ui/qr/Area.h"
 #include "ui/ocr/Area.h"
+#include "ui/face/Area.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,6 +23,7 @@ private:
     Menu *menu;
     Qr::Area *qrArea = nullptr;
     Ocr::Area *ocrArea = nullptr;
+    Face::Area *faceArea = nullptr;
     Ui::MainWindow *ui;
 
     void menuItemClicked(int item);

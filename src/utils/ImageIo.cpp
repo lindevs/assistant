@@ -1,6 +1,6 @@
 #include <opencv2/imgcodecs.hpp>
 #include <filesystem>
-#include "core/ImageIo.h"
+#include "utils/ImageIo.h"
 
 cv::Mat ImageIo::read(const std::string &fullpath) {
     return cv::imread(fullpath);
