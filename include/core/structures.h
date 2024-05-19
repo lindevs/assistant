@@ -25,6 +25,7 @@ namespace Ocr {
 
 namespace Face {
     struct Params {
+        bool blur = false;
         bool autosave = false;
         const char *path = "./out";
     };

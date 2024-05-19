@@ -31,13 +31,17 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
         const std::vector<Face::Detection> &detections, const cv::Mat &img
     ) {
         chat->removeProgressBar();
+        Params params = settings->getParams();
 
         cv::Mat result;
         img.copyTo(result);
-        Visualize::drawFaceDetections(result, detections);
+        if (params.blur) {
+            Visualize::blurFaces(result, detections);
+        } else {
+            Visualize::drawFaceDetections(result, detections);
+        }
         chat->addImage(result);
 
-        Params params = settings->getParams();
         if (params.autosave) {
             ImageIo::write(params.path, DateTime::current() + ".jpg", img);
         }

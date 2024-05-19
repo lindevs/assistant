@@ -26,3 +26,12 @@ void Visualize::drawFaceDetections(const cv::Mat &input, const std::vector<Face:
         cv::putText(input, buff, textPos, font, fontScale, textColor, textThickness, cv::LINE_AA);
     }
 }
+
+void Visualize::blurFaces(const cv::Mat &input, const std::vector<Face::Detection> &detections) {
+    cv::Size ksize(32, 32);
+
+    size_t total = detections.size();
+    for (int i = 0; i < total; ++i) {
+        cv::blur(input(detections[i].box), input(detections[i].box), ksize);
+    }
+}

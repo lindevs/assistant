@@ -17,6 +17,7 @@ namespace Face {
 
     private:
         QSettings settings;
+        QCheckBox blur;
         QCheckBox autosave;
     };
 }

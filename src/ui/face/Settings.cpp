@@ -8,7 +8,14 @@ Face::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::OR
     settings.beginGroup("face");
 
     auto *layout = new QVBoxLayout(this);
-    layout->setSpacing(20);
+
+    blur.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    blur.setText("Blur faces");
+    blur.setChecked(settings.value("blur", false).toBool());
+    connect(&blur, &QCheckBox::clicked, [=] (bool checked) {
+        settings.setValue("blur", checked);
+    });
+    layout->addWidget(&blur);
 
     autosave.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     autosave.setText("Save output automatically");
@@ -23,6 +30,7 @@ Face::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::OR
 
 Face::Params Face::Settings::getParams() {
     Params params;
+    params.blur = blur.isChecked();
     params.autosave = autosave.isChecked();
 
     return params;
