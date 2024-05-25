@@ -43,7 +43,7 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
         chat->addImage(result);
 
         if (params.autosave) {
-            ImageIo::write(params.path, DateTime::current() + ".jpg", img);
+            ImageIo::write(params.path, DateTime::current() + ".jpg", result);
         }
     });
 
