@@ -52,9 +52,67 @@ git clone https://github.com/xkbcommon/libxkbcommon.git --depth=1 --branch=xkbco
 cd libxkbcommon
 mkdir build && cd build
 
-meson setup .. --buildtype=release --default-library=static --libdir=lib -Dx-locale-root=/usr/share/X11/locale \
+meson setup .. --buildtype=release --default-library=static --libdir=lib --datadir=/usr/share \
     -Denable-xkbregistry=false -Denable-tools=false \
     -Dc_link_args="-Wl,--start-group /usr/local/lib/libXau.a /usr/local/lib/libXdmcp.a -Wl,--end-group"
+ninja -j$(nproc)
+ninja install
+
+# zlib
+cd $WORKDIR
+git clone https://github.com/madler/zlib.git --depth=1 --branch=v1.3.1
+
+cd zlib
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DZLIB_BUILD_EXAMPLES=OFF
+cmake --build . -j$(nproc)
+cmake --install . --strip
+rm -rf /usr/local/lib/libz.so*
+
+# libpng
+cd $WORKDIR
+git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.43
+
+cd libpng
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DPNG_SHARED=OFF -DPNG_TESTS=OFF
+cmake --build . -j$(nproc)
+cmake --install . --strip
+
+# FreeType
+cd $WORKDIR
+git clone https://github.com/freetype/freetype.git --depth=1 --branch=VER-2-13-2
+
+cd freetype
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DFT_DISABLE_HARFBUZZ=ON -DFT_DISABLE_BZIP2=ON -DFT_DISABLE_BROTLI=ON
+cmake --build . -j$(nproc)
+cmake --install . --strip
+
+# Expat
+cd $WORKDIR
+git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_6_2
+
+cd libexpat/expat
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DEXPAT_BUILD_EXAMPLES=OFF -DEXPAT_BUILD_TESTS=OFF \
+    -DEXPAT_BUILD_TOOLS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+cmake --build . -j$(nproc)
+cmake --install . --strip
+
+# Fontconfig
+cd $WORKDIR
+git clone https://gitlab.freedesktop.org/fontconfig/fontconfig.git --depth=1 --branch=2.15.0
+
+cd fontconfig
+mkdir build && cd build
+
+meson setup .. --buildtype=release --default-library=static --libdir=lib --sysconfdir=/etc --datadir=/usr/share \
+    --localstatedir=/var -Dtests=disabled -Dtools=disabled
 ninja -j$(nproc)
 ninja install
 
@@ -73,6 +131,8 @@ sed -i '/^    IMAGE/d' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/Fi
 sed -i '/^    UTIL/a\    IMAGE' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
 sed -i '/^        XCB::XCB/a\        X11::Xdmcp\n        X11::Xau' qtbase/src/gui/configure.cmake
 sed -i '/^        XKB::XKB/a\        X11::Xdmcp\n        X11::Xau' qtbase/src/plugins/platforms/xcb/CMakeLists.txt
+sed -i '/QMAKE_LIB fontconfig)/a\qt_find_package(EXPAT PROVIDED_TARGETS EXPAT::EXPAT MODULE_NAME gui QMAKE_LIB expat)' qtbase/src/gui/configure.cmake
+sed -i '/^        Fontconfig::Fontconfig/a\        EXPAT::EXPAT' qtbase/src/gui/CMakeLists.txt
 
 mkdir build && cd build
 
