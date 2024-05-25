@@ -3,7 +3,7 @@
 WORKDIR=$(pwd)
 
 # xorg
-git clone https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
+git clone https://gitlab.freedesktop.org/xorg/proto/xcbproto.git --depth=1
 cd xcbproto
 ./autogen.sh
 make install
@@ -18,12 +18,14 @@ LIBRARIES=(
   'libxcb-cursor'
   'libice'
   'libsm'
+  'libxau'
+  'libxdmcp'
   'libx11'
 )
 
 for library in "${LIBRARIES[@]}"; do
   cd $WORKDIR
-  git clone --recursive https://gitlab.freedesktop.org/xorg/lib/${library}.git
+  git clone --recursive https://gitlab.freedesktop.org/xorg/lib/${library}.git --depth=1
   cd $library
 
   ./autogen.sh
@@ -32,16 +34,27 @@ for library in "${LIBRARIES[@]}"; do
   make install
 done
 
-rm -rf /usr/local/lib/libxcb.a
-
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git
+git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.2
 
 cd glib
 mkdir build && cd build
 
-meson setup .. --default-library static
+meson setup .. --buildtype=release --default-library=static --libdir=lib
+ninja -j$(nproc)
+ninja install
+
+# libxkbcommon
+cd $WORKDIR
+git clone https://github.com/xkbcommon/libxkbcommon.git --depth=1 --branch=xkbcommon-1.7.0
+
+cd libxkbcommon
+mkdir build && cd build
+
+meson setup .. --buildtype=release --default-library=static --libdir=lib -Dx-locale-root=/usr/share/X11/locale \
+    -Denable-xkbregistry=false -Denable-tools=false \
+    -Dc_link_args="-Wl,--start-group /usr/local/lib/libXau.a /usr/local/lib/libXdmcp.a -Wl,--end-group"
 ninja -j$(nproc)
 ninja install
 
@@ -58,6 +71,8 @@ perl init-repository --module-subset=qtbase
 sed -i 's/set(XCB_IMAGE_component_deps XCB SHM)/set(XCB_IMAGE_component_deps XCB SHM UTIL)/' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
 sed -i '/^    IMAGE/d' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
 sed -i '/^    UTIL/a\    IMAGE' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
+sed -i '/^        XCB::XCB/a\        X11::Xdmcp\n        X11::Xau' qtbase/src/gui/configure.cmake
+sed -i '/^        XKB::XKB/a\        X11::Xdmcp\n        X11::Xau' qtbase/src/plugins/platforms/xcb/CMakeLists.txt
 
 mkdir build && cd build
 
@@ -70,11 +85,9 @@ cmake --install . --strip
 
 # zxing-cpp
 cd $WORKDIR
-git clone https://github.com/zxing-cpp/zxing-cpp.git
+git clone https://github.com/zxing-cpp/zxing-cpp.git --depth=1 --branch=v2.2.1
 
 cd zxing-cpp
-git checkout v2.2.1
-
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF
@@ -83,10 +96,9 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # Leptonica
 cd $WORKDIR
-git clone https://github.com/DanBloomberg/leptonica.git
+git clone https://github.com/DanBloomberg/leptonica.git --depth=1 --branch=1.84.1
 
 cd leptonica
-git checkout 1.84.1
 sed -i '/include(GNUInstallDirs)/a add_definitions(-DNO_CONSOLE_IO)' CMakeLists.txt
 
 mkdir build && cd build
@@ -99,11 +111,9 @@ cmake --install . --strip
 
 # Tesseract OCR
 cd $WORKDIR
-git clone https://github.com/tesseract-ocr/tesseract.git
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.3.4
 
 cd tesseract
-git checkout 5.3.4
-
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_TRAINING_TOOLS=OFF
@@ -112,7 +122,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # libfacedetection
 cd $WORKDIR
-git clone https://github.com/ShiqiYu/libfacedetection.git
+git clone https://github.com/ShiqiYu/libfacedetection.git --depth=1
 
 cd libfacedetection
 sed -i '/ADD_LIBRARY(${fdt_lib_name} ${fdt_source_files} ${INSTALLHEADER_FILES})/a target_link_libraries(${fdt_lib_name} ${OpenMP_gomp_LIBRARY})' CMakeLists.txt
@@ -125,11 +135,9 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenCV
 cd $WORKDIR
-git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.9.0
 
 cd opencv
-git checkout 4.9.0
-
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON -DBUILD_TBB=ON \
