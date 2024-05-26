@@ -3,12 +3,22 @@
 WORKDIR=$(pwd)
 
 # xorg
-git clone https://gitlab.freedesktop.org/xorg/proto/xcbproto.git --depth=1
-cd xcbproto
-./autogen.sh
-make install
+PROTOCOLS=(
+  'xcbproto'
+  'xorgproto'
+)
+
+for protocol in "${PROTOCOLS[@]}"; do
+  cd $WORKDIR
+  git clone --recursive https://gitlab.freedesktop.org/xorg/proto/${protocol}.git --depth=1
+  cd $protocol
+
+  ./autogen.sh
+  make install
+done
 
 LIBRARIES=(
+  'libxau'
   'libxcb'
   'libxcb-render-util'
   'libxcb-wm'
@@ -18,7 +28,6 @@ LIBRARIES=(
   'libxcb-cursor'
   'libice'
   'libsm'
-  'libxau'
   'libxdmcp'
   'libx11'
 )
@@ -64,7 +73,7 @@ git clone https://github.com/madler/zlib.git --depth=1 --branch=v1.3.1
 cd zlib
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DZLIB_BUILD_EXAMPLES=OFF
+cmake -S ../ -B . -G Ninja -DZLIB_BUILD_EXAMPLES=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 rm -rf /usr/local/lib/libz.so*
