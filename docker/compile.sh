@@ -29,7 +29,6 @@ for library in "${LIBRARIES[@]}"; do
   cd $library
 
   ./autogen.sh
-  ./configure
   make -j$(nproc) CFLAGS='-static -fPIC'
   make install
 done
@@ -41,7 +40,7 @@ git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.2
 cd glib
 mkdir build && cd build
 
-meson setup .. --buildtype=release --default-library=static --libdir=lib
+meson setup .. --buildtype=release --default-library=static --libdir=lib -Dtests=false
 ninja -j$(nproc)
 ninja install
 
@@ -77,7 +76,7 @@ git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.43
 cd libpng
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DPNG_SHARED=OFF -DPNG_TESTS=OFF
+cmake -S ../ -B . -G Ninja -DPNG_SHARED=OFF -DPNG_TESTS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
@@ -136,10 +135,10 @@ sed -i '/^        Fontconfig::Fontconfig/a\        EXPAT::EXPAT' qtbase/src/gui/
 
 mkdir build && cd build
 
-../configure -prefix /opt/assistant/deps -ccache -qt-zlib -qt-libjpeg -qt-libpng -qt-pcre -qt-harfbuzz \
+../configure -prefix /opt/assistant/deps -ccache -qt-pcre -qt-harfbuzz \
     -bundled-xcb-xinput -fontconfig -system-freetype \
-    -no-dbus -no-opengl -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent \
-    -no-feature-network -no-feature-androiddeployqt -no-feature-qmake
+    -no-ico -no-libjpeg -no-gif -no-dbus -no-linuxfb -no-opengl -no-evdev -no-feature-sql -no-feature-xml \
+    -no-feature-printsupport -no-feature-concurrent -no-feature-network -no-feature-androiddeployqt -no-feature-qmake
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
