@@ -42,6 +42,30 @@ for library in "${LIBRARIES[@]}"; do
   make install
 done
 
+# zlib
+cd $WORKDIR
+git clone https://github.com/madler/zlib.git --depth=1 --branch=v1.3.1
+
+cd zlib
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DZLIB_BUILD_EXAMPLES=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+cmake --build . -j$(nproc)
+cmake --install . --strip
+rm -rf /usr/local/lib/libz.so*
+
+# pcre2
+cd $WORKDIR
+git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.43
+
+cd pcre2
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DPCRE2_BUILD_PCRE2_16=ON -DPCRE2_BUILD_PCRE2_32=ON -DPCRE2_SUPPORT_JIT=ON \
+  -DPCRE2_STATIC_PIC=ON -DPCRE2_BUILD_PCRE2GREP=OFF -DPCRE2_BUILD_TESTS=OFF -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON
+cmake --build . -j$(nproc)
+cmake --install . --strip
+
 # GLib
 cd $WORKDIR
 git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.2
@@ -49,7 +73,7 @@ git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.2
 cd glib
 mkdir build && cd build
 
-meson setup .. --buildtype=release --default-library=static --libdir=lib -Dtests=false
+meson setup .. --buildtype=release --default-library=static --libdir=lib -Dtests=false -Dglib_debug=disabled
 ninja -j$(nproc)
 ninja install
 
@@ -65,18 +89,6 @@ meson setup .. --buildtype=release --default-library=static --libdir=lib --datad
     -Dc_link_args="-Wl,--start-group /usr/local/lib/libXau.a /usr/local/lib/libXdmcp.a -Wl,--end-group"
 ninja -j$(nproc)
 ninja install
-
-# zlib
-cd $WORKDIR
-git clone https://github.com/madler/zlib.git --depth=1 --branch=v1.3.1
-
-cd zlib
-mkdir build && cd build
-
-cmake -S ../ -B . -G Ninja -DZLIB_BUILD_EXAMPLES=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-cmake --build . -j$(nproc)
-cmake --install . --strip
-rm -rf /usr/local/lib/libz.so*
 
 # libpng
 cd $WORKDIR
@@ -144,8 +156,7 @@ sed -i '/^        Fontconfig::Fontconfig/a\        EXPAT::EXPAT' qtbase/src/gui/
 
 mkdir build && cd build
 
-../configure -prefix /opt/assistant/deps -ccache -qt-pcre -qt-harfbuzz \
-    -bundled-xcb-xinput -fontconfig -system-freetype \
+../configure -prefix /opt/assistant/deps -ccache -qt-harfbuzz -bundled-xcb-xinput -fontconfig -system-freetype \
     -no-ico -no-libjpeg -no-gif -no-dbus -no-linuxfb -no-opengl -no-evdev -no-feature-sql -no-feature-xml \
     -no-feature-printsupport -no-feature-concurrent -no-feature-network -no-feature-androiddeployqt -no-feature-qmake
 cmake --build . -j$(nproc)
