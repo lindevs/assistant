@@ -223,6 +223,17 @@ cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
+# OpenBLAS
+cd $WORKDIR
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.27
+
+cd OpenBLAS
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja
+cmake --build . -j$(nproc)
+cmake --install . --strip
+
 # OpenCV
 cd $WORKDIR
 git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.9.0
@@ -231,7 +242,7 @@ cd opencv
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON -DBUILD_TBB=ON \
-  -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
+  -DWITH_LAPACK=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
   -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
 cmake --build . -j$(nproc)
 cmake --install . --strip
