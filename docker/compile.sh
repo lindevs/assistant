@@ -136,6 +136,17 @@ meson setup .. --buildtype=release --default-library=static --libdir=lib --sysco
 ninja -j$(nproc)
 ninja install
 
+# ICU
+cd $WORKDIR
+git clone https://github.com/unicode-org/icu.git --depth=1 --branch=release-75-1
+
+cd icu/icu4c/source
+
+echo '{"localeFilter":{"filterType":"locale","includeChildren":false,"includelist":["en_US"]},"featureFilters":{"brkitr_dictionaries":"exclude","brkitr_rules":"exclude","brkitr_tree":"exclude","conversion_mappings":"exclude","confusables":"exclude","stringprep":"exclude","translit":"exclude","unames":"exclude"}}' > filters.json
+ICU_DATA_FILTER_FILE=filters.json ./runConfigureICU Linux --enable-static --disable-shared --disable-tests --disable-samples
+make -j$(nproc) CFLAGS='-fPIC' CXXFLAGS='-fPIC'
+make install
+
 # Qt
 cd $WORKDIR
 git clone https://github.com/qt/qt5.git qt6
