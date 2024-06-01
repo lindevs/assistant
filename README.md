@@ -47,5 +47,5 @@ cd assistant
 * Run application:
 
 ```shell
-./deps/assistant
+./build/app/assistant
 ```

@@ -84,4 +84,16 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtesseract facedetection opencv_imgcodecs)
 
-install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_SOURCE_DIR}/${CMAKE_PREFIX_PATH}")
+install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_BINARY_DIR}/app")
+
+if (UNIX)
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6Core.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6Core.so.6")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6Gui.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6Gui.so.6")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6Widgets.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6Widgets.so.6")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6XcbQpa.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6XcbQpa.so.6")
+    install(FILES "${CMAKE_PREFIX_PATH}/plugins/platforms/libqxcb.so" DESTINATION "${CMAKE_BINARY_DIR}/app/plugins/platforms")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_core.so.4.9.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_core.so.409")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgproc.so.4.9.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgproc.so.409")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgcodecs.so.4.9.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgcodecs.so.409")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libtbb.so" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+endif ()
