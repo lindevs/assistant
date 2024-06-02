@@ -49,7 +49,7 @@ git clone https://github.com/madler/zlib.git --depth=1 --branch=v1.3.1
 cd zlib
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DZLIB_BUILD_EXAMPLES=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DZLIB_BUILD_EXAMPLES=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 rm -rf /usr/local/lib/libz.so*
@@ -61,8 +61,9 @@ git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.
 cd pcre2
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DPCRE2_BUILD_PCRE2_16=ON -DPCRE2_BUILD_PCRE2_32=ON -DPCRE2_SUPPORT_JIT=ON \
-  -DPCRE2_STATIC_PIC=ON -DPCRE2_BUILD_PCRE2GREP=OFF -DPCRE2_BUILD_TESTS=OFF -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DPCRE2_BUILD_PCRE2_16=ON -DPCRE2_BUILD_PCRE2_32=ON \
+  -DPCRE2_SUPPORT_JIT=ON -DPCRE2_STATIC_PIC=ON -DPCRE2_BUILD_PCRE2GREP=OFF -DPCRE2_BUILD_TESTS=OFF \
+  -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
@@ -97,7 +98,8 @@ git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.43
 cd libpng
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DPNG_SHARED=OFF -DPNG_TESTS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DPNG_SHARED=OFF -DPNG_TESTS=OFF \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
@@ -108,7 +110,8 @@ git clone https://github.com/freetype/freetype.git --depth=1 --branch=VER-2-13-2
 cd freetype
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DFT_DISABLE_HARFBUZZ=ON -DFT_DISABLE_BZIP2=ON -DFT_DISABLE_BROTLI=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DFT_DISABLE_HARFBUZZ=ON \
+    -DFT_DISABLE_BZIP2=ON -DFT_DISABLE_BROTLI=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
@@ -119,8 +122,8 @@ git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_6_2
 cd libexpat/expat
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DEXPAT_BUILD_EXAMPLES=OFF -DEXPAT_BUILD_TESTS=OFF \
-    -DEXPAT_BUILD_TOOLS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DEXPAT_BUILD_EXAMPLES=OFF \
+    -DEXPAT_BUILD_TESTS=OFF -DEXPAT_BUILD_TOOLS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
@@ -167,7 +170,7 @@ sed -i '/^        Fontconfig::Fontconfig/a\        EXPAT::EXPAT' qtbase/src/gui/
 
 mkdir build && cd build
 
-../configure -prefix /opt/assistant/deps -ccache -qt-harfbuzz -bundled-xcb-xinput -fontconfig -system-freetype \
+../configure -prefix /opt/assistant/deps -release -ccache -qt-harfbuzz -bundled-xcb-xinput -fontconfig -system-freetype \
     -no-ico -no-libjpeg -no-gif -no-dbus -no-linuxfb -no-opengl -no-evdev -no-feature-sql -no-feature-xml \
     -no-feature-printsupport -no-feature-concurrent -no-feature-network -no-feature-androiddeployqt -no-feature-qmake
 cmake --build . -j$(nproc)
@@ -180,7 +183,7 @@ git clone https://github.com/zxing-cpp/zxing-cpp.git --depth=1 --branch=v2.2.1
 cd zxing-cpp
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
@@ -193,7 +196,7 @@ sed -i '/include(GNUInstallDirs)/a add_definitions(-DNO_CONSOLE_IO)' CMakeLists.
 
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DENABLE_WEBP=OFF -DENABLE_OPENJPEG=OFF \
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_WEBP=OFF -DENABLE_OPENJPEG=OFF \
   -DENABLE_GIF=OFF -DENABLE_TIFF=OFF -DENABLE_ZLIB=OFF -DENABLE_PNG=OFF -DENABLE_JPEG=OFF
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
@@ -206,7 +209,7 @@ git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.3.
 cd tesseract
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DBUILD_TRAINING_TOOLS=OFF
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TRAINING_TOOLS=OFF
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
@@ -219,7 +222,7 @@ sed -i '/ADD_LIBRARY(${fdt_lib_name} ${fdt_source_files} ${INSTALLHEADER_FILES})
 
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
@@ -230,9 +233,20 @@ git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.27
 cd OpenBLAS
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build . -j$(nproc)
 cmake --install . --strip
+
+# oneTBB
+cd $WORKDIR
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.12.0
+
+cd oneTBB
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DTBB_TEST=OFF -DTBBMALLOC_BUILD=OFF
+cmake --build . -j$(nproc)
+cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenCV
 cd $WORKDIR
@@ -241,7 +255,7 @@ git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.9.0
 cd opencv
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON -DBUILD_TBB=ON \
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON \
   -DWITH_LAPACK=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
   -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
 cmake --build . -j$(nproc)

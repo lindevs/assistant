@@ -19,9 +19,9 @@ fi
 
 if [[ $1 == build-assistant ]]; then
   rm -rf build
-  cmake -S . -B build -DCMAKE_PREFIX_PATH=deps
+  cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=deps
   cmake --build build -j$(nproc)
-  cmake --install build --prefix deps --strip
+  cmake --install build --strip
 
   exit 0
 fi
