@@ -1,5 +1,6 @@
 #include <ctime>
 #include <iomanip>
+#include <sstream>
 #include "utils/DateTime.h"
 
 std::string DateTime::current() {
