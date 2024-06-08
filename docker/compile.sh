@@ -56,7 +56,7 @@ rm -rf /usr/local/lib/libz.so*
 
 # pcre2
 cd $WORKDIR
-git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.43
+git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.44
 
 cd pcre2
 mkdir build && cd build
@@ -204,7 +204,7 @@ cmake --install . --strip
 
 # Tesseract OCR
 cd $WORKDIR
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.3.4
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.0
 
 cd tesseract
 mkdir build && cd build
@@ -250,7 +250,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenCV
 cd $WORKDIR
-git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.9.0
+git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.10.0
 
 cd opencv
 mkdir build && cd build
