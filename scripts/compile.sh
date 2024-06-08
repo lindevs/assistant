@@ -62,8 +62,8 @@ cd pcre2
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DPCRE2_BUILD_PCRE2_16=ON -DPCRE2_BUILD_PCRE2_32=ON \
-  -DPCRE2_SUPPORT_JIT=ON -DPCRE2_STATIC_PIC=ON -DPCRE2_BUILD_PCRE2GREP=OFF -DPCRE2_BUILD_TESTS=OFF \
-  -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON
+    -DPCRE2_SUPPORT_JIT=ON -DPCRE2_STATIC_PIC=ON -DPCRE2_BUILD_PCRE2GREP=OFF -DPCRE2_BUILD_TESTS=OFF \
+    -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
@@ -197,7 +197,7 @@ sed -i '/include(GNUInstallDirs)/a add_definitions(-DNO_CONSOLE_IO)' CMakeLists.
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_WEBP=OFF -DENABLE_OPENJPEG=OFF \
-  -DENABLE_GIF=OFF -DENABLE_TIFF=OFF -DENABLE_ZLIB=OFF -DENABLE_PNG=OFF -DENABLE_JPEG=OFF
+    -DENABLE_GIF=OFF -DENABLE_TIFF=OFF -DENABLE_ZLIB=OFF -DENABLE_PNG=OFF -DENABLE_JPEG=OFF
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 cmake --install . --strip
@@ -256,7 +256,7 @@ cd opencv
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON \
-  -DWITH_LAPACK=ON -DWITH_ZLIB_NG=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
-  -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
+    -DWITH_LAPACK=ON -DWITH_ZLIB_NG=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
+    -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
 cmake --build . -j$(nproc)
 cmake --install . --strip

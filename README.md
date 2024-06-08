@@ -49,3 +49,30 @@ cd assistant
 ```shell
 ./build/app/assistant
 ```
+
+### Windows
+
+* Clone repository:
+
+```shell
+git clone https://github.com/lindevs/assistant.git
+cd assistant
+```
+
+* Build dependencies:
+
+```shell
+.\setup.bat build-deps
+```
+
+* Build Lindevs Assistant:
+
+```shell
+.\setup.bat build-assistant
+```
+
+* Run application:
+
+```shell
+.\build\app\assistant
+```
