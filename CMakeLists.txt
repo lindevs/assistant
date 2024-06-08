@@ -86,7 +86,30 @@ target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtes
 
 install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_BINARY_DIR}/app")
 
-if (UNIX)
+if (WIN32)
+    set_property(TARGET ${PROJECT_NAME} PROPERTY WIN32_EXECUTABLE true)
+
+    message(STATUS ${MSVC_RUNTIME_LIBRARY})
+
+    get_filename_component(COMPILER_DIR ${CMAKE_C_COMPILER} DIRECTORY)
+    if (EXISTS "${COMPILER_DIR}/msvcp140.dll")
+        install(FILES "${COMPILER_DIR}/msvcp140.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    endif ()
+    if (EXISTS "${COMPILER_DIR}/vcruntime140.dll")
+        install(FILES "${COMPILER_DIR}/vcruntime140.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    endif ()
+
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/Qt6Core.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/Qt6Gui.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/Qt6Widgets.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/plugins/platforms/qwindows.dll" DESTINATION "${CMAKE_BINARY_DIR}/app/platforms")
+    install(FILES "${CMAKE_PREFIX_PATH}/plugins/styles/qmodernwindowsstyle.dll" DESTINATION "${CMAKE_BINARY_DIR}/app/styles")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/opencv_core4100.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/opencv_imgproc4100.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/opencv_imgcodecs4100.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/tbb12.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/openblas.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+else ()
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6Core.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6Core.so.6")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6Gui.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6Gui.so.6")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libQt6Widgets.so.6.7.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libQt6Widgets.so.6")
