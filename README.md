@@ -19,6 +19,15 @@ security, and no risk of data leakage.
 
 ### Linux
 
+#### Requirements
+
+* [gcc/g++](https://lindevs.com/install-build-essential-on-ubuntu)
+* [CMake](https://lindevs.com/install-cmake-on-ubuntu)
+* [Ninja](https://lindevs.com/install-ninja-build-system-on-ubuntu)
+* [Docker](https://lindevs.com/install-docker-ce-on-ubuntu)
+
+#### Instructions
+
 * Clone repository:
 
 ```shell
@@ -51,6 +60,15 @@ cd assistant
 ```
 
 ### Windows
+
+#### Requirements
+
+* MSVC - recommended to install [standalone compiler](https://gist.github.com/mmozeiko/7f3162ec2988e81e56d5c4e22cde9977)
+* [CMake](https://cmake.org/download/)
+* [Ninja](https://github.com/ninja-build/ninja/releases)
+* [Python](https://www.python.org/downloads/)
+
+#### Instructions
 
 * Clone repository:
 
