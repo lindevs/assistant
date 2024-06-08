@@ -256,7 +256,7 @@ cd opencv
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON \
-  -DWITH_LAPACK=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
+  -DWITH_LAPACK=ON -DWITH_ZLIB_NG=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
   -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
 cmake --build . -j$(nproc)
 cmake --install . --strip
