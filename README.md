@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2024-06-08]** Project compilation scripts on Linux and Windows.
 * **[2024-05-19]** Face detection.
 * **[2024-05-07]** Optical character recognition (OCR).
 * **[2024-05-01]** Initial project with QR code generator.
@@ -22,6 +23,7 @@ security, and no risk of data leakage.
 #### Requirements
 
 * [gcc/g++](https://lindevs.com/install-build-essential-on-ubuntu)
+* [Git](https://lindevs.com/install-git-on-ubuntu)
 * [CMake](https://lindevs.com/install-cmake-on-ubuntu)
 * [Ninja](https://lindevs.com/install-ninja-build-system-on-ubuntu)
 * [Docker](https://lindevs.com/install-docker-ce-on-ubuntu)
@@ -64,6 +66,7 @@ cd assistant
 #### Requirements
 
 * MSVC - recommended to install [standalone compiler](https://gist.github.com/mmozeiko/7f3162ec2988e81e56d5c4e22cde9977)
+* [Git](https://www.git-scm.com/downloads)
 * [CMake](https://cmake.org/download/)
 * [Ninja](https://github.com/ninja-build/ninja/releases)
 * [Python](https://www.python.org/downloads/)
