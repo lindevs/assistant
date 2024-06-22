@@ -18,23 +18,25 @@ for protocol in "${PROTOCOLS[@]}"; do
 done
 
 LIBRARIES=(
-  'libxau'
-  'libxcb'
-  'libxcb-render-util'
-  'libxcb-wm'
-  'libxcb-keysyms'
-  'libxcb-util'
-  'libxcb-image'
-  'libxcb-cursor'
-  'libice'
-  'libsm'
-  'libxdmcp'
-  'libx11'
+  'libxau:libXau-1.0.11'
+  'libxcb:libxcb-1.17.0'
+  'libxcb-render-util:xcb-util-renderutil-0.3.10'
+  'libxcb-wm:xcb-util-wm-0.4.2'
+  'libxcb-keysyms:xcb-util-keysyms-0.4.1'
+  'libxcb-util:xcb-util-0.4.1'
+  'libxcb-image:xcb-util-image-0.4.1'
+  'libxcb-cursor:xcb-util-cursor-0.1.5'
+  'libice:libICE-1.1.1'
+  'libsm:libSM-1.2.4'
+  'libxdmcp:libXdmcp-1.1.5'
+  'libx11:libX11-1.8.9'
 )
 
-for library in "${LIBRARIES[@]}"; do
+for entry in "${LIBRARIES[@]}"; do
   cd $WORKDIR
-  git clone --recursive https://gitlab.freedesktop.org/xorg/lib/${library}.git --depth=1
+  library="${entry%%:*}"
+  version="${entry#*:}"
+  git clone --recursive https://gitlab.freedesktop.org/xorg/lib/${library}.git --depth=1 --branch=${version}
   cd $library
 
   ./autogen.sh
