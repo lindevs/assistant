@@ -15,6 +15,7 @@ find_package(ZXing REQUIRED)
 find_package(Tesseract REQUIRED)
 find_package(facedetection REQUIRED)
 find_package(OpenCV COMPONENTS imgcodecs REQUIRED)
+find_package(onnxruntime REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -61,14 +62,14 @@ set(PROJECT_SOURCES
         src/ui/SelectBox.cpp
         include/ui/MessageDialog.h
         src/ui/MessageDialog.cpp
-        include/utils/ImageIo.h
-        src/utils/ImageIo.cpp
+        include/utils/ImgIo.h
+        src/utils/ImgIo.cpp
         include/utils/DateTime.h
         src/utils/DateTime.cpp
         include/core/app.h
-        include/face/Libfacedetection.h
-        src/face/Libfacedetection.cpp
-        include/face/QLibfacedetection.h
+        include/models/Libfacedetection.h
+        src/models/Libfacedetection.cpp
+        include/face/QFaceDetection.h
         src/face/QLibfacedetection.cpp
         include/ui/face/Settings.h
         src/ui/face/Settings.cpp
@@ -76,13 +77,28 @@ set(PROJECT_SOURCES
         src/ui/face/Area.cpp
         include/utils/Visualize.h
         src/utils/Vizualize.cpp
+        include/models/OrtModel.h
+        src/models/OrtModel.cpp
+        include/models/Yolov8FaceLindevs.h
+        src/models/Yolov8FaceLindevs.cpp
+        include/utils/ImgProc.h
+        src/utils/ImgProc.cpp
+        include/models/FaceDetectionModel.h
+        include/core/models.h
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-target_link_libraries(${PROJECT_NAME} Qt::Widgets ZXing::ZXing Tesseract::libtesseract facedetection opencv_imgcodecs)
+target_link_libraries(${PROJECT_NAME}
+        Qt::Widgets
+        ZXing::ZXing
+        Tesseract::libtesseract
+        facedetection
+        onnxruntime::onnxruntime
+        opencv_imgcodecs
+)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_BINARY_DIR}/app")
 
@@ -119,4 +135,5 @@ else ()
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgproc.so.4.10.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgproc.so.410")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgcodecs.so.4.10.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgcodecs.so.410")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libtbb.so.12.12" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libtbb.so.12")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime.so.1.18.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
 endif ()

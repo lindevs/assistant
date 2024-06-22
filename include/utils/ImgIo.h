@@ -1,7 +1,7 @@
 #ifndef ASSISTANT_UTILS_IMAGE_IO_H
 #define ASSISTANT_UTILS_IMAGE_IO_H
 
-class ImageIo {
+class ImgIo {
 public:
     static cv::Mat read(const std::string &fullpath);
 

@@ -262,3 +262,15 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JP
     -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
 cmake --build . -j$(nproc)
 cmake --install . --strip
+
+# ONNX Runtime
+cd $WORKDIR
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.0
+
+cd onnxruntime/cmake
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON \
+    -Donnxruntime_ENABLE_LTO=ON
+cmake --build . -j$(nproc)
+cmake --install . --prefix /opt/assistant/deps --strip

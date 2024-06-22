@@ -1,0 +1,86 @@
+#include <opencv2/imgproc.hpp>
+#include "utils/ImgProc.h"
+
+void ImgProc::hwcToNchw(const cv::Mat &src, cv::Mat &dst)
+{
+    const int sizes[] = {1, 3, src.rows, src.cols};
+    cv::Mat nchw(4, sizes, src.depth());
+    cv::Mat planes[] = {
+        cv::Mat(src.rows, src.cols, src.depth(), nchw.ptr(0, 2)),
+        cv::Mat(src.rows, src.cols, src.depth(), nchw.ptr(0, 1)),
+        cv::Mat(src.rows, src.cols, src.depth(), nchw.ptr(0, 0)),
+    };
+    cv::split(src, planes);
+
+    dst = nchw;
+}
+
+void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float> &scores, const float &nmsThreshold,
+                  std::vector<int> &indices)
+{
+    std::vector<std::pair<float, int> > scoreIndexPairs;
+    for (int i = 0; i < scores.size(); ++i) {
+        scoreIndexPairs.emplace_back(scores[i], i);
+    }
+
+    std::stable_sort(
+        scoreIndexPairs.begin(),
+        scoreIndexPairs.end(),
+        [](const std::pair<float, int> &pair1, const std::pair<float, int> &pair2) {
+            return pair1.first > pair2.first;
+        }
+    );
+
+    for (auto &i: scoreIndexPairs) {
+        bool keep = true;
+        for (int j = 0; j < indices.size() && keep; ++j) {
+            keep = jaccardIndex(boxes[i.second], boxes[indices[j]]) <= nmsThreshold;
+        }
+        if (keep) {
+            indices.emplace_back(i.second);
+        }
+    }
+}
+
+void ImgProc::letterbox(cv::InputArray src, cv::OutputArray dst, const cv::Size &size, XyScale &xyScale)
+{
+    const auto width = (float) src.cols();
+    const auto height = (float) src.rows();
+
+    const float resizeFactor = std::min((float) size.width / width, (float) size.height / height);
+    const int rw = (int) std::nearbyint(width * resizeFactor);
+    const int rh = (int) std::nearbyint(height * resizeFactor);
+
+    resize(src, dst, cv::Size(rw, rh));
+
+    const int top = (size.height - rh) / 2;
+    const int bottom = size.height - rh - top;
+    const int left = (size.width - rw) / 2;
+    const int right = size.width - rw - left;
+
+    copyMakeBorder(dst, dst, top, bottom, left, right, cv::BORDER_CONSTANT, cv::Scalar(114, 114, 114));
+
+    xyScale.x = (float) left;
+    xyScale.y = (float) top;
+    xyScale.scale = 1.0f / resizeFactor;
+}
+
+void ImgProc::scale(cv::Mat &src)
+{
+    src.convertTo(src, CV_32F, 1.0f / 255.0f);
+}
+
+float ImgProc::jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b)
+{
+    const float areaA = a.width * a.height;
+    const float areaB = b.width * b.height;
+
+    if (areaA + areaB <= std::numeric_limits<float>::epsilon()) {
+        return 0.0f;
+    }
+
+    const cv::Rect2f ab = a & b;
+    const float areaAb = ab.width * ab.height;
+
+    return areaAb / (areaA + areaB - areaAb);
+}

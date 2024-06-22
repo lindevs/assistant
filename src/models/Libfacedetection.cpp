@@ -1,9 +1,9 @@
 #include <facedetection/facedetectcnn.h>
-#include "face/Libfacedetection.h"
+#include "models/Libfacedetection.h"
 
-std::vector<Face::Detection> Libfacedetection::detect(const cv::Mat &img) const {
+std::vector<Face::Detection> Libfacedetection::detect(const cv::Mat &input) {
     unsigned char buffer[0x9000];
-    int *results = facedetect_cnn(buffer, img.data, img.cols, img.rows, (int) img.step);
+    int *results = facedetect_cnn(buffer, input.data, input.cols, input.rows, (int) input.step);
     auto *data = (short *) (results + 1);
 
     std::vector<Face::Detection> detections{};

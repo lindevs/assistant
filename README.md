@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2024-06-22]** ONNX Runtime and [YOLOv8-Face-Lindevs](https://github.com/lindevs/yolov8-face) model integration.
 * **[2024-06-08]** Project compilation scripts on Linux and Windows.
 * **[2024-05-19]** Face detection.
 * **[2024-05-07]** Optical character recognition (OCR).

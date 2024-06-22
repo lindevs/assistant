@@ -1,5 +1,26 @@
-#include "face/QLibfacedetection.h"
+#include "face/QFaceDetection.h"
+#include "models/Libfacedetection.h"
+#include "models/Yolov8FaceLindevs.h"
 
-void QLibfacedetection::detect(const cv::Mat &img) {
-    emit detected(libfacedetection.detect(img), img);
+void QFaceDetection::start(const Face::Params &params) {
+    switch (params.model.id) {
+        case Face::MODEL_YOLOV8N_FACE_LINDEVS:
+        case Face::MODEL_YOLOV8S_FACE_LINDEVS:
+        case Face::MODEL_YOLOV8M_FACE_LINDEVS:
+        case Face::MODEL_YOLOV8L_FACE_LINDEVS:
+        case Face::MODEL_YOLOV8X_FACE_LINDEVS:
+            model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.model.file);
+            break;
+        default:
+            model = new Libfacedetection();
+    }
+}
+
+void QFaceDetection::stop() {
+    delete model;
+    model = nullptr;
+}
+
+void QFaceDetection::detect(const cv::Mat &img) {
+    emit detected(model->detect(img), img);
 }

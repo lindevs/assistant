@@ -4,6 +4,7 @@
 #include <QGroupBox>
 #include <QSettings>
 #include <QCheckBox>
+#include "ui/SelectBox.h"
 #include "core/structures.h"
 
 namespace Face {
@@ -17,8 +18,18 @@ namespace Face {
 
     private:
         QSettings settings;
+        SelectBox model;
         QCheckBox blur;
         QCheckBox autosave;
+
+        const QList<QString> models = {
+            "libfacedetection",
+            "YOLOv8n-Face-Lindevs",
+            "YOLOv8s-Face-Lindevs",
+            "YOLOv8m-Face-Lindevs",
+            "YOLOv8l-Face-Lindevs",
+            "YOLOv8x-Face-Lindevs",
+        };
     };
 }
 

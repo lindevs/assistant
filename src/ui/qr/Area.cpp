@@ -1,5 +1,5 @@
 #include "ui/qr/Area.h"
-#include "utils/ImageIo.h"
+#include "utils/ImgIo.h"
 #include "utils/DateTime.h"
 
 Qr::Area::Area(QWidget *parent) : QWidget(parent) {
@@ -46,6 +46,6 @@ void Qr::Area::generate() {
     chat->addImage(img);
 
     if (params.autosave) {
-        ImageIo::write(params.path, DateTime::current() + ".jpg", img);
+        ImgIo::write(params.path, DateTime::current() + ".jpg", img);
     }
 }

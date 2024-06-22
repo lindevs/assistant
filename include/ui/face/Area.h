@@ -5,7 +5,7 @@
 #include "ui/UploadBar.h"
 #include "ui/face/Settings.h"
 #include "ui/Chat.h"
-#include "face/QLibfacedetection.h"
+#include "face/QFaceDetection.h"
 
 namespace Face {
     class Area : public QWidget {
@@ -20,8 +20,9 @@ namespace Face {
         Chat *chat;
         Settings *settings;
         UploadBar *uploadBar;
-        QLibfacedetection libfacedetection;
+        QFaceDetection faceDetection;
         QThread thread;
+        Params currentParams;
         bool started = false;
 
         void detect(const cv::Mat &img);

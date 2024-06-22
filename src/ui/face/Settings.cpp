@@ -9,6 +9,14 @@ Face::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::OR
 
     auto *layout = new QVBoxLayout(this);
 
+    model.setText("Model");
+    model.addItems(models);
+    model.setCurrenctIndex(settings.value("model", 0).toInt());
+    connect(&model, &SelectBox::currentIndexChanged, [=] (int index) {
+        settings.setValue("model", index);
+    });
+    layout->addWidget(&model);
+
     blur.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     blur.setText("Blur faces");
     blur.setChecked(settings.value("blur", false).toBool());
@@ -30,6 +38,9 @@ Face::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::OR
 
 Face::Params Face::Settings::getParams() {
     Params params;
+    params.model.id = model.getCurrentIndex();
+    params.model.file = MODEL_FILES[model.getCurrentIndex()];
+    params.model.url = MODEL_URLS[model.getCurrentIndex()];
     params.blur = blur.isChecked();
     params.autosave = autosave.isChecked();
 

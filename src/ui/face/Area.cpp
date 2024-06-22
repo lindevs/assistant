@@ -1,7 +1,10 @@
+#include <QFile>
 #include "ui/face/Area.h"
-#include "utils/ImageIo.h"
+#include "utils/ImgIo.h"
 #include "utils/DateTime.h"
 #include "utils/Visualize.h"
+#include "ui/MessageDialog.h"
+#include "face/QFaceDetection.h"
 
 Face::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);
@@ -26,8 +29,15 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
     uploadBar = new UploadBar(mainContent);
     contentLayout->addWidget(uploadBar);
 
-    libfacedetection.moveToThread(&thread);
-    connect(&libfacedetection, &QLibfacedetection::detected, this, [=](
+    auto *dialog = new MessageDialog("Error", parent);
+
+    faceDetection.moveToThread(&thread);
+    connect(&thread, &QThread::started, [=] {
+        currentParams = settings->getParams();
+        faceDetection.start(currentParams);
+    });
+    connect(&thread, &QThread::finished, &faceDetection, &QFaceDetection::stop);
+    connect(&faceDetection, &QFaceDetection::detected, this, [=](
         const std::vector<Face::Detection> &detections, const cv::Mat &img
     ) {
         chat->removeProgressBar();
@@ -43,11 +53,28 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
         chat->addImage(result);
 
         if (params.autosave) {
-            ImageIo::write(params.path, DateTime::current() + ".jpg", result);
+            ImgIo::write(params.outputPath, DateTime::current() + ".jpg", result);
         }
     });
 
     connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
+        Params params = settings->getParams();
+        QString path = QString(params.path) + "/" + params.model.file;
+
+        if (params.model.url && !QFile::exists(path)) {
+            dialog->setText(
+                QString("Unable to find model '%1'.<br>Download it from <a href=\"%2\">%3</a>")
+                    .arg(path, params.model.url, params.model.url)
+            );
+            dialog->show();
+
+            return;
+        }
+        if (currentParams != params) {
+            thread.quit();
+            thread.wait();
+            started = false;
+        }
         if (!started) {
             thread.start();
             started = true;
@@ -70,7 +97,7 @@ void Face::Area::detect(const cv::Mat &img) {
     chat->addImage(img);
     chat->addUsername("Assistant");
     chat->addProgressBar();
-    QMetaObject::invokeMethod(&libfacedetection, [=] {
-        libfacedetection.detect(img);
+    QMetaObject::invokeMethod(&faceDetection, [=] {
+        faceDetection.detect(img);
     });
 }
