@@ -71,7 +71,7 @@ cmake --install . --strip
 
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.2
+git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.3
 
 cd glib
 mkdir build && cd build
@@ -157,7 +157,7 @@ cd $WORKDIR
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
-git checkout 6.7.1
+git checkout 6.7.2
 
 perl init-repository --module-subset=qtbase
 

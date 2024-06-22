@@ -11,7 +11,7 @@ cd %WORKDIR%
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
-git checkout 6.7.1
+git checkout 6.7.2
 
 git submodule update --init qtbase
 
