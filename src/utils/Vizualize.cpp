@@ -12,7 +12,7 @@ void Visualize::drawFaceDetections(const cv::Mat &input, const std::vector<Face:
     char buff[5];
 
     size_t total = detections.size();
-    for (int i = 0; i < total; ++i) {
+    for (size_t i = 0; i < total; ++i) {
         Face::Detection detection = detections[i];
 
         cv::rectangle(input, detection.box, color, thickness, cv::LINE_AA);
@@ -31,7 +31,7 @@ void Visualize::blurFaces(const cv::Mat &input, const std::vector<Face::Detectio
     cv::Size ksize(32, 32);
 
     size_t total = detections.size();
-    for (int i = 0; i < total; ++i) {
+    for (size_t i = 0; i < total; ++i) {
         cv::blur(input(detections[i].box), input(detections[i].box), ksize);
     }
 }

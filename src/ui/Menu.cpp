@@ -9,7 +9,7 @@ Menu::Menu(QWidget *parent) : QGroupBox(parent) {
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    for (auto i = 0; i < icons.size(); ++i) {
+    for (int i = 0; i < (int) icons.size(); ++i) {
         auto *item = new MenuItem(icons[i]);
         layout->addWidget(item);
         items.emplace_back(item);

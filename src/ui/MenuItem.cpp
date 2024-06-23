@@ -19,6 +19,6 @@ bool MenuItem::isActive() const {
     return activeItem;
 }
 
-void MenuItem::mousePressEvent(QMouseEvent *event) {
+void MenuItem::mousePressEvent(QMouseEvent *) {
     emit clicked();
 }

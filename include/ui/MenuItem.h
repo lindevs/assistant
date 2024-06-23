@@ -18,7 +18,7 @@ signals:
     void clicked();
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *) override;
 
 private:
     bool activeItem = false;

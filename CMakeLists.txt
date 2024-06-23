@@ -105,8 +105,6 @@ install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_BINARY_DIR}/app")
 if (WIN32)
     set_property(TARGET ${PROJECT_NAME} PROPERTY WIN32_EXECUTABLE true)
 
-    message(STATUS ${MSVC_RUNTIME_LIBRARY})
-
     get_filename_component(COMPILER_DIR ${CMAKE_C_COMPILER} DIRECTORY)
     if (EXISTS "${COMPILER_DIR}/msvcp140.dll")
         install(FILES "${COMPILER_DIR}/msvcp140.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")

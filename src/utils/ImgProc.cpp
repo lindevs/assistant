@@ -19,7 +19,7 @@ void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float>
                   std::vector<int> &indices)
 {
     std::vector<std::pair<float, int> > scoreIndexPairs;
-    for (int i = 0; i < scores.size(); ++i) {
+    for (size_t i = 0; i < scores.size(); ++i) {
         scoreIndexPairs.emplace_back(scores[i], i);
     }
 
@@ -33,7 +33,7 @@ void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float>
 
     for (auto &i: scoreIndexPairs) {
         bool keep = true;
-        for (int j = 0; j < indices.size() && keep; ++j) {
+        for (size_t j = 0; j < indices.size() && keep; ++j) {
             keep = jaccardIndex(boxes[i.second], boxes[indices[j]]) <= nmsThreshold;
         }
         if (keep) {
