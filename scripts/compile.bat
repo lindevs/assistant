@@ -114,9 +114,6 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JP
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
-cd %WORKDIR%/..
-rmdir /s /q downloads
-
 :: ONNX Runtime
 cd %WORKDIR%
 git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.0
@@ -129,3 +126,6 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_T
     -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" -DCMAKE_INSTALL_PREFIX=../../../deps
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
+
+cd %WORKDIR%/..
+rmdir /s /q downloads

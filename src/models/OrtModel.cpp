@@ -1,10 +1,10 @@
 #include "models/OrtModel.h"
 
 OrtModel::OrtModel(const std::string &onnxModelPath)
-    : session(env, onnxModelPath.c_str(), sessionOptions)
-{
+    : session(env, (ORTCHAR_T *) onnxModelPath.c_str(), sessionOptions
+) {
     sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
-    session = Ort::Session(env, onnxModelPath.c_str(), sessionOptions);
+    session = Ort::Session(env, (ORTCHAR_T *) onnxModelPath.c_str(), sessionOptions);
 
     Ort::AllocatorWithDefaultOptions allocator;
 
