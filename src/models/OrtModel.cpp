@@ -1,10 +1,14 @@
 #include "models/OrtModel.h"
 
-OrtModel::OrtModel(const std::string &onnxModelPath)
-    : session(env, (ORTCHAR_T *) onnxModelPath.c_str(), sessionOptions
-) {
+OrtModel::OrtModel(const std::string &onnxModelPath) {
+#ifdef _WIN32
+    auto path = std::wstring(onnxModelPath.begin(), onnxModelPath.end()).c_str();
+#else
+    auto path = onnxModelPath.c_str();
+#endif
+
     sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
-    session = Ort::Session(env, (ORTCHAR_T *) onnxModelPath.c_str(), sessionOptions);
+    session = Ort::Session(env, path, sessionOptions);
 
     Ort::AllocatorWithDefaultOptions allocator;
 

@@ -13,7 +13,7 @@ protected:
     const Ort::MemoryInfo memoryInfo = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
     const Ort::RunOptions runOptions;
     Ort::SessionOptions sessionOptions;
-    Ort::Session session;
+    Ort::Session session = Ort::Session(nullptr);
 
     std::vector<Ort::AllocatedStringPtr> inputNamesAlloc;
     std::vector<Ort::AllocatedStringPtr> outputNamesAlloc;
