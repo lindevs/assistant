@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     menu = new Menu();
     ui->horizontalLayout->addWidget(menu);
-    menuItemClicked(0);
+    menuItemClicked(menu->getItemIdx());
     ui->horizontalLayout->setAlignment(Qt::AlignLeft);
 
     connect(menu, &Menu::clicked, this, &MainWindow::menuItemClicked);
