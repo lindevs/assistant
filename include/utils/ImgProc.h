@@ -21,6 +21,8 @@ public:
 
     static void bgr2gray(const cv::Mat &src, cv::Mat &dst);
 
+    static void hash(const cv::Mat &src, cv::Mat &dst);
+
     static std::string hex(const cv::Mat &src);
 
 private:

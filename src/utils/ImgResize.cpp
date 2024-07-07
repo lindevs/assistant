@@ -36,8 +36,7 @@ cv::Mat ImgResize::resize(const cv::Mat &src, const cv::Size &size, int32_t filt
 }
 
 double ImgResize::BoxFilter::filter(double x) const {
-    constexpr double halfPixel = 0.5;
-    if (x > -halfPixel && x <= halfPixel) {
+    if (x > -0.5 && x <= 0.5) {
         return 1.0;
     }
 
@@ -95,9 +94,8 @@ double ImgResize::LanczosFilter::sincFilter(double x) {
 }
 
 double ImgResize::LanczosFilter::filter(double x) const {
-    constexpr double aParam = 3.0;
-    if (-aParam <= x && x < aParam) {
-        return sincFilter(x) * sincFilter(x / aParam);
+    if (-3.0 <= x && x < 3.0) {
+        return sincFilter(x) * sincFilter(x / 3);
     }
 
     return 0.0;
@@ -352,12 +350,11 @@ std::vector<double> ImgResize::normalizeCoeffs8bpc(const std::vector<double> &pr
 
     constexpr auto shiftedCoeff = static_cast<double>(1U << precisionBits);
 
-    constexpr double halfPixel = 0.5;
     for (const auto &k: prekk) {
         if (k < 0) {
-            kk.emplace_back(trunc(-halfPixel + k * shiftedCoeff));
+            kk.emplace_back(trunc(-0.5 + k * shiftedCoeff));
         } else {
-            kk.emplace_back(trunc(halfPixel + k * shiftedCoeff));
+            kk.emplace_back(trunc(0.5 + k * shiftedCoeff));
         }
     }
 

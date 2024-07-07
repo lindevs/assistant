@@ -89,6 +89,23 @@ void ImgProc::bgr2gray(const cv::Mat &src, cv::Mat &dst) {
     cv::cvtColor(src, dst, cv::COLOR_BGR2GRAY);
 }
 
+void ImgProc::hash(const cv::Mat &src, cv::Mat &dst) {
+    uchar *in = src.data;
+    uchar *out = dst.data;
+
+    int size = dst.cols - 1;
+    int total = src.rows * src.cols;
+    for (int i = 0; i != total;) {
+        *out = 0;
+        for (int k = size; k >= 0; --k, ++i) {
+            if (*in++) {
+                *out |= 1 << k;
+            }
+        }
+        ++out;
+    }
+}
+
 std::string ImgProc::hex(const cv::Mat &src) {
     static const char *digits = "0123456789abcdef";
 

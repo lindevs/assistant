@@ -89,6 +89,8 @@ set(PROJECT_SOURCES
         src/utils/ImgResize.cpp
         include/hash/AverageHash.h
         src/hash/AverageHash.cpp
+        include/hash/DifferenceHash.h
+        src/hash/DifferenceHash.cpp
         include/ui/hash/Settings.h
         src/ui/hash/Settings.cpp
         include/ui/hash/Area.h
