@@ -4,7 +4,6 @@
 #include "utils/DateTime.h"
 #include "utils/Visualize.h"
 #include "ui/MessageDialog.h"
-#include "face/QFaceDetection.h"
 
 Face::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);
@@ -90,7 +89,6 @@ Face::Area::~Area() {
         thread.wait();
     }
 }
-
 
 void Face::Area::detect(const cv::Mat &img) {
     chat->addUsername("User");

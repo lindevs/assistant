@@ -1,8 +1,7 @@
 #include <opencv2/imgproc.hpp>
 #include "utils/Visualize.h"
 
-void Visualize::drawFaceDetections(const cv::Mat &input, const std::vector<Face::Detection> &detections)
-{
+void Visualize::drawFaceDetections(const cv::Mat &input, const std::vector<Face::Detection> &detections) {
     cv::Scalar color(0, 255, 0);
     int thickness = 1;
     cv::Scalar textColor(0, 0, 0);

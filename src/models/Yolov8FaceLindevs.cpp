@@ -1,12 +1,10 @@
 #include "models/Yolov8FaceLindevs.h"
 #include "utils/ImgProc.h"
 
-Yolov8FaceLindevs::Yolov8FaceLindevs(const std::string &onnxModelPath) : OrtModel(onnxModelPath)
-{
+Yolov8FaceLindevs::Yolov8FaceLindevs(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
 }
 
-std::vector<Face::Detection> Yolov8FaceLindevs::detect(const cv::Mat &input)
-{
+std::vector<Face::Detection> Yolov8FaceLindevs::detect(const cv::Mat &input) {
     cv::Mat blob;
     XyScale xyScale;
     preprocess(input, blob, xyScale);
@@ -75,8 +73,7 @@ std::vector<Face::Detection> Yolov8FaceLindevs::detect(const cv::Mat &input)
     return detections;
 }
 
-void Yolov8FaceLindevs::preprocess(const cv::Mat &input, cv::Mat &blob, XyScale &xyScale)
-{
+void Yolov8FaceLindevs::preprocess(const cv::Mat &input, cv::Mat &blob, XyScale &xyScale) {
     ImgProc::letterbox(input, blob, modelInputShape, xyScale);
     ImgProc::hwcToNchw(blob, blob);
     ImgProc::scale(blob);

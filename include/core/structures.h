@@ -3,6 +3,7 @@
 
 #include <opencv2/core/types.hpp>
 #include "core/models.h"
+#include "core/algorithms.h"
 
 struct XyScale {
     float x{0.0f};
@@ -48,6 +49,16 @@ namespace Face {
         cv::Rect box{};
 
         Detection(float confidence, cv::Rect box) : confidence(confidence), box(box) {
+        }
+    };
+}
+
+namespace Hash {
+    struct Params {
+        Algorithm algorithm;
+
+        bool operator!=(const Params &other) const {
+            return algorithm != other.algorithm;
         }
     };
 }

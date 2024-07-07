@@ -11,6 +11,7 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV8X_FACE_LINDEVS:
             model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.model.file);
             break;
+        case Face::MODEL_LIBFACEDETECTION:
         default:
             model = new Libfacedetection();
     }

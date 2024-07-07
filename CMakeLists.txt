@@ -85,6 +85,18 @@ set(PROJECT_SOURCES
         src/utils/ImgProc.cpp
         include/models/FaceDetectionModel.h
         include/core/models.h
+        include/utils/ImgResize.h
+        src/utils/ImgResize.cpp
+        include/hash/AverageHash.h
+        src/hash/AverageHash.cpp
+        include/ui/hash/Settings.h
+        src/ui/hash/Settings.cpp
+        include/ui/hash/Area.h
+        src/ui/hash/Area.cpp
+        include/hash/HashAlgorithm.h
+        include/core/algorithms.h
+        include/hash/QHashCalculation.h
+        src/hash/QHashCalculation.cpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

@@ -7,10 +7,11 @@ recognizing text, chatting with LLM models (coming soon), and more. Lindevs Assi
 computer. While online tools offer convenience and accessibility, the Lindevs Assistant ensures data privacy,
 security, and no risk of data leakage.
 
-![lindevs-assistant](https://i.ibb.co/CBncCvL/lindevs-assistant.png)
+![lindevs-assistant](https://i.ibb.co/jH5x7Bq/lindevs-assistant.png)
 
 ## Release Notes
 
+* **[2024-07-07]** Image hash calculation.
 * **[2024-06-22]** ONNX Runtime and [YOLOv8-Face-Lindevs](https://github.com/lindevs/yolov8-face) model integration.
 * **[2024-06-08]** Project compilation scripts on Linux and Windows.
 * **[2024-05-19]** Face detection.
