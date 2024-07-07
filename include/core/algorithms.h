@@ -12,6 +12,7 @@ struct Algorithm {
 namespace Hash {
     const int ALGORITHM_AVERAGE_HASH = 0;
     const int ALGORITHM_DIFFERENCE_HASH = 1;
+    const int ALGORITHM_PERCEPTUAL_HASH = 2;
 }
 
 #endif //ASSISTANT_CORE_ALGORITHMS_H

@@ -67,6 +67,10 @@ void ImgProc::scale(cv::Mat &src) {
     src.convertTo(src, CV_32F, 1.0f / 255.0f);
 }
 
+void ImgProc::convertToFloat(cv::Mat &src) {
+    src.convertTo(src, CV_32F);
+}
+
 cv::Scalar ImgProc::mean(const cv::Mat &src) {
     return cv::mean(src);
 }
@@ -87,6 +91,10 @@ float ImgProc::jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b) {
 
 void ImgProc::bgr2gray(const cv::Mat &src, cv::Mat &dst) {
     cv::cvtColor(src, dst, cv::COLOR_BGR2GRAY);
+}
+
+void ImgProc::dct(const cv::Mat &src, cv::Mat &dst) {
+    cv::dct(src, dst);
 }
 
 void ImgProc::hash(const cv::Mat &src, cv::Mat &dst) {

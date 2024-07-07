@@ -91,6 +91,8 @@ set(PROJECT_SOURCES
         src/hash/AverageHash.cpp
         include/hash/DifferenceHash.h
         src/hash/DifferenceHash.cpp
+        include/hash/PerceptualHash.h
+        src/hash/PerceptualHash.cpp
         include/ui/hash/Settings.h
         src/ui/hash/Settings.cpp
         include/ui/hash/Area.h

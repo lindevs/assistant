@@ -15,11 +15,15 @@ public:
 
     static void scale(cv::Mat &src);
 
+    static void convertToFloat(cv::Mat &src);
+
     static cv::Scalar mean(const cv::Mat &src);
 
     static float jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b);
 
     static void bgr2gray(const cv::Mat &src, cv::Mat &dst);
+
+    static void dct(const cv::Mat &src, cv::Mat &dst);
 
     static void hash(const cv::Mat &src, cv::Mat &dst);
 

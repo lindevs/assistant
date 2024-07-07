@@ -22,6 +22,7 @@ namespace Hash {
         const QList<QString> algorithms = {
             "Average hash (AHash)",
             "Difference hash (DHash)",
+            "Perceptual hash (PHash)",
         };
     };
 }
