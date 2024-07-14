@@ -97,6 +97,49 @@ void ImgProc::dct(const cv::Mat &src, cv::Mat &dst) {
     cv::dct(src, dst);
 }
 
+void ImgProc::dwt2(const cv::Mat &src, cv::Mat &dst, const int level) {
+    dst.create(src.rows, src.cols, CV_32F);
+    auto *in = (float *) src.data;
+    auto *out = (float *) dst.data;
+
+    for (int k = 0; k < level; ++k) {
+        int hStep = src.rows >> (k + 1);
+        int wStep = src.cols >> (k + 1);
+
+        for (int y = 0; y < hStep; ++y) {
+            int sy0 = 2 * y * src.cols;
+            int sy1 = sy0 + src.cols;
+            int dy0 = y * dst.cols;
+            int dy1 = dy0 + hStep * dst.cols;
+
+            for (int x = 0; x < wStep; ++x) {
+                int x2 = 2 * x;
+                int sx0 = sy0 + x2;
+                int sx1 = sy1 + x2;
+
+                float s0 = in[sx0];
+                float s1 = in[sx0 + 1];
+                float s2 = in[sx1];
+                float s3 = in[sx1 + 1];
+
+                float sum01 = s0 + s1;
+                float sum23 = s2 + s3;
+                float diff01 = s0 - s1;
+                float diff23 = s2 - s3;
+
+                int dx0 = dy0 + x;
+                int dx1 = dy1 + x;
+
+                out[dx0] = (sum01 + sum23) * 0.5f;
+                out[dx0 + wStep] = (diff01 - diff23) * 0.5f;
+                out[dx1] = (sum01 - sum23) * 0.5f;
+                out[dx1 + wStep] = (diff01 + diff23) * 0.5f;
+            }
+        }
+        dst.copyTo(src);
+    }
+}
+
 void ImgProc::hash(const cv::Mat &src, cv::Mat &dst) {
     uchar *in = src.data;
     uchar *out = dst.data;

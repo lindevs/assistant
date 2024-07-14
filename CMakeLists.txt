@@ -93,6 +93,8 @@ set(PROJECT_SOURCES
         src/hash/DifferenceHash.cpp
         include/hash/PerceptualHash.h
         src/hash/PerceptualHash.cpp
+        include/hash/WaveletHash.h
+        src/hash/WaveletHash.cpp
         include/ui/hash/Settings.h
         src/ui/hash/Settings.cpp
         include/ui/hash/Area.h

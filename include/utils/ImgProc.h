@@ -25,6 +25,8 @@ public:
 
     static void dct(const cv::Mat &src, cv::Mat &dst);
 
+    static void dwt2(const cv::Mat &src, cv::Mat &dst, int level);
+
     static void hash(const cv::Mat &src, cv::Mat &dst);
 
     static std::string hex(const cv::Mat &src);

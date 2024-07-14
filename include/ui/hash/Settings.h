@@ -23,6 +23,7 @@ namespace Hash {
             "Average hash (AHash)",
             "Difference hash (DHash)",
             "Perceptual hash (PHash)",
+            "Wavelet hash (WHash)",
         };
     };
 }

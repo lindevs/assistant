@@ -3,6 +3,7 @@
 #include "hash/AverageHash.h"
 #include "hash/DifferenceHash.h"
 #include "hash/PerceptualHash.h"
+#include "hash/WaveletHash.h"
 
 void QHashCalculation::start(const Hash::Params &params) {
     switch (params.algorithm.id) {
@@ -11,6 +12,9 @@ void QHashCalculation::start(const Hash::Params &params) {
             break;
         case Hash::ALGORITHM_PERCEPTUAL_HASH:
             algorithm = new PerceptualHash();
+            break;
+        case Hash::ALGORITHM_WAVELET_HASH:
+            algorithm = new WaveletHash();
             break;
         case Hash::ALGORITHM_AVERAGE_HASH:
         default:
