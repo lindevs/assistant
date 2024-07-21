@@ -4,5 +4,6 @@
         <file>img/ocr.png</file>
         <file>img/face.png</file>
         <file>img/hash.png</file>
+        <file>img/dedup.png</file>
     </qresource>
 </RCC>

@@ -1,5 +1,5 @@
-#ifndef ASSISTANT_FACE_QLIBFACEDETECTION_H
-#define ASSISTANT_FACE_QLIBFACEDETECTION_H
+#ifndef ASSISTANT_FACE_QFACE_DETECTION_H
+#define ASSISTANT_FACE_QFACE_DETECTION_H
 
 #include <QObject>
 #include <opencv2/core/mat.hpp>
@@ -23,4 +23,4 @@ private:
     FaceDetectionModel *model;
 };
 
-#endif //ASSISTANT_FACE_QLIBFACEDETECTION_H
+#endif //ASSISTANT_FACE_QFACE_DETECTION_H

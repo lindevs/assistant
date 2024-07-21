@@ -103,6 +103,19 @@ set(PROJECT_SOURCES
         include/core/algorithms.h
         include/hash/QHashCalculation.h
         src/hash/QHashCalculation.cpp
+        include/models/DeduplicationModel.h
+        include/models/MobileNetV3Dedup.h
+        src/models/MobileNetV3Dedup.cpp
+        include/ui/dedup/Settings.h
+        src/ui/dedup/Settings.cpp
+        include/ui/dedup/Area.h
+        src/ui/dedup/Area.cpp
+        include/dedup/ImageDeduplication.h
+        src/dedup/ImageDeduplication.cpp
+        include/dedup/QImageDeduplication.h
+        src/dedup/QImageDeduplication.cpp
+        include/utils/Formatting.h
+        src/utils/Formatting.cpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

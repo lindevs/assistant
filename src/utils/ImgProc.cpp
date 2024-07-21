@@ -67,12 +67,39 @@ void ImgProc::scale(cv::Mat &src) {
     src.convertTo(src, CV_32F, 1.0f / 255.0f);
 }
 
+cv::Size ImgProc::scale(const cv::Size &size, float scale) {
+    return {(int) ((float) size.width / scale), (int) ((float) size.height / scale)};
+}
+
 void ImgProc::convertToFloat(cv::Mat &src) {
     src.convertTo(src, CV_32F);
 }
 
+void ImgProc::scaleAndNormalize(cv::Mat &src, const float *mean, const float *std) {
+    src.convertTo(src, CV_32F);
+    auto *data = (float *) src.data;
+
+    int total = src.rows * src.cols * src.channels();
+    for (int i = 0; i < total; i += 3) {
+        data[i] = ((data[i] / 255.0f) - mean[0]) / std[0];
+        data[i + 1] = ((data[i + 1] / 255.0f) - mean[1]) / std[1];
+        data[i + 2] = ((data[i + 2] / 255.0f) - mean[2]) / std[2];
+    }
+}
+
 cv::Scalar ImgProc::mean(const cv::Mat &src) {
     return cv::mean(src);
+}
+
+void ImgProc::centerCrop(cv::Mat &src, const cv::Size &size) {
+    src = src(
+        cv::Rect(
+            (int) std::nearbyint((float) (src.cols - size.width) * 0.5f),
+            (int) std::nearbyint((float) (src.rows - size.height) * 0.5f),
+            size.width,
+            size.height
+        )
+    );
 }
 
 float ImgProc::jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b) {
@@ -170,4 +197,8 @@ std::string ImgProc::hex(const cv::Mat &src) {
     }
 
     return dst;
+}
+
+double ImgProc::cosineSimilarity(const cv::Mat &x, const cv::Mat &y) {
+    return x.dot(y) / std::sqrt(x.dot(x) * y.dot(y));
 }

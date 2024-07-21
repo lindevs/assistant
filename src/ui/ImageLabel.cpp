@@ -14,7 +14,7 @@ ImageLabel::ImageLabel(const cv::Mat &img, const int width, QWidget *parent) : Q
 void ImageLabel::mousePressEvent(QMouseEvent *event) {
     QLabel::mouseMoveEvent(event);
 
-    QString path = QFileDialog::getExistingDirectory(this, "Select directory", QDir::homePath());
+    QString path = QFileDialog::getExistingDirectory(this, "Select Directory", QDir::homePath());
     if (!path.isEmpty()) {
         ImgIo::write(path.toStdString() + "/" + DateTime::current() + ".jpg", img);
     }

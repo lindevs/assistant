@@ -7,6 +7,7 @@
 #include "ui/ocr/Area.h"
 #include "ui/face/Area.h"
 #include "ui/hash/Area.h"
+#include "ui/dedup/Area.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,6 +27,7 @@ private:
     Ocr::Area *ocrArea = nullptr;
     Face::Area *faceArea = nullptr;
     Hash::Area *hashArea = nullptr;
+    Dedup::Area *dedupArea = nullptr;
     Ui::MainWindow *ui;
 
     void menuItemClicked(int item);

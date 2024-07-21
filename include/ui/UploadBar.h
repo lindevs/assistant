@@ -8,11 +8,16 @@ class UploadBar : public QWidget {
 Q_OBJECT
 
 public:
-    explicit UploadBar(QWidget *parent = nullptr);
+    explicit UploadBar(QWidget *parent = nullptr, int type = TYPE_IMAGE);
+
+    static const int TYPE_DIRECTORY = 0;
+    static const int TYPE_IMAGE = 1;
 
 signals:
 
     void imageSelected(const cv::Mat &img);
+
+    void directorySelected(const QString &path);
 
 private:
     QString style = R"(
@@ -40,6 +45,11 @@ private:
             border-color: #0d6efd;
         }
     )";
+
+    const QList<QString> text = {
+        "Select Directory...",
+        "Select Image...",
+    };
 };
 
 #endif //ASSISTANT_UI_UPLOAD_BAR_H

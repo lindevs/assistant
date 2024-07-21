@@ -15,9 +15,15 @@ public:
 
     static void scale(cv::Mat &src);
 
+    static cv::Size scale(const cv::Size &size, float scale);
+
     static void convertToFloat(cv::Mat &src);
 
+    static void scaleAndNormalize(cv::Mat &src, const float *mean, const float *std);
+
     static cv::Scalar mean(const cv::Mat &src);
+
+    static void centerCrop(cv::Mat &src, const cv::Size &size);
 
     static float jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b);
 
@@ -30,6 +36,8 @@ public:
     static void hash(const cv::Mat &src, cv::Mat &dst);
 
     static std::string hex(const cv::Mat &src);
+
+    static double cosineSimilarity(const cv::Mat &x, const cv::Mat &y);
 
 private:
     ImgProc() {

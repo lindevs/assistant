@@ -23,10 +23,12 @@ void MainWindow::menuItemClicked(int itemIdx) {
     removeMenuItem(ocrArea);
     removeMenuItem(faceArea);
     removeMenuItem(hashArea);
+    removeMenuItem(dedupArea);
     qrArea = nullptr;
     ocrArea = nullptr;
     faceArea = nullptr;
     hashArea = nullptr;
+    dedupArea = nullptr;
 
     switch (itemIdx) {
         case 0:
@@ -44,6 +46,10 @@ void MainWindow::menuItemClicked(int itemIdx) {
         case 3:
             hashArea = new Hash::Area(this);
             ui->horizontalLayout->addWidget(hashArea);
+            break;
+        case 4:
+            dedupArea = new Dedup::Area(this);
+            ui->horizontalLayout->addWidget(dedupArea);
             break;
         default:
             break;

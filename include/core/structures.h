@@ -63,4 +63,28 @@ namespace Hash {
     };
 }
 
+namespace Dedup {
+    struct Params {
+        const char *path{"./data"};
+        Model model;
+
+        bool operator!=(const Params &other) const {
+            return model != other.model;
+        }
+    };
+
+    struct Duplication {
+        int index{0};
+        float confidence{0.0f};
+
+        Duplication(int index, float confidence) : index(index), confidence(confidence) {
+        }
+    };
+
+    struct Findings {
+        std::vector<std::string> images;
+        std::vector<std::vector<Duplication>> duplications;
+    };
+}
+
 #endif //ASSISTANT_CORE_STRUCTURES_H

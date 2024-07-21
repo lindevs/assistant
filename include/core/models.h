@@ -40,4 +40,16 @@ namespace Face {
     };
 }
 
+namespace Dedup {
+    const int MODEL_MOBILE_NET_V3_SMALL_DEDUP = 0;
+
+    inline constexpr const char *MODEL_FILES[] = {
+        "mobilenetv3-small-dedup.onnx",
+    };
+
+    inline constexpr const char *MODEL_URLS[] = {
+        "https://github.com/clibdev/imagededup/releases",
+    };
+}
+
 #endif //ASSISTANT_CORE_MODELS_H

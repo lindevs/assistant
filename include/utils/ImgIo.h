@@ -1,6 +1,8 @@
 #ifndef ASSISTANT_UTILS_IMAGE_IO_H
 #define ASSISTANT_UTILS_IMAGE_IO_H
 
+#include <opencv2/core/mat.hpp>
+
 class ImgIo {
 public:
     static cv::Mat read(const std::string &fullpath);

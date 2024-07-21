@@ -163,7 +163,7 @@ cv::Mat ImgResize::resample(const cv::Mat &imIn, int32_t xSize, int32_t ySize,
 void ImgResize::resampleHorizontal(cv::Mat &imOut, const cv::Mat &imIn, int32_t offset, int32_t ksize,
                                 const std::vector<int32_t> &bounds, const std::vector<double> &prekk
 ) {
-    switch (imIn.type() & CV_MAT_DEPTH_MASK) {
+    switch (imIn.depth()) {
         case CV_8U:
             return resampleHorizontal<uint8_t>(
                 imOut, imIn, offset, ksize, bounds, prekk, normalizeCoeffs8bpc,
@@ -229,7 +229,7 @@ cv::Mat ImgResize::resampleNearest(const cv::Mat &imIn, int32_t xSize, int32_t y
     cv::Mat imOut = cv::Mat::zeros(ySize, xSize, imIn.type());
 
     size_t pixelSize;
-    switch (imIn.type() & CV_MAT_DEPTH_MASK) {
+    switch (imIn.depth()) {
         case CV_8U:
             pixelSize = sizeof(uint8_t);
             break;

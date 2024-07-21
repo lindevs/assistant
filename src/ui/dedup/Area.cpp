@@ -1,11 +1,9 @@
 #include <QFile>
-#include "ui/face/Area.h"
-#include "utils/ImgIo.h"
-#include "utils/DateTime.h"
-#include "utils/Visualize.h"
+#include "ui/dedup/Area.h"
 #include "ui/MessageDialog.h"
+#include "utils/Formatting.h"
 
-Face::Area::Area(QWidget *parent) : QWidget(parent) {
+Dedup::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);
 
     auto *mainContent = new QWidget(this);
@@ -25,38 +23,34 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
 
     chat = new Chat(mainContent);
     contentLayout->addWidget(chat);
-    uploadBar = new UploadBar(mainContent);
+    uploadBar = new UploadBar(mainContent, UploadBar::TYPE_DIRECTORY);
     contentLayout->addWidget(uploadBar);
 
     auto *dialog = new MessageDialog("Error", parent);
 
-    faceDetection.moveToThread(&thread);
+    deduplication.moveToThread(&thread);
     connect(&thread, &QThread::started, [=] {
         currentParams = settings->getParams();
-        faceDetection.start(currentParams);
+        deduplication.start(currentParams);
     });
-    connect(&thread, &QThread::finished, &faceDetection, &QFaceDetection::stop);
-    connect(&faceDetection, &QFaceDetection::detected, this, [=](
-        const std::vector<Face::Detection> &detections, const cv::Mat &img
-    ) {
+    connect(&thread, &QThread::finished, &deduplication, &QImageDeduplication::stop);
+    connect(&deduplication, &QImageDeduplication::found, this, [=](const Dedup::Findings &findings) {
         chat->removeProgressBar();
-        Params params = settings->getParams();
 
-        cv::Mat result;
-        img.copyTo(result);
-        if (params.blur) {
-            Visualize::blurFaces(result, detections);
-        } else {
-            Visualize::drawFaceDetections(result, detections);
-        }
-        chat->addImage(result);
-
-        if (params.autosave) {
-            ImgIo::write(params.outputPath, DateTime::current() + ".jpg", result);
+        size_t total = findings.duplications.size();
+        for (size_t i = 0; i < total; ++i) {
+            if (findings.duplications[i].empty()) {
+                continue;
+            }
+            if (i == showLimit) {
+                chat->addText("Too many duplicates...");
+                break;
+            }
+            chat->addText(QString::fromStdString(Formatting::formatDuplications(findings, i)));
         }
     });
 
-    connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
+    connect(uploadBar, &UploadBar::directorySelected, this, [=](const QString &path) {
         Params params = settings->getParams();
         QString modelPath = QString(params.path) + "/" + params.model.file;
 
@@ -79,23 +73,23 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
             started = true;
         }
 
-        detect(img);
+        findDuplicates(path);
     });
 }
 
-Face::Area::~Area() {
+Dedup::Area::~Area() {
     if (started) {
         thread.quit();
         thread.wait();
     }
 }
 
-void Face::Area::detect(const cv::Mat &img) {
+void Dedup::Area::findDuplicates(const QString &path) {
     chat->addUsername("User");
-    chat->addImage(img);
+    chat->addText(path);
     chat->addUsername("Assistant");
     chat->addProgressBar();
-    QMetaObject::invokeMethod(&faceDetection, [=] {
-        faceDetection.detect(img);
+    QMetaObject::invokeMethod(&deduplication, [=] {
+        deduplication.findDuplicates(path);
     });
 }
