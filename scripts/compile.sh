@@ -17,6 +17,9 @@ for protocol in "${PROTOCOLS[@]}"; do
   make install
 done
 
+cd $WORKDIR
+git clone https://gitlab.freedesktop.org/xorg/util/xcb-util-m4.git --depth=1 m4
+
 LIBRARIES=(
   'libxau:libXau-1.0.11'
   'libxcb:libxcb-1.17.0'
@@ -36,8 +39,10 @@ for entry in "${LIBRARIES[@]}"; do
   cd $WORKDIR
   library="${entry%%:*}"
   version="${entry#*:}"
-  git clone --recursive https://gitlab.freedesktop.org/xorg/lib/${library}.git --depth=1 --branch=${version}
+  git clone https://gitlab.freedesktop.org/xorg/lib/${library}.git --depth=1 --branch=${version}
   cd $library
+  cp -r $WORKDIR/m4 .
+  git submodule update --init
 
   ./autogen.sh
   make -j$(nproc) CFLAGS='-static -fPIC'
@@ -71,7 +76,7 @@ cmake --install . --strip
 
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.80.3
+git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.81.1
 
 cd glib
 mkdir build && cd build
@@ -206,7 +211,7 @@ cmake --install . --strip
 
 # Tesseract OCR
 cd $WORKDIR
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.0
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.1
 
 cd tesseract
 mkdir build && cd build
@@ -241,7 +246,7 @@ cmake --install . --strip
 
 # oneTBB
 cd $WORKDIR
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.12.0
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.13.0
 
 cd oneTBB
 mkdir build && cd build
@@ -265,7 +270,7 @@ cmake --install . --strip
 
 # ONNX Runtime
 cd $WORKDIR
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.0
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.1
 
 cd onnxruntime/cmake
 mkdir build && cd build

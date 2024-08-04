@@ -2,8 +2,6 @@ FROM ubuntu:22.04
 
 WORKDIR /opt/assistant
 
-COPY compile.sh compile.sh
-
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         curl ca-certificates git build-essential ninja-build nasm ccache \

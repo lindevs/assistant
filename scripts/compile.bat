@@ -52,7 +52,7 @@ cmake --install .
 
 :: Tesseract OCR
 cd %WORKDIR%
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.0
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.1
 
 cd tesseract
 mkdir build && cd build
@@ -90,7 +90,7 @@ cmake --install .
 
 :: oneTBB
 cd %WORKDIR%
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.12.0
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.13.0
 
 cd oneTBB
 mkdir build && cd build
@@ -116,7 +116,7 @@ cmake --install .
 
 :: ONNX Runtime
 cd %WORKDIR%
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.0
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.1
 
 cd onnxruntime/cmake
 mkdir build && cd build

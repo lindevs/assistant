@@ -12,7 +12,8 @@ if [[ $1 == build-image ]]; then
 fi
 
 if [[ $1 == build-deps ]]; then
-  docker run -it --rm -v ./deps:/opt/assistant/deps lindevs-assistant compile.sh
+  docker run -it --rm -v ./scripts/compile.sh:/opt/assistant/compile.sh -v ./deps:/opt/assistant/deps lindevs-assistant compile.sh
+  sudo chown -R $USER:$USER ./deps
 
   exit 0
 fi
