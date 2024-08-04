@@ -21,13 +21,11 @@ Dedup::Findings ImageDeduplication::findDuplicates(const std::string &path) {
     findings.duplications.resize(total);
 
     for (int i = 0; i < total; ++i) {
-        for (int j = i; j < total; ++j) {
-            if (i != j) {
-                double score = ImgProc::cosineSimilarity(encodings[i], encodings[j]);
-                if (score >= modelScoreThreshold) {
-                    findings.duplications[i].emplace_back(j, score);
-                    findings.duplications[j].emplace_back(i, score);
-                }
+        for (int j = i + 1; j < total; ++j) {
+            double score = ImgProc::cosineSimilarity(encodings[i], encodings[j]);
+            if (score >= modelScoreThreshold) {
+                findings.duplications[i].emplace_back(j, score);
+                findings.duplications[j].emplace_back(i, score);
             }
         }
     }
