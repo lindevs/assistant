@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ ! $1 =~ ^(build-image|build-deps|build-assistant|build-archive)$ ]]; then
-  echo 'Available arguments: build-image, build-deps, build-assistant, build-archive'
+if [[ ! $1 =~ ^(build-image|build-deps|build-assistant|test-assistant|build-archive)$ ]]; then
+  echo 'Available arguments: build-image, build-deps, build-assistant, test-assistant, build-archive'
   exit 1
 fi
 
@@ -23,6 +23,15 @@ if [[ $1 == build-assistant ]]; then
   cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=deps
   cmake --build build -j$(nproc)
   cmake --install build --strip
+
+  exit 0
+fi
+
+if [[ $1 == test-assistant ]]; then
+  rm -rf build
+  cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=deps -DBUILD_TESTING=ON
+  cmake --build build --target assistant_tests -j$(nproc)
+  ./build/tests/assistant_tests
 
   exit 0
 fi

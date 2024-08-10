@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2024-08-10]** GoogleTest integration.
 * **[2024-07-21]** Image deduplication and [MobileNetV3-Small-Dedup](https://github.com/idealo/imagededup) model integration.
 * **[2024-07-07]** Image hash calculation.
 * **[2024-06-22]** ONNX Runtime and [YOLOv8-Face-Lindevs](https://github.com/lindevs/yolov8-face) model integration.
@@ -64,6 +65,12 @@ cd assistant
 ./build/app/assistant
 ```
 
+* (Optional) Build and run tests:
+
+```shell
+./setup.sh test-assistant
+```
+
 ### Windows
 
 #### Requirements
@@ -99,4 +106,10 @@ cd assistant
 
 ```shell
 .\build\app\assistant
+```
+
+* (Optional) Build and run tests:
+
+```shell
+.\setup.bat test-assistant
 ```

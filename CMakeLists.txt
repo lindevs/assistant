@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.28)
 project(assistant)
 
+option(BUILD_TESTING "Build tests" OFF)
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_AUTOMOC ON)
@@ -18,9 +20,6 @@ find_package(OpenCV COMPONENTS imgcodecs REQUIRED)
 find_package(onnxruntime REQUIRED)
 
 set(PROJECT_SOURCES
-        main.cpp
-        forms/mainwindow.ui
-        resources/resource.qrc
         src/ui/MainWindow.cpp
         include/ui/MainWindow.h
         include/core/structures.h
@@ -118,11 +117,12 @@ set(PROJECT_SOURCES
         src/utils/Formatting.cpp
 )
 
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
+add_executable(${PROJECT_NAME} main.cpp forms/mainwindow.ui resources/resource.qrc)
 
-target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_include_directories(${PROJECT_NAME}_core PUBLIC include)
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME}_core
         Qt::Widgets
         ZXing::ZXing
         Tesseract::libtesseract
@@ -130,6 +130,8 @@ target_link_libraries(${PROJECT_NAME}
         onnxruntime::onnxruntime
         opencv_imgcodecs
 )
+
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_core)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_BINARY_DIR}/app")
 
@@ -167,3 +169,10 @@ else ()
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libtbb.so.12.13" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libtbb.so.12")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime.so.1.18.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
 endif ()
+
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif ()
+
+message(STATUS "Build tests: " ${BUILD_TESTING})
