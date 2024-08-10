@@ -11,6 +11,8 @@ public:
     static void nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float> &scores, const float &nmsThreshold,
                     std::vector<int> &indices);
 
+    static void resize(cv::InputArray src, cv::OutputArray dst, const cv::Size &size);
+
     static void letterbox(cv::InputArray src, cv::OutputArray dst, const cv::Size &size, XyScale &xyScale);
 
     static void scale(cv::Mat &src);
@@ -18,6 +20,8 @@ public:
     static cv::Size scale(const cv::Size &size, float scale);
 
     static void convertToFloat(cv::Mat &src);
+
+    static void normalize(cv::Mat &src, const cv::Scalar &mean, const cv::Scalar &std);
 
     static void scaleAndNormalize(cv::Mat &src, const float *mean, const float *std);
 

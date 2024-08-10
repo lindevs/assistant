@@ -18,6 +18,10 @@ namespace Face {
     const int MODEL_YOLOV8M_FACE_LINDEVS = 3;
     const int MODEL_YOLOV8L_FACE_LINDEVS = 4;
     const int MODEL_YOLOV8X_FACE_LINDEVS = 5;
+    const int MODEL_ULTRA_FACE_SLIM_320 = 6;
+    const int MODEL_ULTRA_FACE_RFB_320 = 7;
+    const int MODEL_ULTRA_FACE_SLIM_640 = 8;
+    const int MODEL_ULTRA_FACE_RFB_640 = 9;
 
     inline constexpr const char *MODEL_FILES[] = {
         nullptr,
@@ -26,9 +30,14 @@ namespace Face {
         "yolov8m-face-lindevs.onnx",
         "yolov8l-face-lindevs.onnx",
         "yolov8x-face-lindevs.onnx",
+        "ultraface-slim-320.onnx",
+        "ultraface-rfb-320.onnx",
+        "ultraface-slim-640.onnx",
+        "ultraface-rfb-640.onnx",
     };
 
     inline constexpr const char *MODEL_YOLOV8_FACE_LINDEVS_URL = "https://github.com/lindevs/yolov8-face/releases";
+    inline constexpr const char *MODEL_ULTRA_FACE_URL = "https://github.com/clibdev/Ultra-Light-Fast-Generic-Face-Detector-1MB/releases";
 
     inline constexpr const char *MODEL_URLS[] = {
         nullptr,
@@ -37,6 +46,10 @@ namespace Face {
         MODEL_YOLOV8_FACE_LINDEVS_URL,
         MODEL_YOLOV8_FACE_LINDEVS_URL,
         MODEL_YOLOV8_FACE_LINDEVS_URL,
+        MODEL_ULTRA_FACE_URL,
+        MODEL_ULTRA_FACE_URL,
+        MODEL_ULTRA_FACE_URL,
+        MODEL_ULTRA_FACE_URL,
     };
 }
 

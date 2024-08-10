@@ -29,6 +29,10 @@ namespace Face {
             "YOLOv8m-Face-Lindevs",
             "YOLOv8l-Face-Lindevs",
             "YOLOv8x-Face-Lindevs",
+            "UltraFace-slim-320",
+            "UltraFace-RFB-320",
+            "UltraFace-slim-640",
+            "UltraFace-RFB-640",
         };
     };
 }

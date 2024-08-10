@@ -80,6 +80,8 @@ set(PROJECT_SOURCES
         src/models/OrtModel.cpp
         include/models/Yolov8FaceLindevs.h
         src/models/Yolov8FaceLindevs.cpp
+        include/models/UltraFace.h
+        src/models/UltraFace.cpp
         include/utils/ImgProc.h
         src/utils/ImgProc.cpp
         include/models/FaceDetectionModel.h

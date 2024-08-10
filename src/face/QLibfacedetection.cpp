@@ -1,6 +1,7 @@
 #include "face/QFaceDetection.h"
 #include "models/Libfacedetection.h"
 #include "models/Yolov8FaceLindevs.h"
+#include "models/UltraFace.h"
 
 void QFaceDetection::start(const Face::Params &params) {
     switch (params.model.id) {
@@ -10,6 +11,12 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV8L_FACE_LINDEVS:
         case Face::MODEL_YOLOV8X_FACE_LINDEVS:
             model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.model.file);
+            break;
+        case Face::MODEL_ULTRA_FACE_SLIM_320:
+        case Face::MODEL_ULTRA_FACE_RFB_320:
+        case Face::MODEL_ULTRA_FACE_SLIM_640:
+        case Face::MODEL_ULTRA_FACE_RFB_640:
+            model = new UltraFace(std::string(params.path) + "/" + params.model.file);
             break;
         case Face::MODEL_LIBFACEDETECTION:
         default:

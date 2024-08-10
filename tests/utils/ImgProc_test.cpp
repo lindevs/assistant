@@ -47,6 +47,19 @@ TEST(ImgProcTests, nmsTest) {
     }
 }
 
+TEST(ImgProcTests, resizeTest) {
+    cv::Mat img = createBgr();
+    ImgProc::resize(img, img, cv::Size(1, 3));
+
+    std::vector<uchar> expected{11, 19, 27, 14, 22, 30, 15, 23, 31};
+    auto *actual = img.data;
+
+    EXPECT_EQ(3 * img.total(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+
 TEST(ImgProcTests, letterboxTest) {
     XyScale xyScale;
     cv::Mat img = createBgr();
@@ -112,6 +125,23 @@ TEST(ImgProcTests, convertToFloatTest) {
 }
 
 TEST(ImgProcTests, normalizeTest) {
+    cv::Mat img = createBgr();
+    img.convertTo(img, CV_32F);
+    ImgProc::normalize(img, cv::Scalar(1, 2, 3), cv::Scalar(2, 4, 8));
+
+    std::vector<float> expected{
+        4.5f, 4.0f, 2.875f, 5.0f, 4.25f, 3.0f, 5.5f, 4.5f, 3.125f, 6.0f, 4.75f, 3.25f,
+        6.5f, 5.0f, 3.375f, 7.0f, 5.25f, 3.5f, 7.5f, 5.5f, 3.625f, 8.0f, 5.75f, 3.75f,
+    };
+    auto *actual = (float *) img.data;
+
+    EXPECT_EQ(3 * img.total(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+
+TEST(ImgProcTests, scaleAndNormalizeTest) {
     cv::Mat img = createBgr();
     const float mean[3]{1, 2, 3};
     const float std[3]{2, 4, 8};

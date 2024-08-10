@@ -11,7 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
-* **[2024-08-10]** GoogleTest integration.
+* **[2024-08-10]** GoogleTest and [UltraFace](https://github.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB) model integration.
 * **[2024-07-21]** Image deduplication and [MobileNetV3-Small-Dedup](https://github.com/idealo/imagededup) model integration.
 * **[2024-07-07]** Image hash calculation.
 * **[2024-06-22]** ONNX Runtime and [YOLOv8-Face-Lindevs](https://github.com/lindevs/yolov8-face) model integration.

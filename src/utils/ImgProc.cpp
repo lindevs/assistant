@@ -41,6 +41,10 @@ void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float>
     }
 }
 
+void ImgProc::resize(cv::InputArray src, cv::OutputArray dst, const cv::Size &size) {
+    cv::resize(src, dst, size, 0, 0, cv::INTER_LINEAR);
+}
+
 void ImgProc::letterbox(cv::InputArray src, cv::OutputArray dst, const cv::Size &size, XyScale &xyScale) {
     const auto width = (float) src.cols();
     const auto height = (float) src.rows();
@@ -73,6 +77,10 @@ cv::Size ImgProc::scale(const cv::Size &size, float scale) {
 
 void ImgProc::convertToFloat(cv::Mat &src) {
     src.convertTo(src, CV_32F);
+}
+
+void ImgProc::normalize(cv::Mat &src, const cv::Scalar &mean, const cv::Scalar &std) {
+    src = (src - mean) / std;
 }
 
 void ImgProc::scaleAndNormalize(cv::Mat &src, const float *mean, const float *std) {
