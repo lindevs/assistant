@@ -13,6 +13,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
+        utils/DateTime_test.cpp
         utils/Formatting_test.cpp
         utils/ImgProc_test.cpp
 )

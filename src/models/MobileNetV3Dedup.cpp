@@ -15,7 +15,7 @@ cv::Mat MobileNetV3Dedup::encode(const cv::Mat &input) {
 
     std::vector<Ort::Value> outputTensors = session.Run(runOptions, &inputName, &inputTensor, 1, outputNames.data(), 1);
 
-    cv::Mat output({1, (int) outputDims[0][1], CV_32FC1, outputTensors[0].GetTensorMutableData<float>()});
+    cv::Mat output(1, (int) outputDims[0][1], CV_32FC1, outputTensors[0].GetTensorMutableData<float>());
 
     return output.clone();
 }
