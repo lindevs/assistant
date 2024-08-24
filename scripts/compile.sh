@@ -76,7 +76,7 @@ cmake --install . --strip
 
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.81.1
+git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.81.2
 
 cd glib
 mkdir build && cd build
@@ -235,7 +235,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenBLAS
 cd $WORKDIR
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.27
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.28
 
 cd OpenBLAS
 mkdir build && cd build
@@ -270,7 +270,7 @@ cmake --install . --strip
 
 # ONNX Runtime
 cd $WORKDIR
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.1
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.19.0
 
 cd onnxruntime/cmake
 mkdir build && cd build

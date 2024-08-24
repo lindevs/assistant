@@ -169,7 +169,7 @@ else ()
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgproc.so.4.10.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgproc.so.410")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgcodecs.so.4.10.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgcodecs.so.410")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libtbb.so.12.13" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libtbb.so.12")
-    install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime.so.1.18.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime.so.1.19.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libonnxruntime.so.1")
 endif ()
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)

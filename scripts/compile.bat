@@ -76,7 +76,7 @@ cmake --install .
 
 :: OpenBLAS
 cd %WORKDIR%
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.27
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.28
 
 cd OpenBLAS
 powershell -command "(gc CMakeLists.txt) -replace 'set\(CMAKE_INSTALL_INCLUDEDIR \${CMAKE_INSTALL_INCLUDEDIR}/openblas\${SUFFIX64}\)', '' | sc CMakeLists.txt"
@@ -116,7 +116,7 @@ cmake --install .
 
 :: ONNX Runtime
 cd %WORKDIR%
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.18.1
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.19.0
 
 cd onnxruntime/cmake
 mkdir build && cd build
