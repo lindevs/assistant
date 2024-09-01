@@ -225,7 +225,7 @@ cd $WORKDIR
 git clone https://github.com/ShiqiYu/libfacedetection.git --depth=1
 
 cd libfacedetection
-sed -i '/ADD_LIBRARY(${fdt_lib_name} ${fdt_source_files} ${INSTALLHEADER_FILES})/a target_link_libraries(${fdt_lib_name} ${OpenMP_gomp_LIBRARY})' CMakeLists.txt
+sed -i '/ADD_LIBRARY(${fdt_lib_name} ${fdt_source_files} ${INSTALLHEADER_FILES})/a target_link_libraries(${fdt_lib_name} gomp)' CMakeLists.txt
 
 mkdir build && cd build
 

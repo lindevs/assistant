@@ -12,11 +12,11 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS forms)
 
 set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED QUIET)
 find_package(ZXing REQUIRED)
 find_package(Tesseract REQUIRED)
 find_package(facedetection REQUIRED)
-find_package(OpenCV COMPONENTS imgcodecs REQUIRED)
+find_package(OpenCV COMPONENTS imgcodecs REQUIRED QUIET)
 find_package(onnxruntime REQUIRED)
 
 set(PROJECT_SOURCES
