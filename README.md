@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2024-09-08]** [YOLO-FaceV2](https://github.com/Krasjet-Yu/YOLO-FaceV2) model integration.
 * **[2024-08-10]** GoogleTest and [UltraFace](https://github.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB) model integration.
 * **[2024-07-21]** Image deduplication and [MobileNetV3-Small-Dedup](https://github.com/idealo/imagededup) model integration.
 * **[2024-07-07]** Image hash calculation.

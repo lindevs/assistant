@@ -33,6 +33,7 @@ namespace Face {
             "UltraFace-RFB-320",
             "UltraFace-slim-640",
             "UltraFace-RFB-640",
+            "YOLO-FaceV2",
         };
     };
 }

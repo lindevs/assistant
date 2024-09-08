@@ -117,6 +117,8 @@ set(PROJECT_SOURCES
         src/dedup/QImageDeduplication.cpp
         include/utils/Formatting.h
         src/utils/Formatting.cpp
+        include/models/YoloFaceV2.h
+        src/models/YoloFaceV2.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
