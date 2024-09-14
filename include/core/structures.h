@@ -44,11 +44,38 @@ namespace Face {
         }
     };
 
+    struct Point {
+        cv::Point pt{};
+        float confidence{0.0f};
+    };
+
     struct Detection {
         float confidence{0.0f};
         cv::Rect box{};
+        Point rightEye{};
+        Point leftEye{};
+        Point nose{};
+        Point mouthRightCorner{};
+        Point mouthLeftCorner{};
 
         Detection(float confidence, cv::Rect box) : confidence(confidence), box(box) {
+        }
+
+        Detection(
+            float confidence,
+            cv::Rect box,
+            Point rightEye,
+            Point leftEye,
+            Point nose,
+            Point mouthRightCorner,
+            Point mouthLeftCorner
+        ) : confidence(confidence),
+            box(box),
+            rightEye(rightEye),
+            leftEye(leftEye),
+            nose(nose),
+            mouthRightCorner(mouthRightCorner),
+            mouthLeftCorner(mouthLeftCorner) {
         }
     };
 }

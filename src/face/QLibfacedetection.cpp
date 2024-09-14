@@ -1,10 +1,18 @@
 #include "face/QFaceDetection.h"
 #include "models/Libfacedetection.h"
+#include "models/Yolov5Face.h"
 #include "models/Yolov8FaceLindevs.h"
 #include "models/UltraFace.h"
 
 void QFaceDetection::start(const Face::Params &params) {
     switch (params.model.id) {
+        case Face::MODEL_YOLOV5N_05_FACE:
+        case Face::MODEL_YOLOV5N_FACE:
+        case Face::MODEL_YOLOV5S_FACE:
+        case Face::MODEL_YOLOV5M_FACE:
+        case Face::MODEL_YOLOV5L_FACE:
+            model = new Yolov5Face(std::string(params.path) + "/" + params.model.file);
+        break;
         case Face::MODEL_YOLOV8N_FACE_LINDEVS:
         case Face::MODEL_YOLOV8S_FACE_LINDEVS:
         case Face::MODEL_YOLOV8M_FACE_LINDEVS:

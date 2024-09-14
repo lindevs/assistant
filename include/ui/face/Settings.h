@@ -24,6 +24,11 @@ namespace Face {
 
         const QList<QString> models = {
             "libfacedetection",
+            "YOLOv5n-0.5-Face",
+            "YOLOv5n-Face",
+            "YOLOv5s-Face",
+            "YOLOv5m-Face",
+            "YOLOv5l-Face",
             "YOLOv8n-Face-Lindevs",
             "YOLOv8s-Face-Lindevs",
             "YOLOv8m-Face-Lindevs",

@@ -15,6 +15,7 @@ set(TEST_SOURCES
         utils/DateTime_test.cpp
         utils/Formatting_test.cpp
         utils/ImgProc_test.cpp
+        models/Yolov5Face_test.cpp
         models/Yolov8FaceLindevs_test.cpp
         models/UltraFace_test.cpp
         models/YoloFaceV2_test.cpp
@@ -42,6 +43,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(testsdata)
 
 # Models
+file(DOWNLOAD https://github.com/clibdev/yolov5-face/releases/latest/download/yolov5n-0.5-face.onnx
+        ${CMAKE_SOURCE_DIR}/testsdata/models/yolov5n-0.5-face.onnx
+        EXPECTED_HASH SHA256=269eb1e54313f9d1f7941ed9939fa247767539bca5801fc7aa7895960e93ca43 SHOW_PROGRESS
+)
 file(DOWNLOAD https://github.com/lindevs/yolov8-face/releases/latest/download/yolov8n-face-lindevs.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/yolov8n-face-lindevs.onnx
         EXPECTED_HASH SHA256=3ebbeaddfe4fc51a9ab119a4c67cc6193b559b07a8104d029ba0e146fcaa2ad4 SHOW_PROGRESS

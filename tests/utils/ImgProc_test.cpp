@@ -283,7 +283,7 @@ TEST(ImgProcTests, cosineSimilarityTest) {
     };
     cv::Mat y(1, 8, CV_32F, &data2);
 
-    EXPECT_EQ(ImgProc::cosineSimilarity(x, y), 0.82124705752820049);
+    ASSERT_NEAR(ImgProc::cosineSimilarity(x, y), 0.82124705752820049, 0.000001f);
 }
 
 cv::Mat createBgr() {

@@ -18,25 +18,21 @@ std::vector<Face::Detection> Yolov8FaceLindevs::detect(const cv::Mat &input) {
     int64_t rows = outputDims[0][2];
     int64_t dimensions = outputDims[0][1];
 
-    std::vector<int> classIds;
     std::vector<float> confidences;
     std::vector<cv::Rect2f> boxes;
 
     auto *data = outputTensors[0].GetTensorData<float>();
     for (int i = 0; i < rows; ++i) {
-        int classId = 0;
         float maxClassScore = 0;
         for (int j = 4; j < dimensions; ++j) {
             float classScore = *(data + j * rows);
             if (classScore > maxClassScore) {
                 maxClassScore = classScore;
-                classId = j - 4;
             }
         }
 
         if (maxClassScore > modelScoreThreshold) {
             confidences.emplace_back(maxClassScore);
-            classIds.emplace_back(classId);
 
             const float cx = *data;
             const float cy = *(data + rows);

@@ -119,6 +119,8 @@ set(PROJECT_SOURCES
         src/utils/Formatting.cpp
         include/models/YoloFaceV2.h
         src/models/YoloFaceV2.cpp
+        include/models/Yolov5Face.h
+        src/models/Yolov5Face.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
