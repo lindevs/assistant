@@ -2,6 +2,7 @@
 #define ASSISTANT_UI_UPLOAD_BAR_H
 
 #include <QWidget>
+#include <QSettings>
 #include <opencv2/core/mat.hpp>
 
 class UploadBar : public QWidget {
@@ -20,6 +21,8 @@ signals:
     void directorySelected(const QString &path);
 
 private:
+    QSettings settings;
+
     QString style = R"(
         QPushButton {
             border-radius: 3px;

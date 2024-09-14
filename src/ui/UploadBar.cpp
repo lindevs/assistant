@@ -3,9 +3,12 @@
 #include <QFileDialog>
 #include "ui/UploadBar.h"
 #include "utils/ImgIo.h"
+#include "core/app.h"
 
-UploadBar::UploadBar(QWidget *parent, int type) : QWidget(parent) {
+UploadBar::UploadBar(QWidget *parent, int type) : QWidget(parent), settings(Core::ORG, Core::APP) {
     setStyleSheet(style);
+
+    settings.beginGroup("upload");
 
     auto *layout = new QHBoxLayout(this);
 
@@ -18,14 +21,19 @@ UploadBar::UploadBar(QWidget *parent, int type) : QWidget(parent) {
     layout->setContentsMargins(0, 9, 0, 0);
 
     connect(generateButton, &QPushButton::clicked, [=] {
+        QString defaultDir = settings.value("dir", QDir::homePath()).toString();
+
         if (type == TYPE_DIRECTORY) {
-            QString path = QFileDialog::getExistingDirectory(this, "Select Directory", QDir::homePath());
+            QString path = QFileDialog::getExistingDirectory(this, "Select Directory", defaultDir);
             if (!path.isEmpty()) {
+                settings.setValue("dir", path);
                 emit directorySelected(path);
             }
         } else if (type == TYPE_IMAGE) {
-            QString path = QFileDialog::getOpenFileName(this, "Select Image", QDir::homePath(), "*jpg *jpeg *.png");
+            QString path = QFileDialog::getOpenFileName(this, "Select Image", defaultDir, "*jpg *jpeg *.png");
             if (!path.isEmpty()) {
+                QFileInfo info(path);
+                settings.setValue("dir", info.dir().path());
                 emit imageSelected(ImgIo::read(path.toStdString()));
             }
         }
