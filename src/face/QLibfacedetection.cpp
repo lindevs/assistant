@@ -6,6 +6,7 @@
 
 void QFaceDetection::start(const Face::Params &params) {
     switch (params.model.id) {
+        case Face::MODEL_YOLOV5_BLAZE_FACE:
         case Face::MODEL_YOLOV5N_05_FACE:
         case Face::MODEL_YOLOV5N_FACE:
         case Face::MODEL_YOLOV5S_FACE:

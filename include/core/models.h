@@ -13,24 +13,26 @@ struct Model {
 
 namespace Face {
     const int MODEL_LIBFACEDETECTION = 0;
-    const int MODEL_YOLOV5N_05_FACE = 1;
-    const int MODEL_YOLOV5N_FACE = 2;
-    const int MODEL_YOLOV5S_FACE = 3;
-    const int MODEL_YOLOV5M_FACE = 4;
-    const int MODEL_YOLOV5L_FACE = 5;
-    const int MODEL_YOLOV8N_FACE_LINDEVS = 6;
-    const int MODEL_YOLOV8S_FACE_LINDEVS = 7;
-    const int MODEL_YOLOV8M_FACE_LINDEVS = 8;
-    const int MODEL_YOLOV8L_FACE_LINDEVS = 9;
-    const int MODEL_YOLOV8X_FACE_LINDEVS = 10;
-    const int MODEL_ULTRA_FACE_SLIM_320 = 11;
-    const int MODEL_ULTRA_FACE_RFB_320 = 12;
-    const int MODEL_ULTRA_FACE_SLIM_640 = 13;
-    const int MODEL_ULTRA_FACE_RFB_640 = 14;
-    const int MODEL_YOLO_FACE_V2 = 15;
+    const int MODEL_YOLOV5_BLAZE_FACE = 1;
+    const int MODEL_YOLOV5N_05_FACE = 2;
+    const int MODEL_YOLOV5N_FACE = 3;
+    const int MODEL_YOLOV5S_FACE = 4;
+    const int MODEL_YOLOV5M_FACE = 5;
+    const int MODEL_YOLOV5L_FACE = 6;
+    const int MODEL_YOLOV8N_FACE_LINDEVS = 7;
+    const int MODEL_YOLOV8S_FACE_LINDEVS = 8;
+    const int MODEL_YOLOV8M_FACE_LINDEVS = 9;
+    const int MODEL_YOLOV8L_FACE_LINDEVS = 10;
+    const int MODEL_YOLOV8X_FACE_LINDEVS = 11;
+    const int MODEL_ULTRA_FACE_SLIM_320 = 12;
+    const int MODEL_ULTRA_FACE_RFB_320 = 13;
+    const int MODEL_ULTRA_FACE_SLIM_640 = 14;
+    const int MODEL_ULTRA_FACE_RFB_640 = 15;
+    const int MODEL_YOLO_FACE_V2 = 16;
 
     inline constexpr const char *MODEL_FILES[] = {
         nullptr,
+        "yolov5-blazeface.onnx",
         "yolov5n-0.5-face.onnx",
         "yolov5n-face.onnx",
         "yolov5s-face.onnx",
@@ -55,6 +57,7 @@ namespace Face {
 
     inline constexpr const char *MODEL_URLS[] = {
         nullptr,
+        MODEL_YOLOV5_FACE_URL,
         MODEL_YOLOV5_FACE_URL,
         MODEL_YOLOV5_FACE_URL,
         MODEL_YOLOV5_FACE_URL,
