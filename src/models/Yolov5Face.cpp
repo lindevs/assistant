@@ -4,7 +4,6 @@
 Yolov5Face::Yolov5Face(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
 }
 
-
 std::vector<Face::Detection> Yolov5Face::detect(const cv::Mat &input) {
     cv::Mat blob;
     XyScale xyScale;

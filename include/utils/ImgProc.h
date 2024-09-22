@@ -21,6 +21,8 @@ public:
 
     static void convertToFloat(cv::Mat &src);
 
+    static void normalize(cv::Mat &src, const cv::Scalar &mean);
+
     static void normalize(cv::Mat &src, const cv::Scalar &mean, const cv::Scalar &std);
 
     static void scaleAndNormalize(cv::Mat &src, const float *mean, const float *std);

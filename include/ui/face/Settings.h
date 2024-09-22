@@ -40,6 +40,8 @@ namespace Face {
             "UltraFace-slim-640",
             "UltraFace-RFB-640",
             "YOLO-FaceV2",
+            "RetinaFace ResNet-50",
+            "RetinaFace MobileNet-0.25",
         };
     };
 }

@@ -124,7 +124,24 @@ TEST(ImgProcTests, convertToFloatTest) {
     }
 }
 
-TEST(ImgProcTests, normalizeTest) {
+TEST(ImgProcTests, normalizeMeanTest) {
+    cv::Mat img = createBgr();
+    img.convertTo(img, CV_32F);
+    ImgProc::normalize(img, cv::Scalar(1.5f, 2.5f, 3.5f));
+
+    std::vector<float> expected{
+        8.5f, 15.5f, 22.5f, 9.5f, 16.5f, 23.5f, 10.5f, 17.5f, 24.5f, 11.5f, 18.5f, 25.5f,
+        12.5f, 19.5f, 26.5f, 13.5f, 20.5f, 27.5f, 14.5f, 21.5f, 28.5f, 15.5f, 22.5f, 29.5f,
+    };
+    auto *actual = (float *) img.data;
+
+    EXPECT_EQ(3 * img.total(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+
+TEST(ImgProcTests, normalizeStdTest) {
     cv::Mat img = createBgr();
     img.convertTo(img, CV_32F);
     ImgProc::normalize(img, cv::Scalar(1, 2, 3), cv::Scalar(2, 4, 8));

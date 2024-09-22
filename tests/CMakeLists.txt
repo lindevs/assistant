@@ -19,6 +19,7 @@ set(TEST_SOURCES
         models/Yolov8FaceLindevs_test.cpp
         models/UltraFace_test.cpp
         models/YoloFaceV2_test.cpp
+        models/RetinaFace_test.cpp
         models/Libfacedetection_test.cpp
         models/MobileNetV3Dedup_test.cpp
 )
@@ -58,6 +59,10 @@ file(DOWNLOAD https://github.com/clibdev/Ultra-Light-Fast-Generic-Face-Detector-
 file(DOWNLOAD https://github.com/clibdev/YOLO-FaceV2/releases/latest/download/yolo-facev2.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/yolo-facev2.onnx
         EXPECTED_HASH SHA256=8ad769e4e9fd5869baa4243367e041df901a228e121a1602deec85074d2bd7ed SHOW_PROGRESS
+)
+file(DOWNLOAD https://github.com/clibdev/Pytorch_Retinaface/releases/latest/download/retinaface-mobilenet-0.25.onnx
+        ${CMAKE_SOURCE_DIR}/testsdata/models/retinaface-mobilenet-0.25.onnx
+        EXPECTED_HASH SHA256=4aa128919a621c913b3bf78befa33eaaba086a7a7e142cdb739839a9340f2420 SHOW_PROGRESS
 )
 file(DOWNLOAD https://github.com/clibdev/imagededup/releases/latest/download/mobilenetv3-small-dedup.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/mobilenetv3-small-dedup.onnx

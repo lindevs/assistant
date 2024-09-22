@@ -121,6 +121,8 @@ set(PROJECT_SOURCES
         src/models/YoloFaceV2.cpp
         include/models/Yolov5Face.h
         src/models/Yolov5Face.cpp
+        include/models/RetinaFace.h
+        src/models/RetinaFace.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})

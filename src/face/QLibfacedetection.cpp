@@ -3,9 +3,14 @@
 #include "models/Yolov5Face.h"
 #include "models/Yolov8FaceLindevs.h"
 #include "models/UltraFace.h"
+#include "models/YoloFaceV2.h"
+#include "models/RetinaFace.h"
 
 void QFaceDetection::start(const Face::Params &params) {
     switch (params.model.id) {
+        case Face::MODEL_LIBFACEDETECTION:
+            model = new Libfacedetection();
+            break;
         case Face::MODEL_YOLOV5_BLAZE_FACE:
         case Face::MODEL_YOLOV5N_05_FACE:
         case Face::MODEL_YOLOV5N_FACE:
@@ -13,7 +18,7 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV5M_FACE:
         case Face::MODEL_YOLOV5L_FACE:
             model = new Yolov5Face(std::string(params.path) + "/" + params.model.file);
-        break;
+            break;
         case Face::MODEL_YOLOV8N_FACE_LINDEVS:
         case Face::MODEL_YOLOV8S_FACE_LINDEVS:
         case Face::MODEL_YOLOV8M_FACE_LINDEVS:
@@ -27,9 +32,15 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_ULTRA_FACE_RFB_640:
             model = new UltraFace(std::string(params.path) + "/" + params.model.file);
             break;
-        case Face::MODEL_LIBFACEDETECTION:
+        case Face::MODEL_YOLO_FACE_V2:
+            model = new YoloFaceV2(std::string(params.path) + "/" + params.model.file);
+            break;
+        case Face::MODEL_RETINA_FACE_RESNET_50:
+        case Face::MODEL_RETINA_FACE_MOBILENET_025:
+            model = new RetinaFace(std::string(params.path) + "/" + params.model.file);
+            break;
         default:
-            model = new Libfacedetection();
+            model = nullptr;
     }
 }
 

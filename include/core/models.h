@@ -29,6 +29,8 @@ namespace Face {
     const int MODEL_ULTRA_FACE_SLIM_640 = 14;
     const int MODEL_ULTRA_FACE_RFB_640 = 15;
     const int MODEL_YOLO_FACE_V2 = 16;
+    const int MODEL_RETINA_FACE_RESNET_50 = 17;
+    const int MODEL_RETINA_FACE_MOBILENET_025 = 18;
 
     inline constexpr const char *MODEL_FILES[] = {
         nullptr,
@@ -48,12 +50,15 @@ namespace Face {
         "ultraface-slim-640.onnx",
         "ultraface-rfb-640.onnx",
         "yolo-facev2.onnx",
+        "retinaface-resnet-50.onnx",
+        "retinaface-mobilenet-0.25.onnx",
     };
 
     inline constexpr const char *MODEL_YOLOV5_FACE_URL = "https://github.com/clibdev/yolov5-face/releases";
     inline constexpr const char *MODEL_YOLOV8_FACE_LINDEVS_URL = "https://github.com/lindevs/yolov8-face/releases";
     inline constexpr const char *MODEL_ULTRA_FACE_URL = "https://github.com/clibdev/Ultra-Light-Fast-Generic-Face-Detector-1MB/releases";
     inline constexpr const char *MODEL_YOLO_FACE_V2_URL = "https://github.com/clibdev/YOLO-FaceV2/releases";
+    inline constexpr const char *MODEL_RETINA_FACE_URL = "https://github.com/clibdev/Pytorch_Retinaface/releases";
 
     inline constexpr const char *MODEL_URLS[] = {
         nullptr,
@@ -73,6 +78,8 @@ namespace Face {
         MODEL_ULTRA_FACE_URL,
         MODEL_ULTRA_FACE_URL,
         MODEL_YOLO_FACE_V2_URL,
+        MODEL_RETINA_FACE_URL,
+        MODEL_RETINA_FACE_URL,
     };
 }
 

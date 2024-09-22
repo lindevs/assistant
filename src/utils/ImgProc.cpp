@@ -79,6 +79,10 @@ void ImgProc::convertToFloat(cv::Mat &src) {
     src.convertTo(src, CV_32F);
 }
 
+void ImgProc::normalize(cv::Mat &src, const cv::Scalar &mean) {
+    src -= mean;
+}
+
 void ImgProc::normalize(cv::Mat &src, const cv::Scalar &mean, const cv::Scalar &std) {
     src = (src - mean) / std;
 }
