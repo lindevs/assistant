@@ -7,7 +7,7 @@
 #include "models/RetinaFace.h"
 
 void QFaceDetection::start(const Face::Params &params) {
-    switch (params.model.id) {
+    switch (params.detectionModel.id) {
         case Face::MODEL_LIBFACEDETECTION:
             model = new Libfacedetection();
             break;
@@ -17,27 +17,27 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV5S_FACE:
         case Face::MODEL_YOLOV5M_FACE:
         case Face::MODEL_YOLOV5L_FACE:
-            model = new Yolov5Face(std::string(params.path) + "/" + params.model.file);
+            model = new Yolov5Face(std::string(params.path) + "/" + params.detectionModel.file);
             break;
         case Face::MODEL_YOLOV8N_FACE_LINDEVS:
         case Face::MODEL_YOLOV8S_FACE_LINDEVS:
         case Face::MODEL_YOLOV8M_FACE_LINDEVS:
         case Face::MODEL_YOLOV8L_FACE_LINDEVS:
         case Face::MODEL_YOLOV8X_FACE_LINDEVS:
-            model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.model.file);
+            model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.detectionModel.file);
             break;
         case Face::MODEL_ULTRA_FACE_SLIM_320:
         case Face::MODEL_ULTRA_FACE_RFB_320:
         case Face::MODEL_ULTRA_FACE_SLIM_640:
         case Face::MODEL_ULTRA_FACE_RFB_640:
-            model = new UltraFace(std::string(params.path) + "/" + params.model.file);
+            model = new UltraFace(std::string(params.path) + "/" + params.detectionModel.file);
             break;
         case Face::MODEL_YOLO_FACE_V2:
-            model = new YoloFaceV2(std::string(params.path) + "/" + params.model.file);
+            model = new YoloFaceV2(std::string(params.path) + "/" + params.detectionModel.file);
             break;
         case Face::MODEL_RETINA_FACE_RESNET_50:
         case Face::MODEL_RETINA_FACE_MOBILENET_025:
-            model = new RetinaFace(std::string(params.path) + "/" + params.model.file);
+            model = new RetinaFace(std::string(params.path) + "/" + params.detectionModel.file);
             break;
         default:
             model = nullptr;
@@ -50,5 +50,5 @@ void QFaceDetection::stop() {
 }
 
 void QFaceDetection::detect(const cv::Mat &img) {
-    emit detected(model->detect(img), img);
+    emit detected(model->detect(img));
 }

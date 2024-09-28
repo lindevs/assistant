@@ -95,4 +95,16 @@ namespace Dedup {
     };
 }
 
+namespace Matting {
+    const int MODEL_MODNET_PHOTOGRAPHIC = 0;
+
+    inline constexpr const char *MODEL_FILES[] = {
+        "modnet-photographic.onnx",
+    };
+
+    inline constexpr const char *MODEL_URLS[] = {
+        "https://github.com/clibdev/MODNet/releases",
+    };
+}
+
 #endif //ASSISTANT_CORE_MODELS_H

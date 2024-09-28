@@ -13,6 +13,10 @@ public:
 
     static void resize(cv::InputArray src, cv::OutputArray dst, const cv::Size &size);
 
+    static void resizeArea(cv::InputArray src, cv::OutputArray dst, const cv::Size &size);
+
+    static cv::Size computeSizeForResize(const cv::Size &srcSize, const int &refSize);
+
     static void letterbox(cv::InputArray src, cv::OutputArray dst, const cv::Size &size, XyScale &xyScale);
 
     static void scale(cv::Mat &src);
@@ -34,6 +38,8 @@ public:
     static float jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b);
 
     static void bgr2gray(const cv::Mat &src, cv::Mat &dst);
+
+    static void bgra2rgba(const cv::Mat &src, cv::Mat &dst);
 
     static void dct(const cv::Mat &src, cv::Mat &dst);
 

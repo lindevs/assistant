@@ -18,11 +18,13 @@ namespace Face {
 
     private:
         QSettings settings;
-        SelectBox model;
+        SelectBox detectionModel;
+        SelectBox mattingModel;
         QCheckBox blur;
+        QCheckBox idPhoto;
         QCheckBox autosave;
 
-        const QList<QString> models = {
+        const QList<QString> detectionModels = {
             "libfacedetection",
             "YOLOv5-BlazeFace",
             "YOLOv5n-0.5-Face",
@@ -42,6 +44,10 @@ namespace Face {
             "YOLO-FaceV2",
             "RetinaFace ResNet-50",
             "RetinaFace MobileNet-0.25",
+        };
+
+        const QList<QString> mattingModels = {
+            "MODNet (Photographic)",
         };
     };
 }

@@ -2,7 +2,6 @@
 #define ASSISTANT_FACE_QFACE_DETECTION_H
 
 #include <QObject>
-#include <opencv2/core/mat.hpp>
 #include "models/FaceDetectionModel.h"
 
 class QFaceDetection : public QObject {
@@ -17,7 +16,7 @@ public:
 
 signals:
 
-    void detected(const std::vector<Face::Detection> &detections, const cv::Mat &img);
+    void detected(const std::vector<Face::Detection> &detections);
 
 private:
     FaceDetectionModel *model;

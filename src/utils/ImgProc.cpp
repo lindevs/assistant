@@ -45,6 +45,33 @@ void ImgProc::resize(cv::InputArray src, cv::OutputArray dst, const cv::Size &si
     cv::resize(src, dst, size, 0, 0, cv::INTER_LINEAR);
 }
 
+void ImgProc::resizeArea(cv::InputArray src, cv::OutputArray dst, const cv::Size &size) {
+    cv::resize(src, dst, size, 0, 0, cv::INTER_AREA);
+}
+
+cv::Size ImgProc::computeSizeForResize(const cv::Size &srcSize, const int &refSize) {
+    const int shortVal = srcSize.width > srcSize.height ? srcSize.height : srcSize.width;
+    const int longVal = srcSize.width > srcSize.height ? srcSize.width : srcSize.height;
+
+    int width;
+    int height;
+
+    if (longVal < refSize || shortVal > refSize) {
+        if (srcSize.width >= srcSize.height) {
+            height = refSize;
+            width = int((float) srcSize.width / (float) srcSize.height * (float) refSize);
+        } else {
+            width = refSize;
+            height = int((float) srcSize.height / (float) srcSize.width * (float) refSize);
+        }
+    } else {
+        width = srcSize.width;
+        height = srcSize.height;
+    }
+
+    return {width - width % 32, height - height % 32};
+}
+
 void ImgProc::letterbox(cv::InputArray src, cv::OutputArray dst, const cv::Size &size, XyScale &xyScale) {
     const auto width = (float) src.cols();
     const auto height = (float) src.rows();
@@ -130,6 +157,10 @@ float ImgProc::jaccardIndex(const cv::Rect2f &a, const cv::Rect2f &b) {
 
 void ImgProc::bgr2gray(const cv::Mat &src, cv::Mat &dst) {
     cv::cvtColor(src, dst, cv::COLOR_BGR2GRAY);
+}
+
+void ImgProc::bgra2rgba(const cv::Mat &src, cv::Mat &dst) {
+    cv::cvtColor(src, dst, cv::COLOR_BGRA2RGBA);
 }
 
 void ImgProc::dct(const cv::Mat &src, cv::Mat &dst) {

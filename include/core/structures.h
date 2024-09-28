@@ -34,13 +34,15 @@ namespace Ocr {
 namespace Face {
     struct Params {
         const char *path{"./data"};
-        Model model;
+        Model detectionModel;
+        Model mattingModel;
         bool blur = false;
+        bool idPhoto = false;
         bool autosave = false;
         const char *outputPath{"./out"};
 
         bool operator!=(const Params &other) const {
-            return model != other.model;
+            return detectionModel != other.detectionModel || idPhoto != other.idPhoto;
         }
     };
 

@@ -7,6 +7,8 @@ class ImgIo {
 public:
     static cv::Mat read(const std::string &fullpath);
 
+    static cv::Mat readGrayscale(const std::string &fullpath);
+
     static void write(const std::string &fullpath, cv::InputArray img);
 
     static void write(const std::string &path, const std::string &filename, cv::InputArray img);

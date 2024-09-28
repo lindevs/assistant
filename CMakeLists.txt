@@ -69,7 +69,7 @@ set(PROJECT_SOURCES
         include/models/Libfacedetection.h
         src/models/Libfacedetection.cpp
         include/face/QFaceDetection.h
-        src/face/QLibfacedetection.cpp
+        src/face/QFaceDetection.cpp
         include/ui/face/Settings.h
         src/ui/face/Settings.cpp
         include/ui/face/Area.h
@@ -123,6 +123,17 @@ set(PROJECT_SOURCES
         src/models/Yolov5Face.cpp
         include/models/RetinaFace.h
         src/models/RetinaFace.cpp
+        include/models/BackgroundMattingModel.h
+        include/models/ModNet.h
+        src/models/ModNet.cpp
+        include/face/QBackgroundMatting.h
+        src/face/QBackgroundMatting.cpp
+        include/face/IdPhotoCreator.h
+        src/face/IdPhotoCreator.cpp
+        include/ui/Line.h
+        src/ui/Line.cpp
+        include/ui/ModelDialog.h
+        src/ui/ModelDialog.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})

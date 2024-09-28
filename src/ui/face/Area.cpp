@@ -3,7 +3,6 @@
 #include "utils/ImgIo.h"
 #include "utils/DateTime.h"
 #include "utils/Visualize.h"
-#include "ui/MessageDialog.h"
 
 Face::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);
@@ -28,59 +27,25 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
     uploadBar = new UploadBar(mainContent);
     contentLayout->addWidget(uploadBar);
 
-    auto *dialog = new MessageDialog("Error", parent);
+    dialog = new ModelDialog("Error", parent);
 
     faceDetection.moveToThread(&thread);
+    backgroundMatting.moveToThread(&thread);
     connect(&thread, &QThread::started, [=] {
         currentParams = settings->getParams();
         faceDetection.start(currentParams);
-    });
-    connect(&thread, &QThread::finished, &faceDetection, &QFaceDetection::stop);
-    connect(&faceDetection, &QFaceDetection::detected, this, [=](
-        const std::vector<Face::Detection> &detections, const cv::Mat &img
-    ) {
-        chat->removeProgressBar();
-        Params params = settings->getParams();
-
-        cv::Mat result;
-        img.copyTo(result);
-        if (params.blur) {
-            Visualize::blurFaces(result, detections);
-        } else {
-            Visualize::drawFaceDetections(result, detections);
-        }
-        chat->addImage(result);
-
-        if (params.autosave) {
-            ImgIo::write(params.outputPath, DateTime::current() + ".jpg", result);
+        if (currentParams.idPhoto) {
+            backgroundMatting.start(currentParams);
         }
     });
-
-    connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
-        Params params = settings->getParams();
-        QString modelPath = QString(params.path) + "/" + params.model.file;
-
-        if (params.model.url && !QFile::exists(modelPath)) {
-            dialog->setText(
-                QString("Unable to find model '%1'.<br>Download it from <a href=\"%2\">%3</a>")
-                    .arg(modelPath, params.model.url, params.model.url)
-            );
-            dialog->show();
-
-            return;
-        }
-        if (currentParams != params) {
-            thread.quit();
-            thread.wait();
-            started = false;
-        }
-        if (!started) {
-            thread.start();
-            started = true;
-        }
-
-        detect(img);
+    connect(&thread, &QThread::finished, [=] {
+        faceDetection.stop();
+        backgroundMatting.stop();
     });
+
+    connect(uploadBar, &UploadBar::imageSelected, this, &Area::process);
+    connect(&faceDetection, &QFaceDetection::detected, this, &Area::onDetected);
+    connect(&backgroundMatting, &QBackgroundMatting::generated, this, &Area::onMatteGenerated);
 }
 
 Face::Area::~Area() {
@@ -90,12 +55,100 @@ Face::Area::~Area() {
     }
 }
 
-void Face::Area::detect(const cv::Mat &img) {
+void Face::Area::process(const cv::Mat &img) {
+    currentImg = img;
+    Params params = settings->getParams();
+
+    QString modelPath = QString(params.path) + "/" + params.detectionModel.file;
+    if (params.detectionModel.url && !QFile::exists(modelPath)) {
+        dialog->setModel(params.detectionModel, params.path);
+        dialog->show();
+
+        return;
+    }
+
+    modelPath = QString(params.path) + "/" + params.mattingModel.file;
+    if (params.idPhoto && params.mattingModel.url && !QFile::exists(modelPath)) {
+        dialog->setModel(params.mattingModel, params.path);
+        dialog->show();
+
+        return;
+    }
+    if (currentParams != params) {
+        thread.quit();
+        thread.wait();
+        started = false;
+    }
+    if (!started) {
+        thread.start();
+        started = true;
+    }
+
+    detect();
+}
+
+void Face::Area::detect() {
     chat->addUsername("User");
-    chat->addImage(img);
+    chat->addImage(currentImg);
     chat->addUsername("Assistant");
     chat->addProgressBar();
     QMetaObject::invokeMethod(&faceDetection, [=] {
-        faceDetection.detect(img);
+        faceDetection.detect(currentImg);
     });
+}
+
+void Face::Area::onDetected(const std::vector<Detection> &detections) {
+    currentDetections = detections;
+    if (detections.empty()) {
+        chat->addText("No faces detected.");
+        chat->removeProgressBar();
+
+        return;
+    }
+
+    Params params = settings->getParams();
+    if (params.idPhoto) {
+        if (detections.size() > 1) {
+            chat->addText("Multiple faces detected.");
+            chat->removeProgressBar();
+
+            return;
+        }
+
+        QMetaObject::invokeMethod(&backgroundMatting, [=] {
+            backgroundMatting.generate(currentImg);
+        });
+
+        return;
+    }
+
+    cv::Mat result;
+    currentImg.copyTo(result);
+    if (params.blur) {
+        Visualize::blurFaces(result, detections);
+    } else {
+        Visualize::drawFaceDetections(result, detections);
+    }
+
+    chat->removeProgressBar();
+    chat->addImage(result);
+
+    if (params.autosave) {
+        ImgIo::write(params.outputPath, DateTime::current() + ".jpg", result);
+    }
+}
+
+void Face::Area::onMatteGenerated(const cv::Mat &matte) {
+    Params params = settings->getParams();
+
+    cv::Mat alpha = matte * 255;
+    alpha.convertTo(alpha, CV_8U);
+    cv::Mat result = idPhotoCreator.create(currentImg, alpha, currentDetections[0].box);
+
+    chat->removeProgressBar();
+    chat->addImage(result);
+
+    if (params.autosave) {
+        ImgIo::write(params.outputPath, DateTime::current() + ".png", result);
+    }
 }

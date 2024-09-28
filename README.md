@@ -7,10 +7,11 @@ recognizing text, chatting with LLM models (coming soon), and more. Lindevs Assi
 computer. While online tools offer convenience and accessibility, the Lindevs Assistant ensures data privacy,
 security, and no risk of data leakage.
 
-![lindevs-assistant](https://i.ibb.co/DMV2wqn/lindevs-assistant.png)
+![lindevs-assistant](https://i.ibb.co/8NR4NNL/lindevs-assistant.png)
 
 ## Release Notes
 
+* **[2024-09-28]** ID photo creator.
 * **[2024-09-22]** [RetinaFace](https://github.com/biubug6/Pytorch_Retinaface) model integration.
 * **[2024-09-14]** [YOLOv5-Face](https://github.com/deepcam-cn/yolov5-face) model integration.
 * **[2024-09-08]** [YOLO-FaceV2](https://github.com/Krasjet-Yu/YOLO-FaceV2) model integration.

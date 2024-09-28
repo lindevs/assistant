@@ -4,6 +4,8 @@
 
 cv::Mat createBgr();
 
+cv::Mat createBgra();
+
 TEST(ImgProcTests, hwcToNchwTest) {
     cv::Mat img = createBgr();
     ImgProc::hwcToNchw(img, img);
@@ -58,6 +60,36 @@ TEST(ImgProcTests, resizeTest) {
     for (size_t i = 0; i < expected.size(); ++i) {
         EXPECT_EQ(actual[i], expected[i]);
     }
+}
+
+TEST(ImgProcTests, resizeAreaTest) {
+    cv::Mat img = createBgr();
+    ImgProc::resizeArea(img, img, cv::Size(1, 3));
+
+    std::vector<uchar> expected{11, 19, 27, 13, 21, 29, 15, 23, 31};
+    auto *actual = img.data;
+
+    EXPECT_EQ(3 * img.total(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+
+TEST(ImgProcTests, computeSizeForResizeWithRefSizeTest) {
+    // src.w > src.h and (src.w and src.h) < ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(500, 419), 512), cv::Size(608, 512));
+    // src.w > src.h and (src.w and src.h) > ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(600, 519), 512), cv::Size(576, 512));
+    // src.w < src.h and (src.w and src.h) < ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(419, 500), 512), cv::Size(512, 608));
+    // src.w < src.h and (src.w and src.h) > ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(519, 600), 512), cv::Size(512, 576));
+    // src.w = src.h and (src.w and src.h) < ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(500, 500), 512), cv::Size(512, 512));
+    // src.w = src.h and (src.w and src.h) > ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(600, 600), 512), cv::Size(512, 512));
+    // src.w = src.h = ref
+    EXPECT_EQ(ImgProc::computeSizeForResize(cv::Size(512, 512), 512), cv::Size(512, 512));
 }
 
 TEST(ImgProcTests, letterboxTest) {
@@ -221,6 +253,23 @@ TEST(ImgProcTests, bgr2grayTest) {
     }
 }
 
+TEST(ImgProcTests, bgra2rgbaTest) {
+    cv::Mat img = createBgra();
+    cv::Mat rgba;
+    ImgProc::bgra2rgba(img, rgba);
+
+    std::vector<uchar> expected{
+        26, 18, 10, 1, 27, 19, 11, 2, 28, 20, 12, 3, 29, 21, 13, 4,
+        30, 22, 14, 5, 31, 23, 15, 6, 32, 24, 16, 7, 33, 25, 17, 8,
+    };
+    auto *actual = rgba.data;
+
+    EXPECT_EQ(4 * rgba.total(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+
 TEST(ImgProcTests, dctTest) {
     float data[][4] = {
         {100, 101, 102, 103},
@@ -334,4 +383,42 @@ cv::Mat createBgr() {
     }
 
     return bgr;
+}
+
+cv::Mat createBgra() {
+    uchar blue[][4] = {
+        {10, 11, 12, 13},
+        {14, 15, 16, 17},
+    };
+    uchar green[][4] = {
+        {18, 19, 20, 21},
+        {22, 23, 24, 25},
+    };
+    uchar red[][4] = {
+        {26, 27, 28, 29},
+        {30, 31, 32, 33},
+    };
+    uchar alpha[][4] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+    };
+    cv::Mat blueChannel(2, 4, CV_8U, &blue);
+    cv::Mat greenChannel(2, 4, CV_8U, &green);
+    cv::Mat redChannel(2, 4, CV_8U, &red);
+    cv::Mat alphaChannel(2, 4, CV_8U, &alpha);
+
+    cv::Mat bgra;
+    std::vector<cv::Mat> channels{blueChannel, greenChannel, redChannel, alphaChannel};
+    cv::merge(channels, bgra);
+
+    std::vector<uchar> expected{
+        10, 18, 26, 1, 11, 19, 27, 2, 12, 20, 28, 3, 13, 21, 29, 4,
+        14, 22, 30, 5, 15, 23, 31, 6, 16, 24, 32, 7, 17, 25, 33, 8,
+    };
+    auto *actual = bgra.data;
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+
+    return bgra;
 }

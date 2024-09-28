@@ -5,7 +5,10 @@
 #include "ui/UploadBar.h"
 #include "ui/face/Settings.h"
 #include "ui/Chat.h"
+#include "ui/ModelDialog.h"
 #include "face/QFaceDetection.h"
+#include "face/QBackgroundMatting.h"
+#include "face/IdPhotoCreator.h"
 
 namespace Face {
     class Area : public QWidget {
@@ -20,12 +23,25 @@ namespace Face {
         Chat *chat;
         Settings *settings;
         UploadBar *uploadBar;
+        ModelDialog *dialog;
         QFaceDetection faceDetection;
+        QBackgroundMatting backgroundMatting;
+        IdPhotoCreator idPhotoCreator;
         QThread thread;
-        Params currentParams;
         bool started = false;
 
-        void detect(const cv::Mat &img);
+        Params currentParams;
+        cv::Mat currentImg;
+        std::vector<Detection> currentDetections;
+        cv::Mat currentMatte;
+
+        void process(const cv::Mat &img);
+
+        void detect();
+
+        void onDetected(const std::vector<Detection> &detections);
+
+        void onMatteGenerated(const cv::Mat &matte);
     };
 }
 

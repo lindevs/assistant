@@ -6,6 +6,10 @@ cv::Mat ImgIo::read(const std::string &fullpath) {
     return cv::imread(fullpath);
 }
 
+cv::Mat ImgIo::readGrayscale(const std::string &fullpath) {
+    return cv::imread(fullpath, cv::IMREAD_GRAYSCALE);
+}
+
 void ImgIo::write(const std::string &fullpath, cv::InputArray img) {
     cv::imwrite(fullpath, img);
 }

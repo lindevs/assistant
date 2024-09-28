@@ -22,6 +22,8 @@ set(TEST_SOURCES
         models/RetinaFace_test.cpp
         models/Libfacedetection_test.cpp
         models/MobileNetV3Dedup_test.cpp
+        models/ModNet_test.cpp
+        face/IdPhotoCreator_test.cpp
 )
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCES})
@@ -67,6 +69,10 @@ file(DOWNLOAD https://github.com/clibdev/Pytorch_Retinaface/releases/latest/down
 file(DOWNLOAD https://github.com/clibdev/imagededup/releases/latest/download/mobilenetv3-small-dedup.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/mobilenetv3-small-dedup.onnx
         EXPECTED_HASH SHA256=cfdb10bd95a6b02c1c41618e2d9037d0ca835279c6d8b4d93553a7a04c5ca327 SHOW_PROGRESS
+)
+file(DOWNLOAD https://github.com/clibdev/MODNet/releases/latest/download/modnet-photographic.onnx
+        ${CMAKE_SOURCE_DIR}/testsdata/models/modnet-photographic.onnx
+        EXPECTED_HASH SHA256=d381d71c0e85f0edc28df99a6dd59544b0c33cc2bf234b1fc22aa417fec127be SHOW_PROGRESS
 )
 
 file(COPY ${CMAKE_SOURCE_DIR}/testsdata DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
