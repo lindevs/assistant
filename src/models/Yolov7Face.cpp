@@ -1,10 +1,10 @@
-#include "models/Yolov5Face.h"
+#include "models/Yolov7Face.h"
 #include "utils/ImgProc.h"
 
-Yolov5Face::Yolov5Face(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+Yolov7Face::Yolov7Face(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
 }
 
-std::vector<Face::Detection> Yolov5Face::detect(const cv::Mat &input) {
+std::vector<Face::Detection> Yolov7Face::detect(const cv::Mat &input) {
     cv::Mat blob;
     XyScale xyScale;
     preprocess(input, blob, xyScale);
@@ -31,7 +31,7 @@ std::vector<Face::Detection> Yolov5Face::detect(const cv::Mat &input) {
             continue;
         }
 
-        float classScore = *(data + 15) * objScore;
+        float classScore = *(data + 5) * objScore;
         if (classScore > modelScoreThreshold) {
             confidences.emplace_back(classScore);
 
@@ -51,33 +51,38 @@ std::vector<Face::Detection> Yolov5Face::detect(const cv::Mat &input) {
                 {
                     {
                         cv::Point(
-                            int((*(data + 5) - xyScale.x) * xyScale.scale),
-                            int((*(data + 6) - xyScale.y) * xyScale.scale)
+                            int((*(data + 6) - xyScale.x) * xyScale.scale),
+                            int((*(data + 7) - xyScale.y) * xyScale.scale)
                         ),
-                    },
-                    {
-                        cv::Point(
-                            int((*(data + 7) - xyScale.x) * xyScale.scale),
-                            int((*(data + 8) - xyScale.y) * xyScale.scale)
-                        ),
+                        *(data + 8),
                     },
                     {
                         cv::Point(
                             int((*(data + 9) - xyScale.x) * xyScale.scale),
                             int((*(data + 10) - xyScale.y) * xyScale.scale)
                         ),
+                        *(data + 11),
                     },
                     {
                         cv::Point(
-                            int((*(data + 11) - xyScale.x) * xyScale.scale),
-                            int((*(data + 12) - xyScale.y) * xyScale.scale)
+                            int((*(data + 12) - xyScale.x) * xyScale.scale),
+                            int((*(data + 13) - xyScale.y) * xyScale.scale)
                         ),
+                        *(data + 14),
                     },
                     {
                         cv::Point(
-                            int((*(data + 13) - xyScale.x) * xyScale.scale),
-                            int((*(data + 14) - xyScale.y) * xyScale.scale)
+                            int((*(data + 15) - xyScale.x) * xyScale.scale),
+                            int((*(data + 16) - xyScale.y) * xyScale.scale)
                         ),
+                        *(data + 17),
+                    },
+                    {
+                        cv::Point(
+                            int((*(data + 18) - xyScale.x) * xyScale.scale),
+                            int((*(data + 19) - xyScale.y) * xyScale.scale)
+                        ),
+                        *(data + 20),
                     },
                 }
             };
@@ -112,7 +117,7 @@ std::vector<Face::Detection> Yolov5Face::detect(const cv::Mat &input) {
     return detections;
 }
 
-void Yolov5Face::preprocess(const cv::Mat &input, cv::Mat &blob, XyScale &xyScale) {
+void Yolov7Face::preprocess(const cv::Mat &input, cv::Mat &blob, XyScale &xyScale) {
     ImgProc::letterbox(input, blob, modelInputShape, xyScale);
     ImgProc::hwcToNchw(blob, blob);
     ImgProc::scale(blob);

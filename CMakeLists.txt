@@ -134,6 +134,8 @@ set(PROJECT_SOURCES
         src/ui/Line.cpp
         include/ui/ModelDialog.h
         src/ui/ModelDialog.cpp
+        include/models/Yolov7Face.h
+        src/models/Yolov7Face.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})

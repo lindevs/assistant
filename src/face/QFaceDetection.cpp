@@ -1,6 +1,7 @@
 #include "face/QFaceDetection.h"
 #include "models/Libfacedetection.h"
 #include "models/Yolov5Face.h"
+#include "models/Yolov7Face.h"
 #include "models/Yolov8FaceLindevs.h"
 #include "models/UltraFace.h"
 #include "models/YoloFaceV2.h"
@@ -19,6 +20,14 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV5L_FACE:
             model = new Yolov5Face(std::string(params.path) + "/" + params.detectionModel.file);
             break;
+        case Face::MODEL_YOLOV7_LITE_T_FACE:
+        case Face::MODEL_YOLOV7_LITE_S_FACE:
+        case Face::MODEL_YOLOV7_TINY_FACE:
+        case Face::MODEL_YOLOV7S_FACE:
+        case Face::MODEL_YOLOV7_FACE:
+        case Face::MODEL_YOLOV7_W6_FACE:
+            model = new Yolov7Face(std::string(params.path) + "/" + params.detectionModel.file);
+        break;
         case Face::MODEL_YOLOV8N_FACE_LINDEVS:
         case Face::MODEL_YOLOV8S_FACE_LINDEVS:
         case Face::MODEL_YOLOV8M_FACE_LINDEVS:

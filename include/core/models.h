@@ -19,18 +19,24 @@ namespace Face {
     const int MODEL_YOLOV5S_FACE = 4;
     const int MODEL_YOLOV5M_FACE = 5;
     const int MODEL_YOLOV5L_FACE = 6;
-    const int MODEL_YOLOV8N_FACE_LINDEVS = 7;
-    const int MODEL_YOLOV8S_FACE_LINDEVS = 8;
-    const int MODEL_YOLOV8M_FACE_LINDEVS = 9;
-    const int MODEL_YOLOV8L_FACE_LINDEVS = 10;
-    const int MODEL_YOLOV8X_FACE_LINDEVS = 11;
-    const int MODEL_ULTRA_FACE_SLIM_320 = 12;
-    const int MODEL_ULTRA_FACE_RFB_320 = 13;
-    const int MODEL_ULTRA_FACE_SLIM_640 = 14;
-    const int MODEL_ULTRA_FACE_RFB_640 = 15;
-    const int MODEL_YOLO_FACE_V2 = 16;
-    const int MODEL_RETINA_FACE_RESNET_50 = 17;
-    const int MODEL_RETINA_FACE_MOBILENET_025 = 18;
+    const int MODEL_YOLOV7_LITE_T_FACE = 7;
+    const int MODEL_YOLOV7_LITE_S_FACE = 8;
+    const int MODEL_YOLOV7_TINY_FACE = 9;
+    const int MODEL_YOLOV7S_FACE = 10;
+    const int MODEL_YOLOV7_FACE = 11;
+    const int MODEL_YOLOV7_W6_FACE = 12;
+    const int MODEL_YOLOV8N_FACE_LINDEVS = 13;
+    const int MODEL_YOLOV8S_FACE_LINDEVS = 14;
+    const int MODEL_YOLOV8M_FACE_LINDEVS = 15;
+    const int MODEL_YOLOV8L_FACE_LINDEVS = 16;
+    const int MODEL_YOLOV8X_FACE_LINDEVS = 17;
+    const int MODEL_ULTRA_FACE_SLIM_320 = 18;
+    const int MODEL_ULTRA_FACE_RFB_320 = 19;
+    const int MODEL_ULTRA_FACE_SLIM_640 = 20;
+    const int MODEL_ULTRA_FACE_RFB_640 = 21;
+    const int MODEL_YOLO_FACE_V2 = 22;
+    const int MODEL_RETINA_FACE_RESNET_50 = 23;
+    const int MODEL_RETINA_FACE_MOBILENET_025 = 24;
 
     inline constexpr const char *MODEL_FILES[] = {
         nullptr,
@@ -40,6 +46,12 @@ namespace Face {
         "yolov5s-face.onnx",
         "yolov5m-face.onnx",
         "yolov5l-face.onnx",
+        "yolov7-lite-t-face.onnx",
+        "yolov7-lite-s-face.onnx",
+        "yolov7-tiny-face.onnx",
+        "yolov7s-face.onnx",
+        "yolov7-face.onnx",
+        "yolov7-w6-face.onnx",
         "yolov8n-face-lindevs.onnx",
         "yolov8s-face-lindevs.onnx",
         "yolov8m-face-lindevs.onnx",
@@ -55,6 +67,7 @@ namespace Face {
     };
 
     inline constexpr const char *MODEL_YOLOV5_FACE_URL = "https://github.com/clibdev/yolov5-face/releases";
+    inline constexpr const char *MODEL_YOLOV7_FACE_URL = "https://github.com/clibdev/yolov7-face/releases";
     inline constexpr const char *MODEL_YOLOV8_FACE_LINDEVS_URL = "https://github.com/lindevs/yolov8-face/releases";
     inline constexpr const char *MODEL_ULTRA_FACE_URL = "https://github.com/clibdev/Ultra-Light-Fast-Generic-Face-Detector-1MB/releases";
     inline constexpr const char *MODEL_YOLO_FACE_V2_URL = "https://github.com/clibdev/YOLO-FaceV2/releases";
@@ -68,6 +81,12 @@ namespace Face {
         MODEL_YOLOV5_FACE_URL,
         MODEL_YOLOV5_FACE_URL,
         MODEL_YOLOV5_FACE_URL,
+        MODEL_YOLOV7_FACE_URL,
+        MODEL_YOLOV7_FACE_URL,
+        MODEL_YOLOV7_FACE_URL,
+        MODEL_YOLOV7_FACE_URL,
+        MODEL_YOLOV7_FACE_URL,
+        MODEL_YOLOV7_FACE_URL,
         MODEL_YOLOV8_FACE_LINDEVS_URL,
         MODEL_YOLOV8_FACE_LINDEVS_URL,
         MODEL_YOLOV8_FACE_LINDEVS_URL,

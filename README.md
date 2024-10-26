@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2024-10-26]** [YOLOv7-Face](https://github.com/derronqi/yolov7-face) model integration.
 * **[2024-09-28]** ID photo creator.
 * **[2024-09-22]** [RetinaFace](https://github.com/biubug6/Pytorch_Retinaface) model integration.
 * **[2024-09-14]** [YOLOv5-Face](https://github.com/deepcam-cn/yolov5-face) model integration.
