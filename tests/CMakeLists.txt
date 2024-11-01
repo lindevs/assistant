@@ -57,7 +57,7 @@ file(DOWNLOAD https://github.com/clibdev/yolov7-face/releases/latest/download/yo
 )
 file(DOWNLOAD https://github.com/lindevs/yolov8-face/releases/latest/download/yolov8n-face-lindevs.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/yolov8n-face-lindevs.onnx
-        EXPECTED_HASH SHA256=3ebbeaddfe4fc51a9ab119a4c67cc6193b559b07a8104d029ba0e146fcaa2ad4 SHOW_PROGRESS
+        EXPECTED_HASH SHA256=8d0bfb0c3383c5bd7a78dd24ef79a21e2aa456619b6ab5e53867092d1c7dc414 SHOW_PROGRESS
 )
 file(DOWNLOAD https://github.com/clibdev/Ultra-Light-Fast-Generic-Face-Detector-1MB/releases/latest/download/ultraface-rfb-640.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/ultraface-rfb-640.onnx
