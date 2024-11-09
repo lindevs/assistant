@@ -18,6 +18,7 @@ set(TEST_SOURCES
         models/Yolov5Face_test.cpp
         models/Yolov7Face_test.cpp
         models/Yolov8FaceLindevs_test.cpp
+        models/Yolov9FaceLindevs_test.cpp
         models/UltraFace_test.cpp
         models/YoloFaceV2_test.cpp
         models/RetinaFace_test.cpp
@@ -58,6 +59,10 @@ file(DOWNLOAD https://github.com/clibdev/yolov7-face/releases/latest/download/yo
 file(DOWNLOAD https://github.com/lindevs/yolov8-face/releases/latest/download/yolov8n-face-lindevs.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/yolov8n-face-lindevs.onnx
         EXPECTED_HASH SHA256=8d0bfb0c3383c5bd7a78dd24ef79a21e2aa456619b6ab5e53867092d1c7dc414 SHOW_PROGRESS
+)
+file(DOWNLOAD https://github.com/lindevs/yolov9-face/releases/latest/download/yolov9t-face-lindevs.onnx
+        ${CMAKE_SOURCE_DIR}/testsdata/models/yolov9t-face-lindevs.onnx
+        EXPECTED_HASH SHA256=7766f85cecd7045a1b64cf3a89d94819c62cc5ff24b782b86bb0dec4f9e31964 SHOW_PROGRESS
 )
 file(DOWNLOAD https://github.com/clibdev/Ultra-Light-Fast-Generic-Face-Detector-1MB/releases/latest/download/ultraface-rfb-640.onnx
         ${CMAKE_SOURCE_DIR}/testsdata/models/ultraface-rfb-640.onnx

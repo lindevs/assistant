@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 project(assistant)
 
-option(BUILD_TESTING "Build tests" OFF)
+option(BUILD_TESTING "Build tests" ON)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -136,6 +136,10 @@ set(PROJECT_SOURCES
         src/ui/ModelDialog.cpp
         include/models/Yolov7Face.h
         src/models/Yolov7Face.cpp
+        include/models/YoloFaceLindevs.h
+        src/models/YoloFaceLindevs.cpp
+        include/models/Yolov9FaceLindevs.h
+        src/models/Yolov9FaceLindevs.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
