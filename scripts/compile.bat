@@ -11,7 +11,7 @@ cd %WORKDIR%
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
-git checkout 6.7.2
+git checkout 6.8.0
 
 git submodule update --init qtbase
 
@@ -37,7 +37,7 @@ cmake --install .
 
 :: Leptonica
 cd %WORKDIR%
-git clone https://github.com/DanBloomberg/leptonica.git --depth=1 --branch=1.84.1
+git clone https://github.com/DanBloomberg/leptonica.git --depth=1 --branch=1.85.0
 
 cd leptonica
 powershell -command "(gc CMakeLists.txt) -replace 'include\(GNUInstallDirs\)', ('$&' + [Environment]::NewLine + 'add_definitions(-DNO_CONSOLE_IO)') | sc CMakeLists.txt"
@@ -52,7 +52,7 @@ cmake --install .
 
 :: Tesseract OCR
 cd %WORKDIR%
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.1
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.5.0
 
 cd tesseract
 mkdir build && cd build
@@ -90,7 +90,7 @@ cmake --install .
 
 :: oneTBB
 cd %WORKDIR%
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.13.0
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.0.0
 
 cd oneTBB
 mkdir build && cd build
@@ -116,7 +116,7 @@ cmake --install .
 
 :: ONNX Runtime
 cd %WORKDIR%
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.19.0
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.20.1
 
 cd onnxruntime/cmake
 mkdir build && cd build

@@ -76,7 +76,7 @@ cmake --install . --strip
 
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.81.2
+git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.82.2
 
 cd glib
 mkdir build && cd build
@@ -100,7 +100,7 @@ ninja install
 
 # libpng
 cd $WORKDIR
-git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.43
+git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.44
 
 cd libpng
 mkdir build && cd build
@@ -112,7 +112,7 @@ cmake --install . --strip
 
 # FreeType
 cd $WORKDIR
-git clone https://github.com/freetype/freetype.git --depth=1 --branch=VER-2-13-2
+git clone https://github.com/freetype/freetype.git --depth=1 --branch=VER-2-13-3
 
 cd freetype
 mkdir build && cd build
@@ -124,7 +124,7 @@ cmake --install . --strip
 
 # Expat
 cd $WORKDIR
-git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_6_2
+git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_6_4
 
 cd libexpat/expat
 mkdir build && cd build
@@ -148,7 +148,7 @@ ninja install
 
 # ICU
 cd $WORKDIR
-git clone https://github.com/unicode-org/icu.git --depth=1 --branch=release-75-1
+git clone https://github.com/unicode-org/icu.git --depth=1 --branch=release-76-1
 
 cd icu/icu4c/source
 
@@ -162,7 +162,7 @@ cd $WORKDIR
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
-git checkout 6.7.2
+git checkout 6.8.0
 
 perl init-repository --module-subset=qtbase
 
@@ -196,7 +196,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # Leptonica
 cd $WORKDIR
-git clone https://github.com/DanBloomberg/leptonica.git --depth=1 --branch=1.84.1
+git clone https://github.com/DanBloomberg/leptonica.git --depth=1 --branch=1.85.0
 
 cd leptonica
 sed -i '/include(GNUInstallDirs)/a add_definitions(-DNO_CONSOLE_IO)' CMakeLists.txt
@@ -211,7 +211,7 @@ cmake --install . --strip
 
 # Tesseract OCR
 cd $WORKDIR
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.4.1
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.5.0
 
 cd tesseract
 mkdir build && cd build
@@ -246,7 +246,7 @@ cmake --install . --strip
 
 # oneTBB
 cd $WORKDIR
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2021.13.0
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.0.0
 
 cd oneTBB
 mkdir build && cd build
@@ -270,7 +270,7 @@ cmake --install . --strip
 
 # ONNX Runtime
 cd $WORKDIR
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.19.0
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.20.1
 
 cd onnxruntime/cmake
 mkdir build && cd build
