@@ -3,7 +3,7 @@
 MessageEdit::MessageEdit(QWidget *parent) : QTextEdit(parent) {
     setAcceptRichText(false);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
-    setFixedHeight(35);
+    setFixedHeight(38);
     connect(this, &QTextEdit::textChanged, this, &MessageEdit::adjustHeight);
 }
 

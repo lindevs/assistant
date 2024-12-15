@@ -1,9 +1,14 @@
 #include "ui/MainWindow.h"
 #include "ui_mainwindow.h"
 #include <QScreen>
+#include <QFontDatabase>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    QFontDatabase::addApplicationFont(":/font/OpenSans-Regular.ttf");
+    QApplication::setFont(QFont("Open Sans"));
+
     move(screen()->geometry().center() - frameGeometry().center());
 
     menu = new Menu();

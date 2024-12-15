@@ -47,6 +47,9 @@ private:
             background-color: rgba(13, 110, 253, 0.65);
             border-color: #0d6efd;
         }
+        QFileDialog QWidget {
+            font-size: 12px;
+        }
     )";
 
     const QList<QString> text = {

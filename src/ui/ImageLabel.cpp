@@ -5,6 +5,7 @@
 #include "utils/ImgProc.h"
 
 ImageLabel::ImageLabel(const cv::Mat &img, const int width, QWidget *parent) : QLabel(parent), img(img) {
+    setStyleSheet(style);
     cv::Mat cimg = img;
 
     auto format = QImage::Format_BGR888;

@@ -15,6 +15,12 @@ protected:
 
 private:
     const cv::Mat img;
+
+    QString style = R"(
+        QFileDialog QWidget {
+            font-size: 12px;
+        }
+    )";
 };
 
 #endif //ASSISTANT_UI_IMAGE_LABEL_H
