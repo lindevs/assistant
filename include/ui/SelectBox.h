@@ -29,6 +29,10 @@ private:
     QString style = R"(
         QLabel {
             color: #000;
+            font-size: 12px;
+        }
+        QComboBox {
+            font-size: 12px;
         }
     )";
 };

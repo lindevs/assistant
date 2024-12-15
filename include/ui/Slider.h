@@ -48,6 +48,7 @@ private:
         }
         QLabel {
             color: #000;
+            font-size: 12px;
         }
     )";
 };

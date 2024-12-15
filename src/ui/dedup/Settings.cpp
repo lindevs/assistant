@@ -3,7 +3,7 @@
 #include "core/app.h"
 
 Dedup::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::ORG, Core::APP) {
-    setStyleSheet("QGroupBox {border: 1px solid #ccc;border-radius: 4px;}");
+    setStyleSheet(style);
 
     settings.beginGroup("dedup");
 

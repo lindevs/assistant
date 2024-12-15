@@ -19,6 +19,13 @@ namespace Hash {
         QSettings settings;
         SelectBox algorithm;
 
+        QString style = R"(
+            QGroupBox {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+        )";
+
         const QList<QString> algorithms = {
             "Average hash (AHash)",
             "Difference hash (DHash)",

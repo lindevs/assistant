@@ -21,6 +21,16 @@ namespace Qr {
         Slider width;
         Slider height;
         QCheckBox autosave;
+
+        QString style = R"(
+            QGroupBox {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            QCheckBox {
+                font-size: 12px;
+            }
+        )";
     };
 }
 

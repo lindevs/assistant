@@ -19,6 +19,13 @@ namespace Ocr {
         QSettings settings;
         SelectBox language;
 
+        QString style = R"(
+            QGroupBox {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+        )";
+
         const QList<QString> languages = {
             "English",
             "Danish",

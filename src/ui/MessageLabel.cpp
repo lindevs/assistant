@@ -3,7 +3,7 @@
 #include "ui/MessageLabel.h"
 
 MessageLabel::MessageLabel(QWidget *parent) : QTextEdit(parent) {
-    setStyleSheet("QTextEdit {background-color:#f5f5f4;padding:8px;border-radius:8px;font-size:14px;}");
+    setStyleSheet(style);
     setReadOnly(true);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 

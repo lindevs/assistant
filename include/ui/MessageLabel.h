@@ -16,6 +16,15 @@ private:
     QTextBlockFormat format;
     int currentHeight = 0;
 
+    QString style = R"(
+        QTextEdit {
+            background-color:#f5f5f4;
+            padding:8px;
+            border-radius:8px;
+            font-size:14px;
+        }
+    )";
+
     void adjustHeight();
 
     void adjustLineSpacing();

@@ -20,6 +20,13 @@ namespace Dedup {
         QSettings settings;
         SelectBox model;
 
+        QString style = R"(
+            QGroupBox {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+        )";
+
         const QList<QString> models = {
             "MobileNetV3-Small-Dedup",
         };
