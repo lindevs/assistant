@@ -19,7 +19,9 @@ private:
     QString style = R"(
         QTextEdit {
             background-color:#f5f5f4;
-            padding:8px;
+            padding-top:8px;
+            padding-left:8px;
+            padding-right:8px;
             border-radius:8px;
             font-size:14px;
         }

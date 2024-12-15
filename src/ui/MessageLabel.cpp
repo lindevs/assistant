@@ -35,16 +35,14 @@ void MessageLabel::adjustHeight() {
 }
 
 void MessageLabel::adjustLineSpacing() {
-    if (document()->lineCount() > 1) {
-        blockSignals(true);
+    blockSignals(true);
 
-        for (QTextBlock it = document()->begin(); it != document()->end(); it = it.next()) {
-            if (!it.text().isEmpty()) {
-                QTextCursor cursor(it);
-                cursor.setBlockFormat(format);
-            }
+    for (QTextBlock it = document()->begin(); it != document()->end(); it = it.next()) {
+        if (!it.text().isEmpty()) {
+            QTextCursor cursor(it);
+            cursor.setBlockFormat(format);
         }
-
-        blockSignals(false);
     }
+
+    blockSignals(false);
 }
