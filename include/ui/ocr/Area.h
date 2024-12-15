@@ -5,6 +5,7 @@
 #include "ui/UploadBar.h"
 #include "ui/ocr/Settings.h"
 #include "ui/Chat.h"
+#include "ui/MessageDialog.h"
 #include "ocr/QTesseract.h"
 
 namespace Ocr {
@@ -20,10 +21,13 @@ namespace Ocr {
         Chat *chat;
         Settings *settings;
         UploadBar *uploadBar;
+        MessageDialog *dialog;
         QTesseract tesseract;
         QThread thread;
         Params currentParams;
         bool started = false;
+
+        void process(const cv::Mat &img);
 
         void recognize(const cv::Mat &img);
 

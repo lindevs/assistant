@@ -1,4 +1,5 @@
 #include "ui/hash/Area.h"
+#include "utils/ImgIo.h"
 #include "utils/ImgProc.h"
 
 Hash::Area::Area(QWidget *parent) : QWidget(parent) {
@@ -35,20 +36,12 @@ Hash::Area::Area(QWidget *parent) : QWidget(parent) {
         chat->addText(hash);
     });
 
-    connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
-        Params params = settings->getParams();
-
-        if (currentParams != params) {
-            thread.quit();
-            thread.wait();
-            started = false;
+    connect(uploadBar, &UploadBar::imageSelected, this, &Area::process);
+    connect(chat, &Chat::dropped, this, [=](const QString &path) {
+        cv::Mat img = ImgIo::read(path.toStdString());
+        if (!img.empty()) {
+            process(img);
         }
-        if (!started) {
-            thread.start();
-            started = true;
-        }
-
-        calculate(img);
     });
 }
 
@@ -57,6 +50,22 @@ Hash::Area::~Area() {
         thread.quit();
         thread.wait();
     }
+}
+
+void Hash::Area::process(const cv::Mat &img) {
+    Params params = settings->getParams();
+
+    if (currentParams != params) {
+        thread.quit();
+        thread.wait();
+        started = false;
+    }
+    if (!started) {
+        thread.start();
+        started = true;
+    }
+
+    calculate(img);
 }
 
 void Hash::Area::calculate(const cv::Mat &img) {

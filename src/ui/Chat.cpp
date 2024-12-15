@@ -1,6 +1,8 @@
 #include <QTimer>
 #include <QScrollBar>
 #include <QDateTime>
+#include <QDragEnterEvent>
+#include <QMimeData>
 #include "ui/Chat.h"
 #include "ui/MessageLabel.h"
 #include "ui/UsernameLabel.h"
@@ -12,6 +14,7 @@ Chat::Chat(QWidget *parent) : QScrollArea(parent) {
     content->setLayout(&layout);
     layout.addStretch();
     setWidgetResizable(true);
+    setAcceptDrops(true);
     setWidget(content);
 }
 
@@ -55,4 +58,17 @@ void Chat::scrollToBottom() {
     QTimer::singleShot(40, this, [scrollBar = verticalScrollBar()] {
         scrollBar->setValue(scrollBar->maximum());
     });
+}
+
+void Chat::dragEnterEvent(QDragEnterEvent *event) {
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+    }
+}
+
+void Chat::dropEvent(QDropEvent *event) {
+    for (const QUrl &url: event->mimeData()->urls()) {
+        emit dropped(url.toLocalFile());
+        break;
+    }
 }

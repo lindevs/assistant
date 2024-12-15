@@ -44,6 +44,12 @@ Face::Area::Area(QWidget *parent) : QWidget(parent) {
     });
 
     connect(uploadBar, &UploadBar::imageSelected, this, &Area::process);
+    connect(chat, &Chat::dropped, this, [=](const QString &path) {
+        cv::Mat img = ImgIo::read(path.toStdString());
+        if (!img.empty()) {
+            process(img);
+        }
+    });
     connect(&faceDetection, &QFaceDetection::detected, this, &Area::onDetected);
     connect(&backgroundMatting, &QBackgroundMatting::generated, this, &Area::onMatteGenerated);
 }

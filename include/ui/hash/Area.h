@@ -25,6 +25,8 @@ namespace Hash {
         Params currentParams;
         bool started = false;
 
+        void process(const cv::Mat &img);
+
         void calculate(const cv::Mat &img);
     };
 }

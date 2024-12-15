@@ -22,11 +22,19 @@ public:
 
     void removeProgressBar();
 
+signals:
+
+    void dropped(const QString &path);
+
 private:
     QVBoxLayout layout;
     QProgressBar progressBar;
 
     void scrollToBottom();
+
+    void dragEnterEvent(QDragEnterEvent *event) override;
+
+    void dropEvent(QDropEvent *event) override;
 };
 
 #endif //ASSISTANT_UI_CHAT_H

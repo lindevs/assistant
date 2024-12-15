@@ -1,6 +1,6 @@
 #include <QFile>
 #include "ui/ocr/Area.h"
-#include "ui/MessageDialog.h"
+#include "utils/ImgIo.h"
 
 Ocr::Area::Area(QWidget *parent) : QWidget(parent) {
     auto *horizontalLayout = new QHBoxLayout(this);
@@ -25,7 +25,7 @@ Ocr::Area::Area(QWidget *parent) : QWidget(parent) {
     uploadBar = new UploadBar(mainContent);
     contentLayout->addWidget(uploadBar);
 
-    auto *dialog = new MessageDialog("Error", parent);
+    dialog = new MessageDialog("Error", parent);
 
     tesseract.moveToThread(&thread);
     connect(&thread, &QThread::started, [=] {
@@ -38,30 +38,12 @@ Ocr::Area::Area(QWidget *parent) : QWidget(parent) {
         chat->addText(text.trimmed());
     });
 
-    connect(uploadBar, &UploadBar::imageSelected, this, [=](const cv::Mat &img) {
-        Params params = settings->getParams();
-        QString path = QString(params.path) + "/" + params.language + ".traineddata";
-
-        if (!QFile::exists(path)) {
-            dialog->setText(
-                QString("Unable to find training data '%1'.<br>Download it from <a href=\"%2\">%3</a>")
-                    .arg(path, tesseractUrl, tesseractUrl)
-            );
-            dialog->show();
-
-            return;
+    connect(uploadBar, &UploadBar::imageSelected, this, &Area::process);
+    connect(chat, &Chat::dropped, this, [=](const QString &path) {
+        cv::Mat img = ImgIo::read(path.toStdString());
+        if (!img.empty()) {
+            process(img);
         }
-        if (currentParams != params) {
-            thread.quit();
-            thread.wait();
-            started = false;
-        }
-        if (!started) {
-            thread.start();
-            started = true;
-        }
-
-        recognize(img);
     });
 }
 
@@ -70,6 +52,32 @@ Ocr::Area::~Area() {
         thread.quit();
         thread.wait();
     }
+}
+
+void Ocr::Area::process(const cv::Mat &img) {
+    Params params = settings->getParams();
+    QString path = QString(params.path) + "/" + params.language + ".traineddata";
+
+    if (!QFile::exists(path)) {
+        dialog->setText(
+            QString("Unable to find training data '%1'.<br>Download it from <a href=\"%2\">%3</a>")
+            .arg(path, tesseractUrl, tesseractUrl)
+        );
+        dialog->show();
+
+        return;
+    }
+    if (currentParams != params) {
+        thread.quit();
+        thread.wait();
+        started = false;
+    }
+    if (!started) {
+        thread.start();
+        started = true;
+    }
+
+    recognize(img);
 }
 
 void Ocr::Area::recognize(const cv::Mat &img) {
