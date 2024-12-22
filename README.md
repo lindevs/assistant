@@ -37,32 +37,41 @@ security, and no risk of data leakage.
 * [CMake](https://lindevs.com/install-cmake-on-ubuntu)
 * [Ninja](https://lindevs.com/install-ninja-build-system-on-ubuntu)
 * [Docker](https://lindevs.com/install-docker-ce-on-ubuntu)
+* (Optional) [NVIDIA Drivers](https://lindevs.com/install-nvidia-drivers-on-ubuntu)
 
 #### Instructions
 
 * Clone repository:
 
 ```shell
-git clone https://github.com/lindevs/assistant.git
-cd assistant
+git clone https://github.com/lindevs/assistant.git && cd assistant
 ```
 
-* Build Docker image:
+* Build Docker image (CPU or CUDA backend):
 
 ```shell
 ./setup.sh build-image
 ```
+```shell
+./setup.sh build-image cuda
+```
 
-* Build dependencies:
+* Build dependencies (CPU or CUDA backend):
 
 ```shell
 ./setup.sh build-deps
 ```
+```shell
+./setup.sh build-deps cuda
+```
 
-* Build Lindevs Assistant:
+* Build Lindevs Assistant (CPU or CUDA backend):
 
 ```shell
 ./setup.sh build-assistant
+```
+```shell
+./setup.sh build-assistant cuda
 ```
 
 * Run application:
@@ -92,8 +101,7 @@ cd assistant
 * Clone repository:
 
 ```shell
-git clone https://github.com/lindevs/assistant.git
-cd assistant
+git clone https://github.com/lindevs/assistant.git && cd assistant
 ```
 
 * Build dependencies:

@@ -6,7 +6,7 @@
 
 class ModNet : OrtModel, public BackgroundMattingModel {
 public:
-    explicit ModNet(const std::string &onnxModelPath);
+    explicit ModNet(const std::string &onnxModelPath, Core::Backend backend = Core::Backend::CPU);
 
     cv::Mat generate(const cv::Mat &input) override;
 

@@ -1,7 +1,7 @@
 #include "models/RetinaFace.h"
 #include "utils/ImgProc.h"
 
-RetinaFace::RetinaFace(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+RetinaFace::RetinaFace(const std::string &onnxModelPath, Core::Backend backend) : OrtModel(onnxModelPath, backend) {
     generateAnchors();
 }
 

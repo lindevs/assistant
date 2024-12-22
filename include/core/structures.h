@@ -4,6 +4,7 @@
 #include <opencv2/core/types.hpp>
 #include "core/models.h"
 #include "core/algorithms.h"
+#include "core/app.h"
 
 struct XyScale {
     float x{0.0f};
@@ -40,9 +41,10 @@ namespace Face {
         bool idPhoto = false;
         bool autosave = false;
         const char *outputPath{"./out"};
+        Core::Backend backend = Core::Backend::CPU;
 
         bool operator!=(const Params &other) const {
-            return detectionModel != other.detectionModel || idPhoto != other.idPhoto;
+            return detectionModel != other.detectionModel || idPhoto != other.idPhoto || backend != other.backend;
         }
     };
 
@@ -96,9 +98,10 @@ namespace Dedup {
     struct Params {
         const char *path{"./data"};
         Model model;
+        Core::Backend backend = Core::Backend::CPU;
 
         bool operator!=(const Params &other) const {
-            return model != other.model;
+            return model != other.model || backend != other.backend;
         }
     };
 

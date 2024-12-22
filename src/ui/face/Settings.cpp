@@ -10,6 +10,14 @@ Face::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::OR
 
     auto *layout = new QVBoxLayout(this);
 
+    backend.setCurrenctIndex(settings.value("backend", 0).toInt());
+    connect(&backend, &SelectBox::currentIndexChanged, [=] (int index) {
+        settings.setValue("backend", index);
+    });
+    layout->addWidget(&backend);
+
+    layout->addWidget(new Line());
+
     detectionModel.setText("Face detection model");
     detectionModel.addItems(detectionModels);
     detectionModel.setCurrenctIndex(settings.value("detection_model", 0).toInt());
@@ -66,6 +74,7 @@ Face::Params Face::Settings::getParams() {
     params.blur = blur.isChecked();
     params.idPhoto = idPhoto.isChecked();
     params.autosave = autosave.isChecked();
+    params.backend = backend.getCurrentBackend();
 
     return params;
 }

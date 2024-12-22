@@ -6,7 +6,7 @@
 
 class RetinaFace : OrtModel, public FaceDetectionModel {
 public:
-    explicit RetinaFace(const std::string &onnxModelPath);
+    explicit RetinaFace(const std::string &onnxModelPath, Core::Backend backend = Core::Backend::CPU);
 
     std::vector<Face::Detection> detect(const cv::Mat &input) override;
 

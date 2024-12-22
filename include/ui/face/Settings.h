@@ -4,7 +4,7 @@
 #include <QGroupBox>
 #include <QSettings>
 #include <QCheckBox>
-#include "ui/SelectBox.h"
+#include "ui/BackendSelectBox.h"
 #include "core/structures.h"
 
 namespace Face {
@@ -18,6 +18,7 @@ namespace Face {
 
     private:
         QSettings settings;
+        BackendSelectBox backend;
         SelectBox detectionModel;
         SelectBox mattingModel;
         QCheckBox blur;

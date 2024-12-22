@@ -6,7 +6,7 @@
 
 class YoloFaceV2 : OrtModel, public FaceDetectionModel {
 public:
-    explicit YoloFaceV2(const std::string &onnxModelPath);
+    explicit YoloFaceV2(const std::string &onnxModelPath, Core::Backend backend = Core::Backend::CPU);
 
     std::vector<Face::Detection> detect(const cv::Mat &input) override;
 

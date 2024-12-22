@@ -1,7 +1,7 @@
 #include "models/UltraFace.h"
 #include "utils/ImgProc.h"
 
-UltraFace::UltraFace(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+UltraFace::UltraFace(const std::string &onnxModelPath, Core::Backend backend) : OrtModel(onnxModelPath, backend) {
 }
 
 std::vector<Face::Detection> UltraFace::detect(const cv::Mat &input) {

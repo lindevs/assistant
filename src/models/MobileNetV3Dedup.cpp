@@ -2,7 +2,8 @@
 #include "utils/ImgProc.h"
 #include "utils/ImgResize.h"
 
-MobileNetV3Dedup::MobileNetV3Dedup(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+MobileNetV3Dedup::MobileNetV3Dedup(const std::string &onnxModelPath, Core::Backend backend)
+    : OrtModel(onnxModelPath, backend) {
 }
 
 cv::Mat MobileNetV3Dedup::encode(const cv::Mat &input) {

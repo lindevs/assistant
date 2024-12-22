@@ -3,10 +3,11 @@
 
 #include <onnxruntime_cxx_api.h>
 #include "core/structures.h"
+#include "core/app.h"
 
 class OrtModel {
 public:
-    explicit OrtModel(const std::string &onnxModelPath);
+    explicit OrtModel(const std::string &onnxModelPath, Core::Backend backend = Core::Backend::CPU);
 
 protected:
     const Ort::Env env = Ort::Env(OrtLoggingLevel::ORT_LOGGING_LEVEL_WARNING, "OrtModel");

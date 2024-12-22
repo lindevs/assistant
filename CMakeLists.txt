@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(assistant)
 
 option(BUILD_TESTING "Build tests" OFF)
+option(USE_CUDA "Build with CUDA support" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -140,6 +141,10 @@ set(PROJECT_SOURCES
         src/models/YoloFaceLindevs.cpp
         include/models/Yolov9FaceLindevs.h
         src/models/Yolov9FaceLindevs.cpp
+        include/utils/OrtInfo.h
+        src/utils/OrtInfo.cpp
+        include/ui/BackendSelectBox.h
+        src/ui/BackendSelectBox.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
@@ -193,6 +198,21 @@ else ()
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgcodecs.so.4.10.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgcodecs.so.410")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libtbb.so.12.14" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libtbb.so.12")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime.so.1.20.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libonnxruntime.so.1")
+
+    if (USE_CUDA)
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime_providers_cuda.so" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime_providers_shared.so" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcublasLt.so.12" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcublas.so.12" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcufft.so.11" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudart.so.12" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudnn.so.9" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudnn_graph.so.9" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudnn_ops.so.9" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudnn_engines_precompiled.so.9" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudnn_engines_runtime_compiled.so.9" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+        install(FILES "${CMAKE_PREFIX_PATH}/lib/libcudnn_heuristic.so.9" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
+    endif ()
 endif ()
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+CUDA=OFF
+[[ $1 == cuda ]] && CUDA=ON
+
 WORKDIR=$(pwd)
 
 # xorg
@@ -276,6 +279,17 @@ cd onnxruntime/cmake
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON \
-    -Donnxruntime_ENABLE_LTO=ON
+    -Donnxruntime_ENABLE_LTO=ON -DCMAKE_INSTALL_RPATH='$ORIGIN' -Donnxruntime_USE_CUDA=${CUDA}
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
+
+# CUDA and cuDNN
+if [ $CUDA = ON ]; then
+    cp /usr/local/cuda/targets/x86_64-linux/lib/{libcublasLt.so.12,libcublas.so.12,libcufft.so.11,libcudart.so.12} /opt/assistant/deps/lib
+    cp /lib/x86_64-linux-gnu/libcudnn.so.9 /opt/assistant/deps/lib
+    cp /lib/x86_64-linux-gnu/libcudnn_engines_precompiled.so.9.5.1 /opt/assistant/deps/lib/libcudnn_engines_precompiled.so.9
+    cp /lib/x86_64-linux-gnu/libcudnn_engines_runtime_compiled.so.9.5.1 /opt/assistant/deps/lib/libcudnn_engines_runtime_compiled.so.9
+    cp /lib/x86_64-linux-gnu/libcudnn_graph.so.9.5.1 /opt/assistant/deps/lib/libcudnn_graph.so.9
+    cp /lib/x86_64-linux-gnu/libcudnn_heuristic.so.9.5.1 /opt/assistant/deps/lib/libcudnn_heuristic.so.9
+    cp /lib/x86_64-linux-gnu/libcudnn_ops.so.9.5.1 /opt/assistant/deps/lib/libcudnn_ops.so.9
+fi

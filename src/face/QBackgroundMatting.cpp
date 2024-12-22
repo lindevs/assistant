@@ -4,7 +4,7 @@
 void QBackgroundMatting::start(const Face::Params &params) {
     switch (params.mattingModel.id) {
         case Matting::MODEL_MODNET_PHOTOGRAPHIC:
-            model = new ModNet(std::string(params.path) + "/" + params.mattingModel.file);
+            model = new ModNet(std::string(params.path) + "/" + params.mattingModel.file, params.backend);
             break;
         default:
             model = nullptr;

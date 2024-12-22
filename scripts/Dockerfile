@@ -1,4 +1,9 @@
-FROM ubuntu:22.04
+ARG IMAGE=cpu
+
+FROM ubuntu:22.04 AS cpu
+FROM nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04 AS cuda
+
+FROM ${IMAGE}
 
 WORKDIR /opt/assistant
 

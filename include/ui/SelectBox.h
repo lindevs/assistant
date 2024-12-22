@@ -16,6 +16,8 @@ public:
 
     int getCurrentIndex();
 
+    void addItem(const QString &text);
+
     void addItems(const QList<QString> &items);
 
 signals:

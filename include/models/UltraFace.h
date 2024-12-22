@@ -6,7 +6,7 @@
 
 class UltraFace : OrtModel, public FaceDetectionModel {
 public:
-    explicit UltraFace(const std::string &onnxModelPath);
+    explicit UltraFace(const std::string &onnxModelPath, Core::Backend backend = Core::Backend::CPU);
 
     std::vector<Face::Detection> detect(const cv::Mat &input) override;
 

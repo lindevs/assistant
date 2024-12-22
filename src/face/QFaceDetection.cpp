@@ -19,7 +19,7 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV5S_FACE:
         case Face::MODEL_YOLOV5M_FACE:
         case Face::MODEL_YOLOV5L_FACE:
-            model = new Yolov5Face(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new Yolov5Face(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         case Face::MODEL_YOLOV7_LITE_T_FACE:
         case Face::MODEL_YOLOV7_LITE_S_FACE:
@@ -27,34 +27,34 @@ void QFaceDetection::start(const Face::Params &params) {
         case Face::MODEL_YOLOV7S_FACE:
         case Face::MODEL_YOLOV7_FACE:
         case Face::MODEL_YOLOV7_W6_FACE:
-            model = new Yolov7Face(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new Yolov7Face(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         case Face::MODEL_YOLOV8N_FACE_LINDEVS:
         case Face::MODEL_YOLOV8S_FACE_LINDEVS:
         case Face::MODEL_YOLOV8M_FACE_LINDEVS:
         case Face::MODEL_YOLOV8L_FACE_LINDEVS:
         case Face::MODEL_YOLOV8X_FACE_LINDEVS:
-            model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new Yolov8FaceLindevs(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         case Face::MODEL_YOLOV9T_FACE_LINDEVS:
         case Face::MODEL_YOLOV9S_FACE_LINDEVS:
         case Face::MODEL_YOLOV9M_FACE_LINDEVS:
         case Face::MODEL_YOLOV9C_FACE_LINDEVS:
         case Face::MODEL_YOLOV9E_FACE_LINDEVS:
-            model = new Yolov9FaceLindevs(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new Yolov9FaceLindevs(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         case Face::MODEL_ULTRA_FACE_SLIM_320:
         case Face::MODEL_ULTRA_FACE_RFB_320:
         case Face::MODEL_ULTRA_FACE_SLIM_640:
         case Face::MODEL_ULTRA_FACE_RFB_640:
-            model = new UltraFace(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new UltraFace(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         case Face::MODEL_YOLO_FACE_V2:
-            model = new YoloFaceV2(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new YoloFaceV2(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         case Face::MODEL_RETINA_FACE_RESNET_50:
         case Face::MODEL_RETINA_FACE_MOBILENET_025:
-            model = new RetinaFace(std::string(params.path) + "/" + params.detectionModel.file);
+            model = new RetinaFace(std::string(params.path) + "/" + params.detectionModel.file, params.backend);
             break;
         default:
             model = nullptr;

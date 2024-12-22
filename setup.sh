@@ -6,21 +6,30 @@ if [[ ! $1 =~ ^(build-image|build-deps|build-assistant|test-assistant|build-arch
 fi
 
 if [[ $1 == build-image ]]; then
-  cd scripts && docker build -t lindevs-assistant .
+  BACKEND=cpu
+  [[ $2 == cuda ]] && BACKEND=cuda
+
+  cd scripts && docker build --build-arg IMAGE=${BACKEND} -t lindevs-assistant .
 
   exit 0
 fi
 
 if [[ $1 == build-deps ]]; then
-  docker run -it --rm -v ./scripts/compile.sh:/opt/assistant/compile.sh -v ./deps:/opt/assistant/deps lindevs-assistant compile.sh
+  BACKEND=cpu
+  [[ $2 == cuda ]] && BACKEND=cuda
+
+  docker run -it --rm -v ./scripts/compile.sh:/opt/assistant/compile.sh -v ./deps:/opt/assistant/deps lindevs-assistant compile.sh ${BACKEND}
   sudo chown -R $USER:$USER ./deps
 
   exit 0
 fi
 
 if [[ $1 == build-assistant ]]; then
+  CUDA=OFF
+  [[ $2 == cuda ]] && CUDA=ON
+
   rm -rf build
-  cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=deps
+  cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=deps -DUSE_CUDA=${CUDA}
   cmake --build build -j$(nproc)
   cmake --install build --strip
 

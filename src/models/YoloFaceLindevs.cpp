@@ -1,7 +1,7 @@
 #include "models/YoloFaceLindevs.h"
 #include "utils/ImgProc.h"
 
-YoloFaceLindevs::YoloFaceLindevs(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+YoloFaceLindevs::YoloFaceLindevs(const std::string &onnxModelPath, Core::Backend backend) : OrtModel(onnxModelPath, backend) {
 }
 
 std::vector<Face::Detection> YoloFaceLindevs::detect(const cv::Mat &input) {

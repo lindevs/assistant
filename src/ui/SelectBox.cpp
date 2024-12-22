@@ -26,6 +26,10 @@ int SelectBox::getCurrentIndex() {
     return input.currentIndex();
 }
 
+void SelectBox::addItem(const QString &text) {
+    input.addItem(text);
+}
+
 void SelectBox::addItems(const QList<QString> &items) {
     input.addItems(items);
 }

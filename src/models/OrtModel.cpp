@@ -1,6 +1,6 @@
 #include "models/OrtModel.h"
 
-OrtModel::OrtModel(const std::string &onnxModelPath) {
+OrtModel::OrtModel(const std::string &onnxModelPath, Core::Backend backend) {
 #ifdef _WIN32
     auto path = std::wstring(onnxModelPath.begin(), onnxModelPath.end()).c_str();
 #else
@@ -8,6 +8,11 @@ OrtModel::OrtModel(const std::string &onnxModelPath) {
 #endif
 
     sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+    if (backend == Core::Backend::CUDA) {
+        OrtCUDAProviderOptions options{};
+        options.cudnn_conv_algo_search = OrtCudnnConvAlgoSearchHeuristic;
+        sessionOptions.AppendExecutionProvider_CUDA(options);
+    }
     session = Ort::Session(env, path, sessionOptions);
 
     Ort::AllocatorWithDefaultOptions allocator;

@@ -4,7 +4,7 @@
 #include <QGroupBox>
 #include <QSettings>
 #include <QCheckBox>
-#include "ui/SelectBox.h"
+#include "ui/BackendSelectBox.h"
 #include "core/structures.h"
 
 namespace Dedup {
@@ -18,6 +18,7 @@ namespace Dedup {
 
     private:
         QSettings settings;
+        BackendSelectBox backend;
         SelectBox model;
 
         QString style = R"(

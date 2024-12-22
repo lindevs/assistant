@@ -1,7 +1,7 @@
 #include "models/ModNet.h"
 #include "utils/ImgProc.h"
 
-ModNet::ModNet(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+ModNet::ModNet(const std::string &onnxModelPath, Core::Backend backend) : OrtModel(onnxModelPath, backend) {
 }
 
 cv::Mat ModNet::generate(const cv::Mat &input) {

@@ -6,7 +6,7 @@
 
 class MobileNetV3Dedup : OrtModel, public DeduplicationModel {
 public:
-    explicit MobileNetV3Dedup(const std::string &onnxModelPath);
+    explicit MobileNetV3Dedup(const std::string &onnxModelPath, Core::Backend backend = Core::Backend::CPU);
 
     cv::Mat encode(const cv::Mat &input) override;
 

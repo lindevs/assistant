@@ -1,7 +1,7 @@
 #include "models/Yolov7Face.h"
 #include "utils/ImgProc.h"
 
-Yolov7Face::Yolov7Face(const std::string &onnxModelPath) : OrtModel(onnxModelPath) {
+Yolov7Face::Yolov7Face(const std::string &onnxModelPath, Core::Backend backend) : OrtModel(onnxModelPath, backend) {
 }
 
 std::vector<Face::Detection> Yolov7Face::detect(const cv::Mat &input) {

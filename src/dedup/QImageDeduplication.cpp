@@ -4,7 +4,7 @@
 void QImageDeduplication::start(const Dedup::Params &params) {
     switch (params.model.id) {
         case Dedup::MODEL_MOBILE_NET_V3_SMALL_DEDUP:
-            model = new MobileNetV3Dedup(std::string(params.path) + "/" + params.model.file);
+            model = new MobileNetV3Dedup(std::string(params.path) + "/" + params.model.file, params.backend);
             break;
         default:
             model = nullptr;
