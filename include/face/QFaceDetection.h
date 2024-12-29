@@ -19,7 +19,7 @@ signals:
     void detected(const std::vector<Face::Detection> &detections);
 
 private:
-    FaceDetectionModel *model;
+    FaceDetectionModel *model = nullptr;
 };
 
 #endif //ASSISTANT_FACE_QFACE_DETECTION_H

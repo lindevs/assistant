@@ -20,8 +20,8 @@ signals:
     void found(const Dedup::Findings &findings);
 
 private:
-    DeduplicationModel *model;
-    ImageDeduplication *deduplication;
+    DeduplicationModel *model = nullptr;
+    ImageDeduplication *deduplication = nullptr;
 };
 
 #endif //ASSISTANT_DEDUP_QIMAGE_DEDUPLICATION_H

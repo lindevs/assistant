@@ -12,20 +12,21 @@ Dedup::Findings ImageDeduplication::findDuplicates(const std::string &path) {
 
     for (std::filesystem::recursive_directory_iterator i(path), end; i != end; ++i) {
         if (i->is_regular_file()) {
-            findings.images.emplace_back(i->path());
-            encodings.emplace_back(model->encode(ImgIo::read(i->path())));
+            std::string imagePath = i->path().string();
+            findings.images.emplace_back(imagePath);
+            encodings.emplace_back(model->encode(ImgIo::read(imagePath)));
         }
     }
 
     size_t total = encodings.size();
     findings.duplications.resize(total);
 
-    for (int i = 0; i < total; ++i) {
-        for (int j = i + 1; j < total; ++j) {
+    for (size_t i = 0; i < total; ++i) {
+        for (size_t j = i + 1; j < total; ++j) {
             double score = ImgProc::cosineSimilarity(encodings[i], encodings[j]);
             if (score >= modelScoreThreshold) {
-                findings.duplications[i].emplace_back(j, score);
-                findings.duplications[j].emplace_back(i, score);
+                findings.duplications[i].emplace_back(j, (float) score);
+                findings.duplications[j].emplace_back(i, (float) score);
             }
         }
     }

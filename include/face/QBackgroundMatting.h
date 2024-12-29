@@ -20,7 +20,7 @@ signals:
     void generated(const cv::Mat &matte);
 
 private:
-    BackgroundMattingModel *model;
+    BackgroundMattingModel *model = nullptr;
 };
 
 #endif //ASSISTANT_FACE_QBACKGROUND_MATTING_H

@@ -18,5 +18,5 @@ void ImgIo::write(const std::string &path, const std::string &filename, cv::Inpu
     if (!std::filesystem::exists(path)) {
         std::filesystem::create_directories(path);
     }
-    imwrite(path + "/" + filename, img);
+    cv::imwrite(path + "/" + filename, img);
 }
