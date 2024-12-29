@@ -17,7 +17,7 @@ void ImgProc::hwcToNchw(const cv::Mat &src, cv::Mat &dst) {
 void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float> &scores, const float &nmsThreshold,
                   std::vector<int> &indices
 ) {
-    std::vector<std::pair<float, int> > scoreIndexPairs;
+    std::vector<std::pair<float, size_t> > scoreIndexPairs;
     for (size_t i = 0; i < scores.size(); ++i) {
         scoreIndexPairs.emplace_back(scores[i], i);
     }
@@ -25,7 +25,7 @@ void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float>
     std::stable_sort(
         scoreIndexPairs.begin(),
         scoreIndexPairs.end(),
-        [](const std::pair<float, int> &pair1, const std::pair<float, int> &pair2) {
+        [](const std::pair<float, size_t> &pair1, const std::pair<float, size_t> &pair2) {
             return pair1.first > pair2.first;
         }
     );
@@ -36,7 +36,7 @@ void ImgProc::nms(const std::vector<cv::Rect2f> &boxes, const std::vector<float>
             keep = jaccardIndex(boxes[i.second], boxes[indices[j]]) <= nmsThreshold;
         }
         if (keep) {
-            indices.emplace_back(i.second);
+            indices.emplace_back(((int) i.second));
         }
     }
 }
@@ -231,10 +231,10 @@ std::string ImgProc::hex(const cv::Mat &src) {
     static const char *digits = "0123456789abcdef";
 
     uchar *data = src.data;
-    size_t total = src.rows * src.cols;
+    int total = src.rows * src.cols;
 
     std::string dst(total * 2, '0');
-    for (size_t i = 0; i < total; ++i) {
+    for (int i = 0; i < total; ++i) {
         dst[i * 2] = digits[(data[i] >> 4) & 0x0f];
         dst[i * 2 + 1] = digits[data[i] & 0x0f];
     }

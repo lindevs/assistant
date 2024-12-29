@@ -1,6 +1,10 @@
 #include "utils/ImgResize.h"
 #include <iostream>
 
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+
 cv::Mat ImgResize::resize(const cv::Mat &src, const cv::Size &size, int32_t filter) {
     const cv::Vec4f rect(0.0f, 0.0f, static_cast<float>(src.size().width), static_cast<float>(src.size().height));
 

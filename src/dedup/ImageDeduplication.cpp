@@ -25,8 +25,8 @@ Dedup::Findings ImageDeduplication::findDuplicates(const std::string &path) {
         for (size_t j = i + 1; j < total; ++j) {
             double score = ImgProc::cosineSimilarity(encodings[i], encodings[j]);
             if (score >= modelScoreThreshold) {
-                findings.duplications[i].emplace_back(j, (float) score);
-                findings.duplications[j].emplace_back(i, (float) score);
+                findings.duplications[i].emplace_back((int) j, (float) score);
+                findings.duplications[j].emplace_back((int) i, (float) score);
             }
         }
     }

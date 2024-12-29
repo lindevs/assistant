@@ -2,7 +2,8 @@
 
 OrtModel::OrtModel(const std::string &onnxModelPath, Core::Backend backend) {
 #ifdef _WIN32
-    auto path = std::wstring(onnxModelPath.begin(), onnxModelPath.end()).c_str();
+    auto wpath = std::wstring(onnxModelPath.begin(), onnxModelPath.end());
+    auto path = wpath.c_str();
 #else
     auto path = onnxModelPath.c_str();
 #endif
