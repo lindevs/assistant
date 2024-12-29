@@ -17,9 +17,9 @@ git submodule update --init qtbase
 
 mkdir build && cd build
 
-call ..\configure -prefix ../../../deps -release -qt-harfbuzz -no-ico -no-libjpeg -no-gif -no-dbus -no-direct2d^
-    -no-opengl -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent -no-feature-network^
-    -no-feature-androiddeployqt -no-feature-windeployqt -no-feature-directwrite -no-feature-qmake
+call ..\configure -prefix ../../../deps -release -qt-harfbuzz -no-ico -no-libjpeg -no-gif -no-dbus -no-opengl^
+    -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent -no-feature-network^
+    -no-feature-androiddeployqt -no-feature-windeployqt -no-feature-qmake
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
@@ -123,7 +123,7 @@ mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON^
     -Donnxruntime_ENABLE_LTO=ON -DONNX_USE_MSVC_STATIC_RUNTIME=ON -Dprotobuf_MSVC_STATIC_RUNTIME=ON^
-    -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" -DCMAKE_INSTALL_PREFIX=../../../../deps
+    -DABSL_MSVC_STATIC_RUNTIME=ON -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" -DCMAKE_INSTALL_PREFIX=../../../../deps
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
