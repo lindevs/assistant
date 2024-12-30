@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2024-12-30]** CUDA integration for ONNX Runtime.
 * **[2024-11-09]** [YOLOv9-Face-Lindevs](https://github.com/lindevs/yolov9-face) model integration.
 * **[2024-10-26]** [YOLOv7-Face](https://github.com/derronqi/yolov7-face) model integration.
 * **[2024-09-28]** ID photo creator.
@@ -95,6 +96,8 @@ git clone https://github.com/lindevs/assistant.git && cd assistant
 * [CMake](https://cmake.org/download/)
 * [Ninja](https://github.com/ninja-build/ninja/releases)
 * [Python](https://www.python.org/downloads/)
+* (Optional) [NVIDIA Drivers](https://www.nvidia.com/en-us/drivers/)
+* (Optional) [CUDA](https://developer.download.nvidia.com/compute/cuda/12.6.3/local_installers/cuda_12.6.3_561.17_windows.exe)
 
 #### Instructions
 
@@ -104,16 +107,22 @@ git clone https://github.com/lindevs/assistant.git && cd assistant
 git clone https://github.com/lindevs/assistant.git && cd assistant
 ```
 
-* Build dependencies:
+* Build dependencies (CPU or CUDA backend):
 
 ```shell
 .\setup.bat build-deps
 ```
+```shell
+.\setup.bat build-deps cuda
+```
 
-* Build Lindevs Assistant:
+* Build Lindevs Assistant (CPU or CUDA backend):
 
 ```shell
 .\setup.bat build-assistant
+```
+```shell
+.\setup.bat build-assistant cuda
 ```
 
 * Run application:

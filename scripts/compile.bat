@@ -4,6 +4,9 @@ setlocal
 if exist downloads rmdir /s /q downloads
 mkdir downloads && cd downloads
 
+set CUDA=OFF
+if "%1" == "cuda" set CUDA=ON
+
 set WORKDIR=%CD%
 
 :: Qt
@@ -114,16 +117,42 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JP
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
+:: cuDNN
+if "%CUDA%" == "ON" (
+  cd %WORKDIR%
+  curl -o cudnn.zip https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.6.0.74_cuda12-archive.zip
+
+  mkdir cudnn
+  tar xf cudnn.zip --strip-components=1 -C cudnn
+  set CUDNN_PATH=%WORKDIR%\cudnn
+
+  copy "%CUDNN_PATH%\bin\cudnn64_9.dll" "..\deps\bin" /y >NUL
+  copy "%CUDNN_PATH%\bin\cudnn_graph64_9.dll" "..\deps\bin" /y >NUL
+  copy "%CUDNN_PATH%\bin\cudnn_ops64_9.dll" "..\deps\bin" /y >NUL
+  copy "%CUDNN_PATH%\bin\cudnn_engines_precompiled64_9.dll" "..\deps\bin" /y >NUL
+  copy "%CUDNN_PATH%\bin\cudnn_engines_runtime_compiled64_9.dll" "..\deps\bin" /y >NUL
+  copy "%CUDNN_PATH%\bin\cudnn_heuristic64_9.dll" "..\deps\bin" /y >NUL
+)
+
 :: ONNX Runtime
 cd %WORKDIR%
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.20.1
 
-cd onnxruntime/cmake
+if "%CUDA%" == "ON" (
+  :: Temp fix for https://github.com/microsoft/onnxruntime/issues/22728
+  git clone https://github.com/microsoft/onnxruntime.git
+  cd onnxruntime && git checkout 497b06f0a9a48c3f5e6de221254f00229984bfa3
+  cd cmake
+) else (
+  git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.20.1
+  cd onnxruntime/cmake
+)
+
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON^
     -Donnxruntime_ENABLE_LTO=ON -DONNX_USE_MSVC_STATIC_RUNTIME=ON -Dprotobuf_MSVC_STATIC_RUNTIME=ON^
-    -DABSL_MSVC_STATIC_RUNTIME=ON -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" -DCMAKE_INSTALL_PREFIX=../../../../deps
+    -DABSL_MSVC_STATIC_RUNTIME=ON -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" -DCMAKE_INSTALL_PREFIX=../../../../deps^
+    -Donnxruntime_USE_CUDA=%CUDA%
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
