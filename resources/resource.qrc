@@ -5,6 +5,7 @@
         <file>img/face.png</file>
         <file>img/hash.png</file>
         <file>img/dedup.png</file>
+        <file>img/sd.png</file>
         <file>font/OpenSans-Regular.ttf</file>
     </qresource>
 </RCC>

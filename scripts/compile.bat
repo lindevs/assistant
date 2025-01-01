@@ -156,5 +156,19 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_T
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
+:: stable-diffusion.cpp
+cd %WORKDIR%
+git clone --recursive https://github.com/leejet/stable-diffusion.cpp.git --depth=1 --branch=master-dcf91f9
+
+cd stable-diffusion.cpp
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DSD_BUILD_EXAMPLES=OFF -DSD_BUILD_SHARED_LIBS=ON^
+    -DCMAKE_CUDA_ARCHITECTURES="80;86;89" -DCMAKE_INSTALL_PREFIX=../../../deps -DSD_CUDA=%CUDA%
+cmake --build . -j%NUMBER_OF_PROCESSORS%
+cmake --install .
+copy "bin\stable-diffusion.dll" "..\..\..\deps\bin" /y >NUL
+copy "..\stable-diffusion.h" "..\..\..\deps\include" /y >NUL
+
 cd %WORKDIR%/..
 rmdir /s /q downloads

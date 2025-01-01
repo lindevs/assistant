@@ -159,6 +159,10 @@ void ImgProc::bgr2gray(const cv::Mat &src, cv::Mat &dst) {
     cv::cvtColor(src, dst, cv::COLOR_BGR2GRAY);
 }
 
+void ImgProc::rgb2bgr(const cv::Mat &src, cv::Mat &dst) {
+    cv::cvtColor(src, dst, cv::COLOR_RGB2BGR);
+}
+
 void ImgProc::bgra2rgba(const cv::Mat &src, cv::Mat &dst) {
     cv::cvtColor(src, dst, cv::COLOR_BGRA2RGBA);
 }

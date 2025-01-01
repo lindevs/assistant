@@ -39,6 +39,8 @@ public:
 
     static void bgr2gray(const cv::Mat &src, cv::Mat &dst);
 
+    static void rgb2bgr(const cv::Mat &src, cv::Mat &dst);
+
     static void bgra2rgba(const cv::Mat &src, cv::Mat &dst);
 
     static void dct(const cv::Mat &src, cv::Mat &dst);

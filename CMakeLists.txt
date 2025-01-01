@@ -20,6 +20,8 @@ find_package(facedetection REQUIRED)
 find_package(OpenCV COMPONENTS imgcodecs REQUIRED QUIET)
 find_package(onnxruntime REQUIRED)
 
+include(cmake/StableDiffusionConfig.cmake)
+
 set(PROJECT_SOURCES
         src/ui/MainWindow.cpp
         include/ui/MainWindow.h
@@ -145,6 +147,16 @@ set(PROJECT_SOURCES
         src/utils/OrtInfo.cpp
         include/ui/BackendSelectBox.h
         src/ui/BackendSelectBox.cpp
+        include/ui/sd/Area.h
+        src/ui/sd/Area.cpp
+        include/ui/sd/Settings.h
+        src/ui/sd/Settings.cpp
+        include/models/StableDiffusionModel.h
+        include/models/StableDiffusionV15.h
+        src/models/StableDiffusionV15.cpp
+        include/sd/QStableDiffusion.h
+        src/sd/QStableDiffusion.cpp
+        include/models/ProgressInterface.h
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
@@ -159,6 +171,7 @@ target_link_libraries(${PROJECT_NAME}_core
         facedetection
         onnxruntime::onnxruntime
         opencv_imgcodecs
+        SD::SD
 )
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_core)
@@ -187,6 +200,7 @@ if (WIN32)
     install(FILES "${CMAKE_PREFIX_PATH}/bin/tbb12.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
     install(FILES "${CMAKE_PREFIX_PATH}/bin/openblas.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
     install(FILES "${CMAKE_PREFIX_PATH}/bin/onnxruntime.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
+    install(FILES "${CMAKE_PREFIX_PATH}/bin/stable-diffusion.dll" DESTINATION "${CMAKE_BINARY_DIR}/app")
 
     if (USE_CUDA)
         cmake_path(SET CUDA_PATH $ENV{CUDA_PATH})
@@ -214,6 +228,7 @@ else ()
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libopencv_imgcodecs.so.4.10.0" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libopencv_imgcodecs.so.410")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libtbb.so.12.14" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libtbb.so.12")
     install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime.so.1.20.1" DESTINATION "${CMAKE_BINARY_DIR}/app/lib" RENAME "libonnxruntime.so.1")
+    install(FILES "${CMAKE_PREFIX_PATH}/lib/libstable-diffusion.so" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")
 
     if (USE_CUDA)
         install(FILES "${CMAKE_PREFIX_PATH}/lib/libonnxruntime_providers_cuda.so" DESTINATION "${CMAKE_BINARY_DIR}/app/lib")

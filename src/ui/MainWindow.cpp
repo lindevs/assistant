@@ -29,11 +29,13 @@ void MainWindow::menuItemClicked(int itemIdx) {
     removeMenuItem(faceArea);
     removeMenuItem(hashArea);
     removeMenuItem(dedupArea);
+    removeMenuItem(sdArea);
     qrArea = nullptr;
     ocrArea = nullptr;
     faceArea = nullptr;
     hashArea = nullptr;
     dedupArea = nullptr;
+    sdArea = nullptr;
 
     switch (itemIdx) {
         case 0:
@@ -55,6 +57,10 @@ void MainWindow::menuItemClicked(int itemIdx) {
         case 4:
             dedupArea = new Dedup::Area(this);
             ui->horizontalLayout->addWidget(dedupArea);
+            break;
+        case 5:
+            sdArea = new Sd::Area(this);
+            ui->horizontalLayout->addWidget(sdArea);
             break;
         default:
             break;

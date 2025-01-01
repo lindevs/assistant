@@ -142,4 +142,16 @@ namespace Matting {
     };
 }
 
+namespace Sd {
+    const int MODEL_STABLE_DIFFUSION_V1_5 = 0;
+
+    inline constexpr const char *MODEL_FILES[] = {
+        "v1-5-pruned-emaonly.safetensors",
+    };
+
+    inline constexpr const char *MODEL_URLS[] = {
+        "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/tree/main",
+    };
+}
+
 #endif //ASSISTANT_CORE_MODELS_H

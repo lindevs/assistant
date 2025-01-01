@@ -4,6 +4,8 @@
 
 cv::Mat createBgr();
 
+cv::Mat createRgb();
+
 cv::Mat createBgra();
 
 TEST(ImgProcTests, hwcToNchwTest) {
@@ -253,6 +255,23 @@ TEST(ImgProcTests, bgr2grayTest) {
     }
 }
 
+TEST(ImgProcTests, rgb2bgrTest) {
+    cv::Mat img = createRgb();
+    cv::Mat bgr;
+    ImgProc::rgb2bgr(img, bgr);
+
+    std::vector<uchar> expected{
+        10, 18, 26, 11, 19, 27, 12, 20, 28, 13, 21, 29,
+        14, 22, 30, 15, 23, 31, 16, 24, 32, 17, 25, 33,
+    };
+    auto *actual = bgr.data;
+
+    EXPECT_EQ(3 * bgr.total(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+
 TEST(ImgProcTests, bgra2rgbaTest) {
     cv::Mat img = createBgra();
     cv::Mat rgba;
@@ -383,6 +402,39 @@ cv::Mat createBgr() {
     }
 
     return bgr;
+}
+
+cv::Mat createRgb() {
+    uchar red[][4] = {
+        {26, 27, 28, 29},
+        {30, 31, 32, 33},
+    };
+    uchar green[][4] = {
+        {18, 19, 20, 21},
+        {22, 23, 24, 25},
+    };
+    uchar blue[][4] = {
+        {10, 11, 12, 13},
+        {14, 15, 16, 17},
+    };
+    cv::Mat redChannel(2, 4, CV_8U, &red);
+    cv::Mat greenChannel(2, 4, CV_8U, &green);
+    cv::Mat blueChannel(2, 4, CV_8U, &blue);
+
+    cv::Mat rgb;
+    std::vector<cv::Mat> channels{redChannel, greenChannel, blueChannel};
+    cv::merge(channels, rgb);
+
+    std::vector<uchar> expected{
+        26, 18, 10, 27, 19, 11, 28, 20, 12, 29, 21, 13,
+        30, 22, 14, 31, 23, 15, 32, 24, 16, 33, 25, 17,
+    };
+    auto *actual = rgb.data;
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+
+    return rgb;
 }
 
 cv::Mat createBgra() {

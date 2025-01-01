@@ -26,6 +26,7 @@ private:
         ":/img/face.png",
         ":/img/hash.png",
         ":/img/dedup.png",
+        ":/img/sd.png",
     };
     std::vector<MenuItem *> items;
 

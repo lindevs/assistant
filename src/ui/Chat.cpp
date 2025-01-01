@@ -50,6 +50,18 @@ void Chat::addProgressBar() {
     scrollToBottom();
 }
 
+void Chat::addProgressBar(const int &steps) {
+    progressBar.setRange(0, steps);
+    progressBar.setValue(0);
+    layout.insertWidget(layout.count() - 1, &progressBar);
+
+    scrollToBottom();
+}
+
+void Chat::setProgressBarStep(const int &step) {
+    progressBar.setValue(step);
+}
+
 void Chat::removeProgressBar() {
     progressBar.setParent(nullptr);
 }

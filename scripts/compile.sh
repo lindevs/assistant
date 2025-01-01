@@ -283,6 +283,20 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_T
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
+# stable-diffusion.cpp
+cd $WORKDIR
+git clone --recursive https://github.com/leejet/stable-diffusion.cpp.git --depth=1 --branch=master-dcf91f9
+
+cd stable-diffusion.cpp
+mkdir build && cd build
+
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DSD_BUILD_EXAMPLES=OFF -DSD_BUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_RPATH='$ORIGIN' -DCMAKE_CUDA_ARCHITECTURES="80;86;89" -DSD_CUDA=${CUDA}
+cmake --build . -j$(nproc)
+cmake --install . --prefix /opt/assistant/deps --strip
+cp bin/libstable-diffusion.so /opt/assistant/deps/lib
+cp ../stable-diffusion.h /opt/assistant/deps/include
+
 # CUDA and cuDNN
 if [ $CUDA = ON ]; then
     cp /usr/local/cuda/targets/x86_64-linux/lib/{libcublasLt.so.12,libcublas.so.12,libcufft.so.11,libcudart.so.12} /opt/assistant/deps/lib

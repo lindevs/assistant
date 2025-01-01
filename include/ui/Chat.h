@@ -20,6 +20,10 @@ public:
 
     void addProgressBar();
 
+    void addProgressBar(const int &steps);
+
+    void setProgressBarStep(const int &step);
+
     void removeProgressBar();
 
 signals:

@@ -119,4 +119,18 @@ namespace Dedup {
     };
 }
 
+namespace Sd {
+    struct Params {
+        const char *path{"./data"};
+        Model model;
+        int steps{20};
+        bool autosave = false;
+        const char *outputPath{"./out"};
+
+        bool operator!=(const Params &other) const {
+            return model != other.model;
+        }
+    };
+}
+
 #endif //ASSISTANT_CORE_STRUCTURES_H

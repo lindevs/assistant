@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2025-01-01]** Image generation and [Stable Diffusion v1.5](https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5) model integration.
 * **[2024-12-30]** CUDA integration for ONNX Runtime.
 * **[2024-11-09]** [YOLOv9-Face-Lindevs](https://github.com/lindevs/yolov9-face) model integration.
 * **[2024-10-26]** [YOLOv7-Face](https://github.com/derronqi/yolov7-face) model integration.
