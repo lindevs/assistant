@@ -2,3 +2,4 @@ CMakeLists.txt linguist-detectable=false
 Dockerfile linguist-detectable=false
 *.sh linguist-detectable=false
 *.bat linguist-detectable=false
+*.cmake linguist-detectable=false

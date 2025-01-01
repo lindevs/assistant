@@ -7,7 +7,7 @@ recognizing text, chatting with LLM models (coming soon), and more. Lindevs Assi
 computer. While online tools offer convenience and accessibility, the Lindevs Assistant ensures data privacy,
 security, and no risk of data leakage.
 
-![lindevs-assistant](https://i.ibb.co/8NR4NNL/lindevs-assistant.png)
+![lindevs-assistant](https://i.ibb.co/v1gPwTd/lindevs-assistant.png)
 
 ## Release Notes
 
