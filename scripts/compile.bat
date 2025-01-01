@@ -168,6 +168,7 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DSD_BUILD_EXAMPLES=OFF -D
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 copy "bin\stable-diffusion.dll" "..\..\..\deps\bin" /y >NUL
+copy "stable-diffusion.lib" "..\..\..\deps\lib" /y >NUL
 copy "..\stable-diffusion.h" "..\..\..\deps\include" /y >NUL
 
 cd %WORKDIR%/..

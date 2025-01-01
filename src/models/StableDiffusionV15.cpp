@@ -1,13 +1,18 @@
 #include <thread>
+#if !defined(_WIN32)
 #include <ggml.h>
+#endif
 #include "models/StableDiffusionV15.h"
 #include "utils/ImgProc.h"
 
 StableDiffusionV15::StableDiffusionV15(const std::string &modelPath, ProgressInterface *progress) {
     this->progress = progress;
 
+#if !defined(_WIN32)
     ggml_log_set([](ggml_log_level, const char *, void *) {
     }, nullptr);
+#endif
+
     sd_set_progress_callback([](int step, int steps, float, void *data) {
         auto self = (StableDiffusionV15 *) data;
         if (self->progress && step > 0 && self->sampleSteps == steps) {
