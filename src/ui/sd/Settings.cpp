@@ -38,8 +38,12 @@ Sd::Settings::Settings(QWidget *parent) : QGroupBox(parent), settings(Core::ORG,
 Sd::Params Sd::Settings::getParams() {
     Params params;
     params.model.id = model.getCurrentIndex();
-    params.model.file = MODEL_FILES[model.getCurrentIndex()];
-    params.model.url = MODEL_URLS[model.getCurrentIndex()];
+    for (const char *model: MODEL_FILES[model.getCurrentIndex()]) {
+        params.model.files.emplace_back(model);
+    }
+    for (const char *url: MODEL_URLS[model.getCurrentIndex()]) {
+        params.model.urls.emplace_back(url);
+    }
     params.steps = steps.getValue();
     params.autosave = autosave.isChecked();
 

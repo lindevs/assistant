@@ -152,11 +152,14 @@ set(PROJECT_SOURCES
         include/ui/sd/Settings.h
         src/ui/sd/Settings.cpp
         include/models/StableDiffusionModel.h
+        src/models/StableDiffusionModel.cpp
         include/models/StableDiffusionV15.h
         src/models/StableDiffusionV15.cpp
         include/sd/QStableDiffusion.h
         src/sd/QStableDiffusion.cpp
         include/models/ProgressInterface.h
+        include/models/StableDiffusion35Medium.h
+        src/models/StableDiffusion35Medium.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})

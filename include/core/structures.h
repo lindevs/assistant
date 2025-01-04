@@ -122,7 +122,7 @@ namespace Dedup {
 namespace Sd {
     struct Params {
         const char *path{"./data"};
-        Model model;
+        MultiModel model;
         int steps{20};
         bool autosave = false;
         const char *outputPath{"./out"};

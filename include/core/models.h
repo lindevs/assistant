@@ -1,12 +1,24 @@
 #ifndef ASSISTANT_CORE_MODELS_H
 #define ASSISTANT_CORE_MODELS_H
 
+#include <vector>
+
 struct Model {
     int id = 0;
     const char *file = nullptr;
     const char *url = nullptr;
 
     bool operator!=(const Model &other) const {
+        return id != other.id;
+    }
+};
+
+struct MultiModel {
+    int id = 0;
+    std::vector<const char *> files;
+    std::vector<const char *> urls;
+
+    bool operator!=(const MultiModel &other) const {
         return id != other.id;
     }
 };
@@ -144,13 +156,21 @@ namespace Matting {
 
 namespace Sd {
     const int MODEL_STABLE_DIFFUSION_V1_5 = 0;
+    const int MODEL_STABLE_DIFFUSION_3_5_MEDIUM = 1;
 
-    inline constexpr const char *MODEL_FILES[] = {
-        "v1-5-pruned-emaonly.safetensors",
+    inline constexpr const char *MODEL_FILES[][4] = {
+        {"v1-5-pruned-emaonly.safetensors"},
+        {"sd3.5_medium.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
     };
 
-    inline constexpr const char *MODEL_URLS[] = {
-        "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/tree/main",
+    inline constexpr const char *MODEL_URLS[][4] = {
+        {"https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/blob/main/v1-5-pruned-emaonly.safetensors"},
+        {
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/sd3.5_medium.safetensors",
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/clip_l.safetensors",
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/clip_g.safetensors",
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/t5xxl_fp16.safetensors",
+        },
     };
 }
 

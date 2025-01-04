@@ -33,6 +33,7 @@ signals:
 private:
     QVBoxLayout layout;
     QProgressBar progressBar;
+    int progressBarSteps= 0;
 
     void scrollToBottom();
 

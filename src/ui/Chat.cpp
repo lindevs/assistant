@@ -51,7 +51,8 @@ void Chat::addProgressBar() {
 }
 
 void Chat::addProgressBar(const int &steps) {
-    progressBar.setRange(0, steps);
+    progressBarSteps = steps;
+    progressBar.setRange(0, 0);
     progressBar.setValue(0);
     layout.insertWidget(layout.count() - 1, &progressBar);
 
@@ -59,6 +60,7 @@ void Chat::addProgressBar(const int &steps) {
 }
 
 void Chat::setProgressBarStep(const int &step) {
+    progressBar.setRange(0, progressBarSteps);
     progressBar.setValue(step);
 }
 

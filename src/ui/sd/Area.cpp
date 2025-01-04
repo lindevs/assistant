@@ -41,17 +41,20 @@ Sd::Area::Area(QWidget *parent) : QWidget(parent) {
         }
 
         Params params = settings->getParams();
-        QString modelPath = QString(params.path) + "/" + params.model.file;
+        for (size_t i = 0; i < params.model.files.size(); ++i) {
+            QString modelPath = QString(params.path) + "/" + params.model.files[i];
 
-        if (params.model.url && !QFile::exists(modelPath)) {
-            dialog->setText(
-                QString("Unable to find model '%1'.<br>Download it from <a href=\"%2\">%3</a>")
-                    .arg(modelPath, params.model.url, params.model.url)
-            );
-            dialog->show();
+            if (!QFile::exists(modelPath)) {
+                dialog->setText(
+                    QString("Unable to find model '%1'.<br>Download it from <a href=\"%2\">%3</a>")
+                        .arg(modelPath, params.model.urls[i], params.model.urls[i])
+                );
+                dialog->show();
 
-            return;
+                return;
+            }
         }
+
         if (currentParams != params) {
             thread.quit();
             thread.wait();
