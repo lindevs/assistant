@@ -7,11 +7,11 @@ recognizing text, chatting with LLM models (coming soon), and more. Lindevs Assi
 computer. While online tools offer convenience and accessibility, the Lindevs Assistant ensures data privacy,
 security, and no risk of data leakage.
 
-![lindevs-assistant](https://i.ibb.co/JnTV8pZ/lindevs-assistant.png)
+![lindevs-assistant](https://i.ibb.co/GxyWHvR/lindevs-assistant.png)
 
 ## Release Notes
 
-* **[2025-01-04]** [Stable Diffusion 3.5 Medium](https://huggingface.co/stabilityai/stable-diffusion-3.5-medium) model integration.
+* **[2025-01-04]** [Stable Diffusion 3.5 Medium](https://huggingface.co/stabilityai/stable-diffusion-3.5-medium) and [Large](https://huggingface.co/stabilityai/stable-diffusion-3.5-large) models integration.
 * **[2025-01-01]** Image generation and [Stable Diffusion v1.5](https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5) model integration.
 * **[2024-12-30]** CUDA integration for ONNX Runtime.
 * **[2024-11-09]** [YOLOv9-Face-Lindevs](https://github.com/lindevs/yolov9-face) model integration.

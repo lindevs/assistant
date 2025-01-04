@@ -157,10 +157,12 @@ namespace Matting {
 namespace Sd {
     const int MODEL_STABLE_DIFFUSION_V1_5 = 0;
     const int MODEL_STABLE_DIFFUSION_3_5_MEDIUM = 1;
+    const int MODEL_STABLE_DIFFUSION_3_5_LARGE = 2;
 
     inline constexpr const char *MODEL_FILES[][4] = {
         {"v1-5-pruned-emaonly.safetensors"},
         {"sd3.5_medium.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
+        {"sd3.5_large.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
     };
 
     inline constexpr const char *MODEL_URLS[][4] = {
@@ -170,6 +172,12 @@ namespace Sd {
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/clip_l.safetensors",
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/clip_g.safetensors",
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/t5xxl_fp16.safetensors",
+        },
+        {
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/sd3.5_large.safetensors",
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/text_encoders/clip_l.safetensors",
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/text_encoders/clip_g.safetensors",
+            "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/text_encoders/t5xxl_fp16.safetensors",
         },
     };
 }

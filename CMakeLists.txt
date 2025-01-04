@@ -160,6 +160,8 @@ set(PROJECT_SOURCES
         include/models/ProgressInterface.h
         include/models/StableDiffusion35Medium.h
         src/models/StableDiffusion35Medium.cpp
+        include/models/StableDiffusion35Large.h
+        src/models/StableDiffusion35Large.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})

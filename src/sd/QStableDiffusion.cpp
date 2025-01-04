@@ -2,6 +2,7 @@
 #include "sd/QStableDiffusion.h"
 #include "models/StableDiffusionV15.h"
 #include "models/StableDiffusion35Medium.h"
+#include "models/StableDiffusion35Large.h"
 
 void QStableDiffusion::start(const Sd::Params &params) {
     std::string path = std::string(params.path) + "/";
@@ -18,6 +19,15 @@ void QStableDiffusion::start(const Sd::Params &params) {
                 this
             );
             break;
+        case Sd::MODEL_STABLE_DIFFUSION_3_5_LARGE:
+            model = new StableDiffusion35Large(
+                path + params.model.files[0],
+                path + params.model.files[1],
+                path + params.model.files[2],
+                path + params.model.files[3],
+                this
+            );
+        break;
         default:
             model = nullptr;
     }
