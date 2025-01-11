@@ -12,6 +12,7 @@ public:
         const std::string &cliplPath,
         const std::string &clipgPath,
         const std::string &t5xxlPath,
+        const std::string &vaePath,
         ProgressInterface *progress
     );
 

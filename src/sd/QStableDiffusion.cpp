@@ -1,6 +1,7 @@
 #include "core/structures.h"
 #include "sd/QStableDiffusion.h"
 #include "models/StableDiffusionV15.h"
+#include "models/StableDiffusionXl.h"
 #include "models/StableDiffusion35Medium.h"
 #include "models/StableDiffusion35Large.h"
 
@@ -10,6 +11,9 @@ void QStableDiffusion::start(const Sd::Params &params) {
         case Sd::MODEL_STABLE_DIFFUSION_V1_5:
             model = new StableDiffusionV15(path + params.model.files[0], this);
             break;
+        case Sd::MODEL_STABLE_DIFFUSION_XL:
+            model = new StableDiffusionXl(path + params.model.files[0], path + params.model.files[1], this);
+        break;
         case Sd::MODEL_STABLE_DIFFUSION_3_5_MEDIUM:
             model = new StableDiffusion35Medium(
                 path + params.model.files[0],
