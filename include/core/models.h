@@ -157,12 +157,14 @@ namespace Matting {
 namespace Sd {
     const int MODEL_STABLE_DIFFUSION_V1_5 = 0;
     const int MODEL_STABLE_DIFFUSION_XL = 1;
-    const int MODEL_STABLE_DIFFUSION_3_5_MEDIUM = 2;
-    const int MODEL_STABLE_DIFFUSION_3_5_LARGE = 3;
+    const int MODEL_STABLE_DIFFUSION_3_MEDIUM = 2;
+    const int MODEL_STABLE_DIFFUSION_3_5_MEDIUM = 3;
+    const int MODEL_STABLE_DIFFUSION_3_5_LARGE = 4;
 
     inline constexpr const char *MODEL_FILES[][4] = {
         {"v1-5-pruned-emaonly.safetensors"},
         {"sd_xl_base_1.0.safetensors", "sdxl_vae.safetensors"},
+        {"sd3_medium_incl_clips_t5xxlfp16.safetensors"},
         {"sd3.5_medium.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
         {"sd3.5_large.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
     };
@@ -173,6 +175,7 @@ namespace Sd {
             "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0.safetensors",
             "https://huggingface.co/madebyollin/sdxl-vae-fp16-fix/blob/main/sdxl_vae.safetensors",
         },
+        {"https://huggingface.co/stabilityai/stable-diffusion-3-medium/blob/main/sd3_medium_incl_clips_t5xxlfp16.safetensors"},
         {
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/sd3.5_medium.safetensors",
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/text_encoders/clip_l.safetensors",

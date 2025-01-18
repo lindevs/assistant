@@ -164,6 +164,8 @@ set(PROJECT_SOURCES
         src/models/StableDiffusion35Large.cpp
         include/models/StableDiffusionXl.h
         src/models/StableDiffusionXl.cpp
+        include/models/StableDiffusion3Medium.h
+        src/models/StableDiffusion3Medium.cpp
 )
 
 add_library(${PROJECT_NAME}_core STATIC ${PROJECT_SOURCES})
