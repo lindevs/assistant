@@ -11,6 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
+* **[2025-01-26]** [Stable Diffusion v2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1) model integration.
 * **[2025-01-18]** [Stable Diffusion 3 Medium](https://huggingface.co/stabilityai/stable-diffusion-3-medium) model integration.
 * **[2025-01-11]** [Stable Diffusion XL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) model integration.
 * **[2025-01-04]** [Stable Diffusion 3.5 Medium](https://huggingface.co/stabilityai/stable-diffusion-3.5-medium) and [Large](https://huggingface.co/stabilityai/stable-diffusion-3.5-large) models integration.

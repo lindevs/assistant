@@ -35,6 +35,7 @@ namespace Sd {
 
         const QList<QString> models = {
             "Stable Diffusion v1.5",
+            "Stable Diffusion v2.1",
             "Stable Diffusion XL",
             "Stable Diffusion 3 Medium",
             "Stable Diffusion 3.5 Medium",
