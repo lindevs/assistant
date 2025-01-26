@@ -28,7 +28,7 @@ cmake --install .
 
 :: zxing-cpp
 cd %WORKDIR%
-git clone https://github.com/zxing-cpp/zxing-cpp.git --depth=1 --branch=v2.2.1
+git clone https://github.com/zxing-cpp/zxing-cpp.git --depth=1 --branch=v2.3.0
 
 cd zxing-cpp
 mkdir build && cd build
@@ -79,7 +79,7 @@ cmake --install .
 
 :: OpenBLAS
 cd %WORKDIR%
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.28
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.29
 
 cd OpenBLAS
 powershell -command "(gc CMakeLists.txt) -replace 'set\(CMAKE_INSTALL_INCLUDEDIR \${CMAKE_INSTALL_INCLUDEDIR}/openblas\${SUFFIX64}\)', '' | sc CMakeLists.txt"
@@ -105,7 +105,7 @@ cmake --install .
 
 :: OpenCV
 cd %WORKDIR%
-git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.10.0
+git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.11.0
 
 cd opencv
 mkdir build && cd build
@@ -158,7 +158,7 @@ cmake --install .
 
 :: stable-diffusion.cpp
 cd %WORKDIR%
-git clone --recursive https://github.com/leejet/stable-diffusion.cpp.git --depth=1 --branch=master-dcf91f9
+git clone --recursive https://github.com/leejet/stable-diffusion.cpp.git --depth=1 --branch=master-d9b5942
 
 cd stable-diffusion.cpp
 mkdir build && cd build

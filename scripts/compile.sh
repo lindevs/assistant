@@ -103,7 +103,7 @@ ninja install
 
 # libpng
 cd $WORKDIR
-git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.44
+git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.46
 
 cd libpng
 mkdir build && cd build
@@ -188,7 +188,7 @@ cmake --install . --strip
 
 # zxing-cpp
 cd $WORKDIR
-git clone https://github.com/zxing-cpp/zxing-cpp.git --depth=1 --branch=v2.2.1
+git clone https://github.com/zxing-cpp/zxing-cpp.git --depth=1 --branch=v2.3.0
 
 cd zxing-cpp
 mkdir build && cd build
@@ -238,7 +238,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenBLAS
 cd $WORKDIR
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.28
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.29
 
 cd OpenBLAS
 mkdir build && cd build
@@ -260,7 +260,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenCV
 cd $WORKDIR
-git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.10.0
+git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.11.0
 
 cd opencv
 mkdir build && cd build
@@ -285,7 +285,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # stable-diffusion.cpp
 cd $WORKDIR
-git clone --recursive https://github.com/leejet/stable-diffusion.cpp.git --depth=1 --branch=master-dcf91f9
+git clone --recursive https://github.com/leejet/stable-diffusion.cpp.git --depth=1 --branch=master-d9b5942
 
 cd stable-diffusion.cpp
 mkdir build && cd build
