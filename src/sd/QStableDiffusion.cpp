@@ -6,6 +6,7 @@
 #include "models/StableDiffusion3Medium.h"
 #include "models/StableDiffusion35Medium.h"
 #include "models/StableDiffusion35Large.h"
+#include "models/Flux1Schnell.h"
 #include "models/Flux1Dev.h"
 
 void QStableDiffusion::start(const Sd::Params &params) {
@@ -34,6 +35,15 @@ void QStableDiffusion::start(const Sd::Params &params) {
             break;
         case Sd::MODEL_STABLE_DIFFUSION_3_5_LARGE:
             model = new StableDiffusion35Large(
+                path + params.model.files[0],
+                path + params.model.files[1],
+                path + params.model.files[2],
+                path + params.model.files[3],
+                this
+            );
+            break;
+        case Sd::MODEL_FLUX_1_SCHNELL:
+            model = new Flux1Schnell(
                 path + params.model.files[0],
                 path + params.model.files[1],
                 path + params.model.files[2],

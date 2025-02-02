@@ -11,7 +11,7 @@ security, and no risk of data leakage.
 
 ## Release Notes
 
-* **[2025-02-02]** [FLUX.1 [dev]](https://huggingface.co/black-forest-labs/FLUX.1-dev) model integration.
+* **[2025-02-02]** [FLUX.1 [schnell]](https://huggingface.co/black-forest-labs/FLUX.1-schnell) and [[dev]](https://huggingface.co/black-forest-labs/FLUX.1-dev) model integration.
 * **[2025-01-26]** [Stable Diffusion v2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1) model integration.
 * **[2025-01-18]** [Stable Diffusion 3 Medium](https://huggingface.co/stabilityai/stable-diffusion-3-medium) model integration.
 * **[2025-01-11]** [Stable Diffusion XL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) model integration.

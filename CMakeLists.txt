@@ -168,6 +168,8 @@ set(PROJECT_SOURCES
         src/models/StableDiffusion3Medium.cpp
         include/models/StableDiffusionV21.h
         src/models/StableDiffusionV21.cpp
+        include/models/Flux1Schnell.h
+        src/models/Flux1Schnell.cpp
         include/models/Flux1Dev.h
         src/models/Flux1Dev.cpp
 )

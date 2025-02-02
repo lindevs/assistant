@@ -161,7 +161,8 @@ namespace Sd {
     const int MODEL_STABLE_DIFFUSION_3_MEDIUM = 3;
     const int MODEL_STABLE_DIFFUSION_3_5_MEDIUM = 4;
     const int MODEL_STABLE_DIFFUSION_3_5_LARGE = 5;
-    const int MODEL_FLUX_1_DEV = 6;
+    const int MODEL_FLUX_1_SCHNELL = 6;
+    const int MODEL_FLUX_1_DEV = 7;
 
     inline constexpr const char *MODEL_FILES[][4] = {
         {"v1-5-pruned-emaonly.safetensors"},
@@ -170,6 +171,7 @@ namespace Sd {
         {"sd3_medium_incl_clips_t5xxlfp16.safetensors"},
         {"sd3.5_medium.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
         {"sd3.5_large.safetensors", "clip_l.safetensors", "clip_g.safetensors", "t5xxl_fp16.safetensors"},
+        {"clip_l.safetensors", "t5xxl_fp16.safetensors", "flux1-schnell-Q8_0.gguf", "ae.safetensors"},
         {"clip_l.safetensors", "t5xxl_fp16.safetensors", "flux1-dev-Q8_0.gguf", "ae.safetensors"},
     };
 
@@ -192,6 +194,12 @@ namespace Sd {
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/text_encoders/clip_l.safetensors",
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/text_encoders/clip_g.safetensors",
             "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/text_encoders/t5xxl_fp16.safetensors",
+        },
+        {
+            "https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors",
+            "https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp16.safetensors",
+            "https://huggingface.co/city96/FLUX.1-schnell-gguf/blob/main/flux1-schnell-Q8_0.gguf",
+            "https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors",
         },
         {
             "https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors",
