@@ -4,7 +4,7 @@ StableDiffusionXl::StableDiffusionXl(
     const std::string &modelPath,
     const std::string &vaePath,
     ProgressInterface *progress
-) : StableDiffusionModel(modelPath, "", "", "", vaePath, progress) {
+) : StableDiffusionModel(modelPath, "", "", "", "", vaePath, progress) {
 }
 
 cv::Mat StableDiffusionXl::generate(const std::string &text, const int &steps) {

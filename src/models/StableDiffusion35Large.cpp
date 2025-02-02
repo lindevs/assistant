@@ -6,7 +6,7 @@ StableDiffusion35Large::StableDiffusion35Large(
     const std::string &clipgPath,
     const std::string &t5xxlPath,
     ProgressInterface *progress
-) : StableDiffusionModel(modelPath, cliplPath, clipgPath, t5xxlPath, "", progress) {
+) : StableDiffusionModel(modelPath, cliplPath, clipgPath, t5xxlPath, "", "", progress) {
 }
 
 cv::Mat StableDiffusion35Large::generate(const std::string &text, const int &steps) {

@@ -40,6 +40,7 @@ namespace Sd {
             "Stable Diffusion 3 Medium",
             "Stable Diffusion 3.5 Medium",
             "Stable Diffusion 3.5 Large",
+            "FLUX.1 [dev]",
         };
     };
 }

@@ -1,15 +1,15 @@
-#include "models/StableDiffusion35Medium.h"
+#include "models/Flux1Dev.h"
 
-StableDiffusion35Medium::StableDiffusion35Medium(
-    const std::string &modelPath,
+Flux1Dev::Flux1Dev(
     const std::string &cliplPath,
-    const std::string &clipgPath,
     const std::string &t5xxlPath,
+    const std::string &diffusionPath,
+    const std::string &vaePath,
     ProgressInterface *progress
-) : StableDiffusionModel(modelPath, cliplPath, clipgPath, t5xxlPath, "", "", progress) {
+) : StableDiffusionModel("", cliplPath, "", t5xxlPath, diffusionPath, vaePath, progress) {
 }
 
-cv::Mat StableDiffusion35Medium::generate(const std::string &text, const int &steps) {
+cv::Mat Flux1Dev::generate(const std::string &text, const int &steps) {
     sampleSteps = steps;
     sd_image_t *result = txt2img(
         sdCtx,

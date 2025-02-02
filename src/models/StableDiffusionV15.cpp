@@ -1,7 +1,7 @@
 #include "models/StableDiffusionV15.h"
 
 StableDiffusionV15::StableDiffusionV15(const std::string &modelPath, ProgressInterface *progress)
-    : StableDiffusionModel(modelPath, "", "", "", "", progress) {
+    : StableDiffusionModel(modelPath, "", "", "", "", "", progress) {
 }
 
 cv::Mat StableDiffusionV15::generate(const std::string &text, const int &steps) {

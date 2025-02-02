@@ -1,7 +1,7 @@
 #include "models/StableDiffusion3Medium.h"
 
 StableDiffusion3Medium::StableDiffusion3Medium(const std::string &modelPath, ProgressInterface *progress)
-    : StableDiffusionModel(modelPath, "", "", "", "", progress) {
+    : StableDiffusionModel(modelPath, "", "", "", "", "", progress) {
 }
 
 cv::Mat StableDiffusion3Medium::generate(const std::string &text, const int &steps) {
