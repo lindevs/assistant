@@ -137,16 +137,9 @@ if "%CUDA%" == "ON" (
 :: ONNX Runtime
 cd %WORKDIR%
 
-if "%CUDA%" == "ON" (
-  :: Temp fix for https://github.com/microsoft/onnxruntime/issues/22728
-  git clone https://github.com/microsoft/onnxruntime.git
-  cd onnxruntime && git checkout 497b06f0a9a48c3f5e6de221254f00229984bfa3
-  cd cmake
-) else (
-  git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.20.1
-  cd onnxruntime/cmake
-)
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.21.0
 
+cd onnxruntime/cmake
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON^

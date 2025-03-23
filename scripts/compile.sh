@@ -66,7 +66,7 @@ rm -rf /usr/local/lib/libz.so*
 
 # pcre2
 cd $WORKDIR
-git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.44
+git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.45
 
 cd pcre2
 mkdir build && cd build
@@ -103,7 +103,7 @@ ninja install
 
 # libpng
 cd $WORKDIR
-git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.46
+git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.47
 
 cd libpng
 mkdir build && cd build
@@ -127,7 +127,7 @@ cmake --install . --strip
 
 # Expat
 cd $WORKDIR
-git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_6_4
+git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_7_0
 
 cd libexpat/expat
 mkdir build && cd build
@@ -273,7 +273,7 @@ cmake --install . --strip
 
 # ONNX Runtime
 cd $WORKDIR
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.20.1
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.21.0
 
 cd onnxruntime/cmake
 mkdir build && cd build
