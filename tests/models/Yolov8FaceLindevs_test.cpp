@@ -1,28 +1,27 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "utils/ImgIo.h"
 #include "models/Yolov8FaceLindevs.h"
 
 TEST(Yolov8FaceLindevsTests, DetectTest) {
-    cv::Mat img = ImgIo::read("testsdata/images/detection/face.jpg");
+    const cv::Mat img = ImgIo::read(TESTS_DATA "/images/detection/face.jpg");
 
-    Yolov8FaceLindevs model("testsdata/models/yolov8n-face-lindevs.onnx");
-    std::vector<Face::Detection> detections = model.detect(img);
+    Yolov8FaceLindevs model(TESTS_DATA "/models/yolov8n-face-lindevs.onnx");
+    const std::vector detections = model.detect(img);
 
     ASSERT_EQ(detections.size(), 2);
 
-    ASSERT_NEAR(detections[0].confidence, 0.886014103f, 0.000001f);
-    ASSERT_NEAR(detections[1].confidence, 0.863056659f, 0.000001f);
+    EXPECT_NEAR(detections[0].confidence, 0.886014103f, 0.000001f);
+    EXPECT_NEAR(detections[1].confidence, 0.863056659f, 0.000001f);
 
-    std::vector x = {detections[0].box.x, detections[1].box.x};
-    EXPECT_THAT(x, testing::ElementsAre(235, 789));
+    EXPECT_EQ(detections[0].box.x, 235);
+    EXPECT_EQ(detections[1].box.x, 789);
 
-    std::vector y = {detections[0].box.y, detections[1].box.y};
-    EXPECT_THAT(y, testing::ElementsAre(24, 34));
+    EXPECT_EQ(detections[0].box.y, 24);
+    EXPECT_EQ(detections[1].box.y, 34);
 
-    std::vector width = {detections[0].box.width, detections[1].box.width};
-    EXPECT_THAT(width, testing::ElementsAre(149, 152));
+    EXPECT_EQ(detections[0].box.width, 149);
+    EXPECT_EQ(detections[1].box.width, 152);
 
-    std::vector height = {detections[0].box.height, detections[1].box.height};
-    EXPECT_THAT(height, testing::ElementsAre(202, 223));
+    EXPECT_EQ(detections[0].box.height, 202);
+    EXPECT_EQ(detections[1].box.height, 223);
 }

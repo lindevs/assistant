@@ -1,28 +1,27 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "utils/ImgIo.h"
 #include "models/UltraFace.h"
 
 TEST(UltraFaceTests, DetectTest) {
-    cv::Mat img = ImgIo::read("testsdata/images/detection/face.jpg");
+    const cv::Mat img = ImgIo::read(TESTS_DATA "/images/detection/face.jpg");
 
-    UltraFace model("testsdata/models/ultraface-rfb-640.onnx");
-    std::vector<Face::Detection> detections = model.detect(img);
+    UltraFace model(TESTS_DATA "/models/ultraface-rfb-640.onnx");
+    const std::vector detections = model.detect(img);
 
     ASSERT_EQ(detections.size(), 2);
 
-    std::vector confidence = {detections[0].confidence, detections[1].confidence};
-    EXPECT_THAT(confidence, testing::ElementsAre(0.999965191f, 0.99948895f));
+    EXPECT_EQ(detections[0].confidence, 0.999965191f);
+    EXPECT_EQ(detections[1].confidence, 0.99948895f);
 
-    std::vector x = {detections[0].box.x, detections[1].box.x};
-    EXPECT_THAT(x, testing::ElementsAre(240, 794));
+    EXPECT_EQ(detections[0].box.x, 240);
+    EXPECT_EQ(detections[1].box.x, 794);
 
-    std::vector y = {detections[0].box.y, detections[1].box.y};
-    EXPECT_THAT(y, testing::ElementsAre(25, 46));
+    EXPECT_EQ(detections[0].box.y, 25);
+    EXPECT_EQ(detections[1].box.y, 46);
 
-    std::vector width = {detections[0].box.width, detections[1].box.width};
-    EXPECT_THAT(width, testing::ElementsAre(142, 142));
+    EXPECT_EQ(detections[0].box.width, 142);
+    EXPECT_EQ(detections[1].box.width, 142);
 
-    std::vector height = {detections[0].box.height, detections[1].box.height};
-    EXPECT_THAT(height, testing::ElementsAre(197, 204));
+    EXPECT_EQ(detections[0].box.height, 197);
+    EXPECT_EQ(detections[1].box.height, 204);
 }

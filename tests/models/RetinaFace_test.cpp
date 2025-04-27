@@ -1,58 +1,57 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "utils/ImgIo.h"
 #include "models/RetinaFace.h"
 
 TEST(RetinaFaceTests, DetectTest) {
-    cv::Mat img = ImgIo::read("testsdata/images/detection/face.jpg");
+    const cv::Mat img = ImgIo::read(TESTS_DATA "/images/detection/face.jpg");
 
-    RetinaFace model("testsdata/models/retinaface-mobilenet-0.25.onnx");
-    std::vector<Face::Detection> detections = model.detect(img);
+    RetinaFace model(TESTS_DATA "/models/retinaface-mobilenet-0.25.onnx");
+    const std::vector detections = model.detect(img);
 
     ASSERT_EQ(detections.size(), 2);
 
-    std::vector confidence = {detections[0].confidence, detections[1].confidence};
-    EXPECT_THAT(confidence, testing::ElementsAre(0.998887f, 0.998074412f));
+    EXPECT_EQ(detections[0].confidence, 0.998887f);
+    EXPECT_EQ(detections[1].confidence, 0.998074412f);
 
-    std::vector x = {detections[0].box.x, detections[1].box.x};
-    EXPECT_THAT(x, testing::ElementsAre(790, 243));
+    EXPECT_EQ(detections[0].box.x, 790);
+    EXPECT_EQ(detections[1].box.x, 243);
 
-    std::vector y = {detections[0].box.y, detections[1].box.y};
-    EXPECT_THAT(y, testing::ElementsAre(52, 34));
+    EXPECT_EQ(detections[0].box.y, 52);
+    EXPECT_EQ(detections[1].box.y, 34);
 
-    std::vector width = {detections[0].box.width, detections[1].box.width};
-    EXPECT_THAT(width, testing::ElementsAre(149, 143));
+    EXPECT_EQ(detections[0].box.width, 149);
+    EXPECT_EQ(detections[1].box.width, 143);
 
-    std::vector height = {detections[0].box.height, detections[1].box.height};
-    EXPECT_THAT(height, testing::ElementsAre(203, 188));
+    EXPECT_EQ(detections[0].box.height, 203);
+    EXPECT_EQ(detections[1].box.height, 188);
 
-    x = {detections[0].rightEye.pt.x, detections[1].rightEye.pt.x};
-    EXPECT_THAT(x, testing::ElementsAre(844, 288));
+    EXPECT_EQ(detections[0].rightEye.pt.x, 844);
+    EXPECT_EQ(detections[1].rightEye.pt.x, 288);
 
-    y = {detections[0].rightEye.pt.y, detections[1].rightEye.pt.y};
-    EXPECT_THAT(y, testing::ElementsAre(124, 98));
+    EXPECT_EQ(detections[0].rightEye.pt.y, 124);
+    EXPECT_EQ(detections[1].rightEye.pt.y, 98);
 
-    x = {detections[0].leftEye.pt.x, detections[1].leftEye.pt.x};
-    EXPECT_THAT(x, testing::ElementsAre(913, 356));
+    EXPECT_EQ(detections[0].leftEye.pt.x, 913);
+    EXPECT_EQ(detections[1].leftEye.pt.x, 356);
 
-    y = {detections[0].leftEye.pt.y, detections[1].leftEye.pt.y};
-    EXPECT_THAT(y, testing::ElementsAre(137, 104));
+    EXPECT_EQ(detections[0].leftEye.pt.y, 137);
+    EXPECT_EQ(detections[1].leftEye.pt.y, 104);
 
-    x = {detections[0].nose.pt.x, detections[1].nose.pt.x};
-    EXPECT_THAT(x, testing::ElementsAre(880, 324));
+    EXPECT_EQ(detections[0].nose.pt.x, 880);
+    EXPECT_EQ(detections[1].nose.pt.x, 324);
 
-    y = {detections[0].nose.pt.y, detections[1].nose.pt.y};
-    EXPECT_THAT(y, testing::ElementsAre(166, 125));
+    EXPECT_EQ(detections[0].nose.pt.y, 166);
+    EXPECT_EQ(detections[1].nose.pt.y, 125);
 
-    x = {detections[0].mouthRightCorner.pt.x, detections[1].mouthRightCorner.pt.x};
-    EXPECT_THAT(x, testing::ElementsAre(834, 283));
+    EXPECT_EQ(detections[0].mouthRightCorner.pt.x, 834);
+    EXPECT_EQ(detections[1].mouthRightCorner.pt.x, 283);
 
-    y = {detections[0].mouthRightCorner.pt.y, detections[1].mouthRightCorner.pt.y};
-    EXPECT_THAT(y, testing::ElementsAre(196, 165));
+    EXPECT_EQ(detections[0].mouthRightCorner.pt.y, 196);
+    EXPECT_EQ(detections[1].mouthRightCorner.pt.y, 165);
 
-    x = {detections[0].mouthLeftCorner.pt.x, detections[1].mouthLeftCorner.pt.x};
-    EXPECT_THAT(x, testing::ElementsAre(893, 343));
+    EXPECT_EQ(detections[0].mouthLeftCorner.pt.x, 893);
+    EXPECT_EQ(detections[1].mouthLeftCorner.pt.x, 343);
 
-    y = {detections[0].mouthLeftCorner.pt.y, detections[1].mouthLeftCorner.pt.y};
-    EXPECT_THAT(y, testing::ElementsAre(207, 170));
+    EXPECT_EQ(detections[0].mouthLeftCorner.pt.y, 207);
+    EXPECT_EQ(detections[1].mouthLeftCorner.pt.y, 170);
 }

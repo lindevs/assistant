@@ -1,13 +1,12 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "utils/ImgIo.h"
 #include "models/MobileNetV3Dedup.h"
 
 TEST(MobileNetV3DedupTests, EncodeTest) {
-    cv::Mat img = ImgIo::read("testsdata/images/detection/face.jpg");
+    const cv::Mat img = ImgIo::read(TESTS_DATA "/images/detection/face.jpg");
 
-    MobileNetV3Dedup model("testsdata/models/mobilenetv3-small-dedup.onnx");
-    cv::Mat encoding = model.encode(img);
+    MobileNetV3Dedup model(TESTS_DATA "/models/mobilenetv3-small-dedup.onnx");
+    const cv::Mat encoding = model.encode(img);
 
-    ASSERT_EQ(encoding.total(), 576);
+   EXPECT_EQ(encoding.total(), 576);
 }

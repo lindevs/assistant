@@ -2,7 +2,7 @@
 #include "utils/Formatting.h"
 
 TEST(FormattingTests, formatDuplicationsTest) {
-    Dedup::Findings findings{
+    const Dedup::Findings findings{
         {"image1.jpg", "image2.jpg"},
         {
             {{1, 0.96789125f}},
