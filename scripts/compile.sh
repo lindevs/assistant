@@ -66,7 +66,7 @@ rm -rf /usr/local/lib/libz.so*
 
 # pcre2
 cd $WORKDIR
-git clone https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.45
+git clone --recursive https://github.com/PCRE2Project/pcre2.git --depth=1 --branch=pcre2-10.45
 
 cd pcre2
 mkdir build && cd build
@@ -232,7 +232,8 @@ sed -i '/ADD_LIBRARY(${fdt_lib_name} ${fdt_source_files} ${INSTALLHEADER_FILES})
 
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 

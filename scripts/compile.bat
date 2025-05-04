@@ -73,7 +73,7 @@ cd libfacedetection
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DENABLE_AVX2=ON^
-    -DCMAKE_INSTALL_PREFIX=../../../deps
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=../../../deps
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
