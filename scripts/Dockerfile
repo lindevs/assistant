@@ -14,8 +14,8 @@ RUN apt-get update \
     && pip3 install meson packaging \
     && curl -sSo /etc/apt/trusted.gpg.d/kitware-key.asc https://apt.kitware.com/keys/kitware-archive-latest.asc \
     && echo "deb https://apt.kitware.com/ubuntu/ jammy main" > /etc/apt/sources.list.d/kitware.list \
-    && apt update \
-    && apt install -y cmake \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y cmake \
     && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/bin/bash"]
