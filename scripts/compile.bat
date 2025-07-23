@@ -14,7 +14,7 @@ cd %WORKDIR%
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
-git checkout 6.8.0
+git checkout 6.9.1
 
 git submodule update --init qtbase
 
@@ -55,7 +55,7 @@ cmake --install .
 
 :: Tesseract OCR
 cd %WORKDIR%
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.5.0
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.5.1
 
 cd tesseract
 mkdir build && cd build
@@ -79,7 +79,7 @@ cmake --install .
 
 :: OpenBLAS
 cd %WORKDIR%
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.29
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.30
 
 cd OpenBLAS
 powershell -command "(gc CMakeLists.txt) -replace 'set\(CMAKE_INSTALL_INCLUDEDIR \${CMAKE_INSTALL_INCLUDEDIR}/openblas\${SUFFIX64}\)', '' | sc CMakeLists.txt"
@@ -93,7 +93,7 @@ cmake --install .
 
 :: oneTBB
 cd %WORKDIR%
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.0.0
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.2.0
 
 cd oneTBB
 mkdir build && cd build
@@ -105,7 +105,7 @@ cmake --install .
 
 :: OpenCV
 cd %WORKDIR%
-git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.11.0
+git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.12.0
 
 cd opencv
 mkdir build && cd build
@@ -137,7 +137,7 @@ if "%CUDA%" == "ON" (
 :: ONNX Runtime
 cd %WORKDIR%
 
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.21.0
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.22.1
 
 cd onnxruntime/cmake
 mkdir build && cd build

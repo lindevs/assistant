@@ -79,7 +79,7 @@ cmake --install . --strip
 
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.82.2
+git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.85.2
 
 cd glib
 mkdir build && cd build
@@ -90,7 +90,7 @@ ninja install
 
 # libxkbcommon
 cd $WORKDIR
-git clone https://github.com/xkbcommon/libxkbcommon.git --depth=1 --branch=xkbcommon-1.7.0
+git clone https://github.com/xkbcommon/libxkbcommon.git --depth=1 --branch=xkbcommon-1.10.0
 
 cd libxkbcommon
 mkdir build && cd build
@@ -103,7 +103,7 @@ ninja install
 
 # libpng
 cd $WORKDIR
-git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.47
+git clone https://github.com/pnggroup/libpng.git --depth=1 --branch=v1.6.50
 
 cd libpng
 mkdir build && cd build
@@ -127,7 +127,7 @@ cmake --install . --strip
 
 # Expat
 cd $WORKDIR
-git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_7_0
+git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_7_1
 
 cd libexpat/expat
 mkdir build && cd build
@@ -139,7 +139,7 @@ cmake --install . --strip
 
 # Fontconfig
 cd $WORKDIR
-git clone https://gitlab.freedesktop.org/fontconfig/fontconfig.git --depth=1 --branch=2.15.0
+git clone https://gitlab.freedesktop.org/fontconfig/fontconfig.git --depth=1 --branch=2.17.1
 
 cd fontconfig
 mkdir build && cd build
@@ -151,7 +151,7 @@ ninja install
 
 # ICU
 cd $WORKDIR
-git clone https://github.com/unicode-org/icu.git --depth=1 --branch=release-76-1
+git clone https://github.com/unicode-org/icu.git --depth=1 --branch=release-77-1
 
 cd icu/icu4c/source
 
@@ -165,7 +165,7 @@ cd $WORKDIR
 git clone https://github.com/qt/qt5.git qt6
 
 cd qt6
-git checkout 6.8.0
+git checkout 6.9.1
 
 perl init-repository --module-subset=qtbase
 
@@ -214,7 +214,7 @@ cmake --install . --strip
 
 # Tesseract OCR
 cd $WORKDIR
-git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.5.0
+git clone https://github.com/tesseract-ocr/tesseract.git --depth=1 --branch=5.5.1
 
 cd tesseract
 mkdir build && cd build
@@ -239,7 +239,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenBLAS
 cd $WORKDIR
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.29
+git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.30
 
 cd OpenBLAS
 mkdir build && cd build
@@ -250,7 +250,7 @@ cmake --install . --strip
 
 # oneTBB
 cd $WORKDIR
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.0.0
+git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.2.0
 
 cd oneTBB
 mkdir build && cd build
@@ -261,7 +261,7 @@ cmake --install . --prefix /opt/assistant/deps --strip
 
 # OpenCV
 cd $WORKDIR
-git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.11.0
+git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.12.0
 
 cd opencv
 mkdir build && cd build
@@ -274,7 +274,7 @@ cmake --install . --strip
 
 # ONNX Runtime
 cd $WORKDIR
-git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.21.0
+git clone https://github.com/microsoft/onnxruntime.git --depth=1 --branch=v1.22.1
 
 cd onnxruntime/cmake
 mkdir build && cd build
