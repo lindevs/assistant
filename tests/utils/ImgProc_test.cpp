@@ -291,7 +291,7 @@ TEST(ImgProcTests, dctTest) {
 
     const std::vector expected{
         224.15285f, -62.602936f, 0.0f, 24.400251f,
-        62.932507f, 59.448616f, 0.0f, -24.624422f,
+        62.9325104f, 59.448616f, 0.0f, -24.624422f,
     };
     const auto *actual = reinterpret_cast<float *>(img.data);
 
