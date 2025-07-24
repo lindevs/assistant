@@ -145,7 +145,7 @@ mkdir build && cd build
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON^
     -Donnxruntime_ENABLE_LTO=ON -DONNX_USE_MSVC_STATIC_RUNTIME=ON -Dprotobuf_MSVC_STATIC_RUNTIME=ON^
     -DABSL_MSVC_STATIC_RUNTIME=ON -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" -DCMAKE_INSTALL_PREFIX=../../../../deps^
-    -Donnxruntime_USE_CUDA=%CUDA%
+    -DCMAKE_CUDA_ARCHITECTURES="80;86;89" -Donnxruntime_USE_CUDA=%CUDA%
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 

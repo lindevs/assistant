@@ -255,7 +255,8 @@ cd onnxruntime/cmake
 mkdir build && cd build
 
 cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -Donnxruntime_BUILD_UNIT_TESTS=OFF -Donnxruntime_BUILD_SHARED_LIB=ON \
-    -Donnxruntime_ENABLE_LTO=ON -DCMAKE_INSTALL_RPATH='$ORIGIN' -Donnxruntime_USE_CUDA=${CUDA}
+    -Donnxruntime_ENABLE_LTO=ON -DCMAKE_INSTALL_RPATH='$ORIGIN' -DCMAKE_CUDA_ARCHITECTURES="80;86;89" \
+    -Donnxruntime_USE_CUDA=${CUDA}
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
