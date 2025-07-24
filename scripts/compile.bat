@@ -20,9 +20,9 @@ git submodule update --init qtbase
 
 mkdir build && cd build
 
-call ..\configure -prefix ../../../deps -release -qt-harfbuzz -no-ico -no-libjpeg -no-gif -no-dbus -no-opengl^
-    -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent -no-feature-network^
-    -no-feature-androiddeployqt -no-feature-windeployqt -no-feature-qmake
+call ..\configure -prefix ../../../deps -release -qt-harfbuzz -no-ico -no-libjpeg -no-gif -no-dbus^
+    -no-opengl -no-feature-sql -no-feature-xml -no-feature-printsupport -no-feature-concurrent -no-feature-network^
+    -no-feature-testlib -no-feature-androiddeployqt -no-feature-windeployqt -no-feature-qmake
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 

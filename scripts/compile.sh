@@ -79,7 +79,7 @@ cmake --install . --strip
 
 # GLib
 cd $WORKDIR
-git clone https://gitlab.gnome.org/GNOME/glib.git --depth=1 --branch=2.85.2
+git clone https://github.com/GNOME/glib.git --depth=1 --branch=2.85.2
 
 cd glib
 mkdir build && cd build
@@ -125,30 +125,6 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -D
 cmake --build . -j$(nproc)
 cmake --install . --strip
 
-# Expat
-cd $WORKDIR
-git clone https://github.com/libexpat/libexpat.git --depth=1 --branch=R_2_7_1
-
-cd libexpat/expat
-mkdir build && cd build
-
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DEXPAT_BUILD_EXAMPLES=OFF \
-    -DEXPAT_BUILD_TESTS=OFF -DEXPAT_BUILD_TOOLS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-cmake --build . -j$(nproc)
-cmake --install . --strip
-
-# Fontconfig
-cd $WORKDIR
-git clone https://gitlab.freedesktop.org/fontconfig/fontconfig.git --depth=1 --branch=2.17.1
-
-cd fontconfig
-mkdir build && cd build
-
-meson setup .. --buildtype=release --default-library=static --libdir=lib --sysconfdir=/etc --datadir=/usr/share \
-    --localstatedir=/var -Dtests=disabled -Dtools=disabled
-ninja -j$(nproc)
-ninja install
-
 # ICU
 cd $WORKDIR
 git clone https://github.com/unicode-org/icu.git --depth=1 --branch=release-77-1
@@ -175,14 +151,13 @@ sed -i '/^    IMAGE/d' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/Fi
 sed -i '/^    UTIL/a\    IMAGE' qtbase/cmake/3rdparty/extra-cmake-modules/find-modules/FindXCB.cmake
 sed -i '/^        XCB::XCB/a\        X11::Xdmcp\n        X11::Xau' qtbase/src/gui/configure.cmake
 sed -i '/^        XKB::XKB/a\        X11::Xdmcp\n        X11::Xau' qtbase/src/plugins/platforms/xcb/CMakeLists.txt
-sed -i '/QMAKE_LIB fontconfig)/a\qt_find_package(EXPAT PROVIDED_TARGETS EXPAT::EXPAT MODULE_NAME gui QMAKE_LIB expat)' qtbase/src/gui/configure.cmake
-sed -i '/^        Fontconfig::Fontconfig/a\        EXPAT::EXPAT' qtbase/src/gui/CMakeLists.txt
 
 mkdir build && cd build
 
-../configure -prefix /opt/assistant/deps -release -ccache -qt-harfbuzz -bundled-xcb-xinput -fontconfig -system-freetype \
-    -no-ico -no-libjpeg -no-gif -no-dbus -no-linuxfb -no-opengl -no-evdev -no-feature-sql -no-feature-xml \
-    -no-feature-printsupport -no-feature-concurrent -no-feature-network -no-feature-androiddeployqt -no-feature-qmake
+../configure -prefix /opt/assistant/deps -release -ccache -qt-harfbuzz -bundled-xcb-xinput -system-freetype \
+    -no-ico -no-libjpeg -no-gif -no-dbus -no-linuxfb -no-opengl -no-evdev -no-feature-sql \
+    -no-feature-xml -no-feature-printsupport -no-feature-concurrent -no-feature-network -no-feature-testlib \
+    -no-feature-androiddeployqt -no-feature-qmake
 cmake --build . -j$(nproc)
 cmake --install . --strip
 

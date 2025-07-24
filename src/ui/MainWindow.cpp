@@ -2,10 +2,12 @@
 #include "ui_mainwindow.h"
 #include <QScreen>
 #include <QFontDatabase>
+#include <QLibraryInfo>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    qputenv("QT_QPA_FONTDIR", QLibraryInfo::path(QLibraryInfo::LibrariesPath).toUtf8());
     QFontDatabase::addApplicationFont(":/font/OpenSans-Regular.ttf");
     QApplication::setFont(QFont("Open Sans"));
 
