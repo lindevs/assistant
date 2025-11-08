@@ -77,32 +77,6 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -D
 cmake --build . -j%NUMBER_OF_PROCESSORS%
 cmake --install .
 
-:: OpenBLAS
-cd %WORKDIR%
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.30
-
-cd OpenBLAS
-powershell -command "(gc CMakeLists.txt) -replace 'set\(CMAKE_INSTALL_INCLUDEDIR \${CMAKE_INSTALL_INCLUDEDIR}/openblas\${SUFFIX64}\)', '' | sc CMakeLists.txt"
-
-mkdir build && cd build
-
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_STATIC_LIBS=OFF -DBUILD_SHARED_LIBS=ON^
-    -DCMAKE_INSTALL_PREFIX=../../../deps
-cmake --build . -j%NUMBER_OF_PROCESSORS%
-cmake --install .
-
-:: oneTBB
-cd %WORKDIR%
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.2.0
-
-cd oneTBB
-mkdir build && cd build
-
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DTBB_TEST=OFF -DTBBMALLOC_BUILD=OFF^
-    -DCMAKE_INSTALL_PREFIX=../../../deps
-cmake --build . -j%NUMBER_OF_PROCESSORS%
-cmake --install .
-
 :: OpenCV
 cd %WORKDIR%
 git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.12.0
@@ -110,8 +84,8 @@ git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.12.0
 cd opencv
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON^
-    -DWITH_LAPACK=ON -DWITH_ZLIB_NG=ON -DWITH_FFMPEG=OFF -DWITH_WIN32UI=OFF -DBUILD_opencv_apps=OFF^
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON^
+    -DWITH_ZLIB_NG=ON -DWITH_FFMPEG=OFF -DWITH_WIN32UI=OFF -DBUILD_opencv_apps=OFF^
     -DBUILD_LIST=core,imgcodecs,imgproc,videoio -DOPENCV_GENERATE_SETUPVARS=OFF -DOPENCV_SKIP_CMAKE_ROOT_CONFIG=ON^
     -DOPENCV_INSTALL_BINARIES_PREFIX= -DOPENCV_CONFIG_INSTALL_PATH=lib/cmake/opencv4 -DCMAKE_INSTALL_PREFIX=../../../deps
 cmake --build . -j%NUMBER_OF_PROCESSORS%

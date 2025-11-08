@@ -212,28 +212,6 @@ cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -D
 cmake --build . -j$(nproc)
 cmake --install . --prefix /opt/assistant/deps --strip
 
-# OpenBLAS
-cd $WORKDIR
-git clone https://github.com/OpenMathLib/OpenBLAS.git --depth=1 --branch=v0.3.30
-
-cd OpenBLAS
-mkdir build && cd build
-
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release
-cmake --build . -j$(nproc)
-cmake --install . --strip
-
-# oneTBB
-cd $WORKDIR
-git clone https://github.com/oneapi-src/oneTBB.git --depth=1 --branch=v2022.2.0
-
-cd oneTBB
-mkdir build && cd build
-
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DTBB_TEST=OFF -DTBBMALLOC_BUILD=OFF
-cmake --build . -j$(nproc)
-cmake --install . --prefix /opt/assistant/deps --strip
-
 # OpenCV
 cd $WORKDIR
 git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.12.0
@@ -241,8 +219,8 @@ git clone https://github.com/opencv/opencv.git --depth=1 --branch=4.12.0
 cd opencv
 mkdir build && cd build
 
-cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON -DWITH_TBB=ON \
-    -DWITH_LAPACK=ON -DWITH_ZLIB_NG=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
+cmake -S ../ -B . -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_ZLIB=ON -DBUILD_JPEG=ON -DBUILD_PNG=ON \
+    -DWITH_ZLIB_NG=ON -DBUILD_opencv_apps=OFF -DBUILD_LIST=core,imgcodecs,imgproc,videoio \
     -DCMAKE_INSTALL_PREFIX=/opt/assistant/deps -DCMAKE_INSTALL_RPATH='$ORIGIN'
 cmake --build . -j$(nproc)
 cmake --install . --strip
